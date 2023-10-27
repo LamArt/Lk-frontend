@@ -1,0 +1,15 @@
+.doubleLabel{
+    width: 100%;
+
+    &-label{
+        text-align: center;
+        font-weight: 400;
+        font-size: 2rem;
+    }
+
+    &-annotation{
+        text-align: center;
+        font-size: 1.3rem;
+        color: #646464;
+    }
+}

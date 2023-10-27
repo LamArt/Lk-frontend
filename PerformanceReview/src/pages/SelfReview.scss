@@ -1,0 +1,40 @@
+@import './../const.scss';
+
+.selfReview{
+    &-header{
+        border-bottom-right-radius: 40px;
+        border-bottom-left-radius: 40px;
+        background-color: $background-blue;
+        height: 290px;
+    }
+
+    &-title{
+        font-family: $header-title-font-family;
+        color: white !important;
+        font-size: $header-title-font-size;
+        line-height: $header-title-lineheight;
+    }
+
+    &-text{
+        color: white;
+        font-size: $header-text-font-size;
+        line-height: $header-text-lineheight;
+    }
+
+    &-content{
+        margin-top: 80px;
+    }
+
+    &-form{
+        display: flex;
+        flex-direction: column;
+        width: 33%;
+        gap: 40px;
+    }
+}
+
+.header{
+    &-container{
+        height: 100%;
+    }
+}
