@@ -7,13 +7,10 @@ export default defineConfig({
   plugins: [
     react(),
     federation({
-      name: "host",
-      remotes: {
-        performanceReview: "http://localhost:5001/assets/remoteEntry.js",
-        authorization: 'http://localhost:5002/assets/remoteEntry.js',
-        planning: "http://localhost:5003/assets/remoteEntry.js"
-      },
-      shared: ["react", "react-dom", "react-router-dom"],
+      name: "planning",
+      filename: "remoteEntry.js",
+      exposes: { "./Planning": "./src/App.tsx" },
+      shared: ["react", "react-dom", "antd", "react-router-dom"],
     }),
   ],
   build: {
