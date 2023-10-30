@@ -1,6 +1,8 @@
 @import './../const.scss';
 
 .selfReview{
+    position: relative;
+
     &-header{
         border-bottom-right-radius: 40px;
         border-bottom-left-radius: 40px;
@@ -23,6 +25,22 @@
 
     &-content{
         margin-top: 80px;
+        padding-bottom: 120px;
+        position: relative;
+        overflow: hidden;
+
+        &::before{
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: -7%;
+            width: 150%;
+            height: 40%;
+            background: linear-gradient(to right, #E9EFFC, transparent);
+            background-position: bottom;
+            background-repeat: no-repeat;
+            transform: rotate(-25deg);
+        }
     }
 
     &-form{
@@ -30,6 +48,25 @@
         flex-direction: column;
         width: 33%;
         gap: 40px;
+    }
+
+    &-textarea{
+        font-size: 24px;
+    }
+
+    &-save,&-send{
+        width: calc(50% - 26px);
+        height: 70px;
+        border-radius: 10px;
+        font-size: 24px;
+    }
+
+    &-save{
+        background-color: #B2BCD5;
+    }
+
+    &-send{
+        background-color: #0843DD;
     }
 }
 

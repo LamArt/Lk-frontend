@@ -38,6 +38,8 @@ const theme: ThemeConfig = {
       handleSizeHover: 36,
       borderRadiusXS: 22
     },
-    
+    Form: {
+      labelFontSize: 32,
+    },
   }
 }
