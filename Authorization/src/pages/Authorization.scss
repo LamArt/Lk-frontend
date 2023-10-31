@@ -1,11 +1,11 @@
 @import './../const.scss';
 
 .authorization{
-  &-header{
-    border-bottom-right-radius: 40px;
-    border-bottom-left-radius: 40px;
+
+  &-content{
+    width: auto;
+    height: 100vh;
     background-color: $background-blue;
-    height: 290px;
   }
 
   &-title{
@@ -15,27 +15,39 @@
     line-height: $header-title-lineheight;
   }
 
-  &-text{
-    color: white;
-    font-size: $header-text-font-size;
-    line-height: $header-text-lineheight;
-  }
-
-  &-content{
-    margin-top: 80px;
-    background-color: $background-blue;
-  }
-
   &-form{
     display: flex;
     flex-direction: column;
-    width: 33%;
-    gap: 40px;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 100px;
+    margin-top: 12.5%;
+    background-color: white;
+    border-radius: 12px;
+    box-shadow: 5px 10px 50px 0 rgba(242, 246, 255, 0.50);
+  }
+
+  &-text{
+    color: rgba(255, 255, 255, 0.75);
+    font-size: $authorization-text-font-size;
+    line-height: $header-text-lineheight;
+    align-self: baseline;
+    margin-top: 11%;
+    font-variation-settings: 'wght' $authorization-text-font-weight;
+  }
+
+  &-button{
+    width: 65%;
   }
 }
 
-.header{
+.content{
+
   &-container{
-    height: 100%;
+    margin: 10% auto;
+    width: 80%;
+    display: flex;
   }
+
 }
