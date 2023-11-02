@@ -1,16 +1,15 @@
-import { Layout, Flex, Form, Button, Slider } from 'antd'
-import '../styles/Review.scss';
-import DoubleFormLabel from '../components/UI/DoubleFormLabel'
-import TextArea from 'antd/es/input/TextArea'
-import { selfTextAreaFields, sliderFields, textAreaFields } from '../helpers/ReviewFormHelper'
+import { Layout, Flex, Form, Slider, Button } from "antd";
+import TextArea from "antd/es/input/TextArea";
+import DoubleFormLabel from "../components/UI/DoubleFormLabel";
+import { leadSliderFields, sliderFields, textAreaFields } from "../helpers/ReviewFormHelper";
+import '../styles/Review.scss'
 
-
-export default function SelfReview(){   
+export default function ManagerReview(){
     return (
         <Layout className='review'>
             <Layout.Header className='review-header header'>
                 <Flex className='header-container' justify='center' align='center' gap='middle' vertical>
-                    <h1 className='review-title'>Оцени себя</h1>
+                    <h1 className='review-title'>Оцени коллег</h1>
                     <p className='review-text'>Постарайся быть объективым</p>
                 </Flex>
             </Layout.Header>
@@ -21,7 +20,12 @@ export default function SelfReview(){
                             <DoubleFormLabel label={field.label} annotation={field.annotation}/>
                             <Slider/>
                         </Form.Item>)}
-                        {[...selfTextAreaFields, ...textAreaFields].map((field, i) => <Form.Item label={field.label} key={i}>
+                        <h2 className="review-subtitle">Оцени тимлида</h2>
+                        {leadSliderFields.map((field, i) => <Form.Item key={i}>
+                            <DoubleFormLabel label={field.label} annotation={field.annotation}/>
+                            <Slider/>
+                        </Form.Item>)}
+                        {textAreaFields.map((field, i) => <Form.Item label={field.label} key={i}>
                             <TextArea className='review-textarea' placeholder={field.placeholder} rows={4}/>
                         </Form.Item>)}
                         <Flex justify='space-between' align='center'>

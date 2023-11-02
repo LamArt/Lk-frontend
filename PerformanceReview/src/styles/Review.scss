@@ -1,6 +1,6 @@
 @import './../const.scss';
 
-.selfReview{
+.review{
     position: relative;
 
     &-header{
@@ -15,6 +15,13 @@
         color: white !important;
         font-size: $header-title-font-size;
         line-height: $header-title-lineheight;
+    }
+
+    &-subtitle{
+        font-size: 2rem;
+        text-align: center;
+        margin-top: 30px;
+        margin-bottom: 20px;
     }
 
     &-text{
