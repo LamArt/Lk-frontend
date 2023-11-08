@@ -18,7 +18,7 @@ export default function PeerReview(){
                     <Form className='review-form' layout='vertical'>
                         {sliderFields.map((field, i) => <Form.Item key={i}>
                             <DoubleFormLabel label={field.label} annotation={field.annotation}/>
-                            <Slider/>
+                            <Slider tooltip={{ open: false }}/>
                         </Form.Item>)}
                         {textAreaFields.map((field, i) => <Form.Item label={field.label} key={i}>
                             <TextArea className='review-textarea' placeholder={field.placeholder} rows={4}/>

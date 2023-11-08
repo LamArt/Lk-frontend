@@ -18,12 +18,12 @@ export default function ManagerReview(){
                     <Form className='review-form' layout='vertical'>
                         {sliderFields.map((field, i) => <Form.Item key={i}>
                             <DoubleFormLabel label={field.label} annotation={field.annotation}/>
-                            <Slider/>
+                            <Slider tooltip={{ open: false }}/>
                         </Form.Item>)}
                         <h2 className="review-subtitle">Оцени тимлида</h2>
                         {leadSliderFields.map((field, i) => <Form.Item key={i}>
                             <DoubleFormLabel label={field.label} annotation={field.annotation}/>
-                            <Slider/>
+                            <Slider tooltip={{ open: false }}/>
                         </Form.Item>)}
                         {textAreaFields.map((field, i) => <Form.Item label={field.label} key={i}>
                             <TextArea className='review-textarea' placeholder={field.placeholder} rows={4}/>
