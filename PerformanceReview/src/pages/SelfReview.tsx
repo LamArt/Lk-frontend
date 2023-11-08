@@ -3,8 +3,12 @@ import '../styles/Review.scss';
 import DoubleFormLabel from '../components/UI/DoubleFormLabel'
 import TextArea from 'antd/es/input/TextArea'
 import { selfTextAreaFields, sliderFields, textAreaFields } from '../helpers/ReviewFormHelper'
+import {useGetAllPostsQuery} from "../store/exampleApi/exampleApi";
 
-export default function SelfReview(){   
+export default function SelfReview(){
+    const {data} = useGetAllPostsQuery({})
+    console.log(data)
+
     return (
         <Layout className='review'>
             <Layout.Header className='review-header header'>
@@ -24,7 +28,7 @@ export default function SelfReview(){
                             <TextArea className='review-textarea' placeholder={field.placeholder} rows={4}/>
                         </Form.Item>)}
                         <Flex justify='space-between' align='center'>
-                            <Button type='primary' className='review-save'>Сохранить</Button>                        
+                            <Button type='primary' className='review-save'>Сохранить</Button>
                             <Button type='primary' htmlType='submit' className='review-send'>Отправить</Button>
                         </Flex>
                     </Form>
