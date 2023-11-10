@@ -1,0 +1,10 @@
+.mail {
+  width: 260px;
+  height: 45px;
+  margin: 32px 0px 0px 42px;
+  &-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+}
