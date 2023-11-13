@@ -1,23 +1,27 @@
 export const sliderFields: SliderFields[] = [
     {
         label: 'Продуктивность',
-        annotation: 'Как быстро спавляешься с задачами?'
+        selfAnnotation: 'Как быстро справляешься с задачами?',
+        annotation: 'Как быстро он/она справляется с задачами?'
     },
     {
         label: 'Коммуникативность',
-        annotation: 'Как тебе даётся общение с коллегами?'
+        selfAnnotation: 'Как тебе даётся общение с коллегами?',
+        annotation: 'Как ему/ей даётся общение с коллегами?'
     },
     {
         label: 'Инициатива',
-        annotation: 'Насколько тебе интересен текущий проект?'
+        selfAnnotation: 'Насколько тебе интересен текущий проект?',
+        annotation: 'Насколько ему/ей интересен текущий проект?'
     },
     {
         label: 'Профессиональные навыки ',
-        annotation: 'Насколько твои навыки соотносятся с проектом?'
+        selfAnnotation: 'Насколько твои навыки соотносятся с проектом?',
+        annotation: 'Насколько его/ее навыки соотносятся с проектом?'
     },
 ]
 
-export const leadSliderFields: SliderFields[] = [
+export const leadSliderFields: Omit<SliderFields, 'selfAnnotation'>[] = [
     {
         label: 'Лидерские качества',
         annotation: 'Берёт ли он/она ответственность за решения?'
@@ -67,4 +71,5 @@ interface TextAreaFields{
 interface SliderFields {
     label: string,
     annotation: string,
+    selfAnnotation: string
 }
