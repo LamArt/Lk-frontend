@@ -11,7 +11,8 @@ export default defineConfig({
       remotes: {
         performanceReview: "http://localhost:5001/assets/remoteEntry.js",
         authorization: 'http://localhost:5002/assets/remoteEntry.js',
-        planning: "http://localhost:5003/assets/remoteEntry.js"
+        planning: "http://localhost:5003/assets/remoteEntry.js",
+        salary: "http://localhost:5004/assets/remoteEntry.js",
       },
       shared: ["react", "react-dom", "react-router-dom"],
     }),
