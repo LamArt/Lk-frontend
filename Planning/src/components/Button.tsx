@@ -1,9 +1,12 @@
 import { Button } from "antd";
 import "./Button.scss";
+import { useGetAllPostsQuery } from "../store/testApi";
 
 const ButtonMail = () => {
+  const { data } = useGetAllPostsQuery({});
+  console.log(data);
   const redirectYandexPost = () => {
-    const redirectUrl = "https://mail.yand.ru";
+    const redirectUrl = "https://mail.yandex.ru";
     window.location.href = redirectUrl;
   };
   return (
