@@ -1,10 +1,37 @@
+@import "./../const.scss";
 .mail {
-  width: 260px;
-  height: 45px;
-  margin: 32px 0px 0px 42px;
+  width: 426px;
+  height: 64px;
+  font-weight: 400;
+  margin: 84px 0px 0px 42px;
+  font-size: $planning-text-font-size;
   &-container {
     display: flex;
     align-items: center;
     justify-content: center;
+    text-align: center;
+    margin: auto;
+    gap: 3%;
+    &__img {
+      width: 40px;
+    }
+  }
+  &-img__container {
+    display: block;
+    position: relative;
+    align-items: center;
+    height: 32px;
+  }
+  &-active {
+    position: absolute;
+    display: flex;
+    top: 1px;
+    right: 1px;
+    transform: translate(50%, -50%);
+    width: 15px; /* Размер кружка */
+    height: 15px;
+    background-color: #ff0000; /* Цвет кружка */
+    border-radius: 50%; /* Делаем кружок круглым */
+    z-index: 1; /* Чтобы кружок был поверх изображения */
   }
 }

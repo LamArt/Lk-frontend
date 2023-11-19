@@ -31,7 +31,7 @@ const theme: ThemeConfig = {
       colorPrimary: "#0843DD",
       colorBgContainerDisabled: "#84A6FF",
       colorTextDisabled: "#ffffff",
-      borderRadius: 10,
+      borderRadius: 15,
     },
   },
 };
