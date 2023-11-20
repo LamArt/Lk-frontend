@@ -4,6 +4,9 @@ import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 import { Mutex } from 'async-mutex';
 import authActions from "./authActions.ts";
 
+interface RefreshData {
+  access: string;
+}
 
 const SERVER_URL = import.meta.env.VITE_BASE_URL
 const mutex = new Mutex();
@@ -41,8 +44,7 @@ const baseQueryWithReauth: BaseQueryFn<
         if (refreshResult.data) {
           localStorage.setItem(
               "access_token",
-              // @ts-ignore
-              refreshResult.data.access
+              (refreshResult.data as RefreshData).access
           );
           api.dispatch(authActions.setAuth());
 
