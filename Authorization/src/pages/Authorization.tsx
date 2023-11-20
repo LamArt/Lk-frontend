@@ -1,8 +1,7 @@
-import { useEffect } from 'react';
+import {useEffect} from 'react';
 import { Flex, Form, Layout } from 'antd';
 import './Authorization.scss';
-import {AuthButton} from "../components/AuthButton.ts";
-
+import { AuthButton } from "../components/AuthButton";
 export default function Authorization() {
     useEffect(() => {
         AuthButton();
