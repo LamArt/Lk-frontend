@@ -35,6 +35,7 @@
         padding-bottom: 120px;
         position: relative;
         overflow: hidden;
+        background-color: #F2F6FF;
 
         &::before{
             content: '';
@@ -53,7 +54,7 @@
     &-form{
         display: flex;
         flex-direction: column;
-        width: 33%;
+        width: 40%;
         gap: 40px;
     }
 
@@ -75,6 +76,34 @@
 
     &-send{
         background-color: #0843DD;
+    }
+
+    &-radar{
+        width: 45%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+    }
+
+    &-chartLabel{
+        text-align: center;
+        font-size: 19px;
+        margin-bottom: 0;
+    }
+
+    &-replies{
+
+        h2{
+            font-weight: 400;
+            font-size: 32px;
+            color: black;
+            opacity: 1;
+        }
+    }
+
+    &-reply{
+        margin-bottom: 16px;
     }
 }
 

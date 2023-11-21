@@ -23,7 +23,7 @@ export default function SelfReview(){
                 <Flex align='center' vertical style={{zIndex: 100}}>
                     <Form className='review-form' layout='vertical'>
                         {sliderFields.map((field, i) => <Form.Item key={i}>
-                            <DoubleFormLabel label={field.label} annotation={field.annotation}/>
+                            <DoubleFormLabel label={field.label} annotation={field.selfAnnotation}/>
                             <Slider tooltip={{ open: false }}/>
                         </Form.Item>)}
                         {[...selfTextAreaFields, ...textAreaFields].map((field, i) => <Form.Item label={field.label} key={i}>

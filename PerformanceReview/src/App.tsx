@@ -4,6 +4,7 @@ import SelfReview from './pages/SelfReview'
 import { ConfigProvider, ThemeConfig } from 'antd'
 import PeerReview from './pages/PeerReview'
 import ManagerReview from './pages/ManagerReview'
+import LeadReivew from './pages/LeadReview'
 
 const basePath = '/performance'
 
@@ -18,6 +19,7 @@ function App({isMicroApp}: {isMicroApp?: boolean}) {
             <Route path={basePath} element={<SelfReview/>}/>
             <Route path={`${basePath}/peer`} element={<PeerReview/>}/>
             <Route path={`${basePath}/manager`} element={<ManagerReview/>}/>
+            <Route path={`${basePath}/lead`} element={<LeadReivew/>}/>
             {!isMicroApp && <Route path='/' element={<Navigate to={basePath}/>}/>}
           </Routes>
         </BrowserRouter>
