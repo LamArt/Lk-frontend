@@ -1,6 +1,7 @@
 import './App.css'
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom'
 import Authorization from './pages/Authorization.tsx'
+import TokenPage from "./pages/TokenPage.tsx";
 import { ConfigProvider, ThemeConfig } from 'antd'
 
 const basePath = '/authorization'
@@ -15,6 +16,7 @@ function App({isMicroApp}: {isMicroApp?: boolean}) {
                     <Routes>
                         <Route path={basePath} element={<Authorization/>}/>
                         {!isMicroApp && <Route path='/' element={<Navigate to={basePath}/>}/>}
+                        <Route path="/token" element={<TokenPage/>}/>
                     </Routes>
                 </BrowserRouter>
             </ConfigProvider>
