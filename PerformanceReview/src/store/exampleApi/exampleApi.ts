@@ -1,4 +1,5 @@
-import {commonApi} from "../commonApi";
+import commonApi from "authorization/commonApi"
+console.log(commonApi)
 
 const exampleApi = commonApi.injectEndpoints({
   endpoints: (build) => ({

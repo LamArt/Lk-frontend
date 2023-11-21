@@ -63,8 +63,10 @@ const baseQueryWithReauth: BaseQueryFn<
   return result;
 };
 
-export const commonApi = createApi({
+const commonApi = createApi({
   reducerPath: 'authReducer',
   baseQuery: baseQueryWithReauth,
   endpoints: () => ({}),
 });
+
+export default commonApi
