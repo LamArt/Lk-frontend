@@ -1,5 +1,5 @@
 import { configureStore } from "@reduxjs/toolkit";
-import { commonApi } from "./commonApi";
+import { commonApi } from "../../../Authorization/src/store/commonApi";
 import { rootReducer } from "./rootReducer";
 export const store = configureStore({
   reducer: rootReducer,

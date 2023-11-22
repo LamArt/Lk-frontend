@@ -1,15 +1,12 @@
 import { Button } from "antd";
 import "./Button.scss";
-import { useGetAllPostsQuery } from "../store/testApi";
 import { useEffect, useState } from "react";
-
+import { commonApi } from "../../../Authorization/src/store/commonApi";
 const ButtonMail = () => {
-  const { data } = useGetAllPostsQuery({});
   const [countEmails, setCountEmails] = useState(6);
-  console.log(data);
   const redirectYandexPost = () => {
     const redirectUrl = "https://mail.yandex.ru";
-    window.location.href = redirectUrl;
+    window.open(redirectUrl);
   };
   return (
     <Button
