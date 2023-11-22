@@ -9,6 +9,9 @@ export default defineConfig({
     federation({
       name: "planning",
       filename: "remoteEntry.js",
+      remotes: {
+        authorization: "http://localhost:5002/assets/remoteEntry.js",
+      },
       exposes: { "./Planning": "./src/App.tsx" },
       shared: ["react", "react-dom", "antd", "react-router-dom"],
     }),
