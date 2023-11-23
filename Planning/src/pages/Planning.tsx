@@ -1,10 +1,12 @@
-import { Layout } from "antd";
-
+import { Layout, Flex } from "antd";
+import TodayDate from "../components/UI/CalendarWidget.tsx";
 export default function Planning() {
   return (
     <Layout>
-      <Layout.Content>
-        <p>Модуль 360</p>
+      <Layout.Content className="planning-content content">
+        <Flex className="content-container" vertical>
+          <TodayDate></TodayDate>
+        </Flex>
       </Layout.Content>
     </Layout>
   );
