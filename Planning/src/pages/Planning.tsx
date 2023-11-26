@@ -1,5 +1,5 @@
 import { Layout, Flex } from "antd";
-import TodayDate from "../components/UI/CalendarWidget.tsx";
+import TodayDate from "../components/CalendarWidget.tsx";
 export default function Planning() {
   return (
     <Layout>

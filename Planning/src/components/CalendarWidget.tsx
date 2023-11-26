@@ -1,12 +1,13 @@
 import { format } from 'date-fns';
-import EventCard from './EventComponent';
+import ruLocale from 'date-fns/locale/ru';
+import EventCard from './UI/EventCard';
 import './CalendarWidget.scss';
 const TodayDate = () => {
   const today: Date = new Date();
-  const formattedDate: string = format(today, 'd MMMM yyyy');
+  const formattedDate: string = format(today, 'd MMMM yyyy', { locale: ruLocale });
   return (
     <div className = "calendar-main-window">
-      <h2 className = "date">{formattedDate}</h2>
+      <p className = "date">{formattedDate}</p>
       <EventCard></EventCard>
     </div>
   );

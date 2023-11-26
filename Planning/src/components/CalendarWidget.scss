@@ -1,4 +1,4 @@
-@import 'CustomButton.scss';
+@import 'UI/CustomButton.scss';
 
 .calendar-main-window {
     width: 700px;
@@ -10,6 +10,7 @@
 .date {
     margin: 4% 0 1% 4%;
     font-family: 'Lato', sans-serif;
+    font-size: 20px;
 }
 
 .list {
@@ -22,21 +23,21 @@
     margin-bottom: 4%;
 }
 
-.meeting-time {
-    font-size: 15px;
-    margin: 0%;
-    font-weight: 400;
-}
-
-.meeting-status {
-    color: #0843DD;
-    font-size: 26px;
-    margin: 0%;
-}
-.meeting-reminder {
-    margin: 0%;
-    margin-top: 1%;
-
+.meeting {
+    &-time{
+        font-size: 15px;
+        margin: 0%;
+        font-weight: 400;
+    }
+    &-status {
+        color: #0843DD;
+        font-size: 26px;
+        margin: 0%;
+    }
+    &-reminder {
+        margin: 0%;
+        margin-top: 1%;
+    }
 }
 
 .buttonAddEvent {
@@ -46,7 +47,11 @@
     margin-left: 85%;
     margin-bottom: 5%;
 }
-
+.buttonAddEvent:active,
+.buttonAddEvent:focus {
+    box-shadow: none;
+    outline: none;
+}
 .plus-image {
     display: block;
     width: 40px;
@@ -55,4 +60,5 @@
 }
 .not-active-meeting {
     color: #949191;
+    // добавить серый цвет боковой вертикальной линии
 }
