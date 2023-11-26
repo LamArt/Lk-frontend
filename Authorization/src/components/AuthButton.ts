@@ -1,4 +1,3 @@
-// AuthButton.ts
 declare global {
     interface Window {
         YaAuthSuggest: {
@@ -7,7 +6,10 @@ declare global {
     }
 }
 
+import Cookies from 'universal-cookie';
+
 let scriptLoaded = false;
+const cookies = new Cookies();
 
 export function AuthButton() {
     if (!scriptLoaded) {
@@ -58,8 +60,8 @@ export function AuthButton() {
                         .then(responseData => {
                             console.log('Ответ от сервера:', responseData);
 
-                            document.cookie = `access_token=${responseData.access}`;
-                            document.cookie = `refresh_token=${responseData.refresh}`;
+                            cookies.set('access_token', responseData.access, { path: '/' });
+                            cookies.set('refresh_token', responseData.refresh, { path: '/' });
                         })
                         .catch(error => {
                             console.error('Ошибка при выполнении POST-запроса:', error);
