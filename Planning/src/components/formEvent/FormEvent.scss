@@ -1,0 +1,47 @@
+@import "../../const.scss";
+.formContainer {
+  padding: 42px 0 0 42px;
+}
+.modal .ant-modal-content {
+  border-radius: 15px;
+}
+.fieldContainer {
+  display: grid;
+  grid-template-columns: 32px auto;
+  gap: 20px 0;
+  margin-top: 0 0 12px 0;
+}
+.info {
+  gap: 20px 8px;
+}
+.infoWrapper {
+  padding: 28px 42px 28px 42px;
+}
+.formIcon {
+  font-size: 32px;
+  color: $accent;
+}
+.fieldTitle {
+  font-size: 34px;
+  font-weight: 400;
+  border-top: none;
+  border-left: none;
+  border-right: none;
+  border-bottom: 2px solid $accent;
+  border-radius: 0;
+  width: 390px;
+  margin: 0 0 42px 0;
+}
+.field {
+  font-size: 20px;
+}
+.saveEvent {
+  width: 200px;
+  height: 48px;
+  font-size: 20px;
+  border-radius: 50px;
+  background-color: $accent;
+}
+.custom-datepicker .ant-picker-input input {
+  font-size: 20px; /* Задаем размер шрифта для ввода */
+}
