@@ -1,11 +1,10 @@
 import commonApi from "authorization/commonApi"
-console.log(commonApi)
 
 const exampleApi = commonApi.injectEndpoints({
-  endpoints: (build) => ({
-    getAllPosts: build.query({
+  endpoints: (build: any) => ({
+    getAllPosts: build.mutation({
       query: () => ({
-        url: '/posts',
+        url: '/profile/',
         method: 'GET',
       }),
     }),

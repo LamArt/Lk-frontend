@@ -4,7 +4,9 @@ import './Authorization.scss';
 import { AuthButton } from "../components/AuthButton";
 export default function Authorization() {
     useEffect(() => {
-        AuthButton();
+        if (!window.YaAuthSuggest) {
+            AuthButton();
+        }
     }, []);
 
     return (

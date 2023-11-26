@@ -15,7 +15,7 @@ export default defineConfig({
       exposes: {
         './PerformanceReview': './src/App.tsx'
       },
-      shared: ['react', 'react-dom', 'antd', 'react-router-dom']
+      shared: ['react', 'react-dom', 'antd', 'react-router-dom', '@reduxjs/toolkit', 'react-redux', 'react-query']
     })
   ],
   build: {

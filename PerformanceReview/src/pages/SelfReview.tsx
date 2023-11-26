@@ -3,13 +3,12 @@ import '../styles/Review.scss';
 import DoubleFormLabel from '../components/UI/DoubleFormLabel'
 import TextArea from 'antd/es/input/TextArea'
 import { selfTextAreaFields, sliderFields, textAreaFields } from '../helpers/ReviewFormHelper'
-import {useGetAllPostsQuery} from "../store/exampleApi/exampleApi";
-import commonApi from "authorization/commonApi"
-export default function SelfReview(){
-    const {data} = useGetAllPostsQuery({})
-    console.log(data)
+// import {useGetAllPostsQuery} from "../store/exampleApi/exampleApi";
+import {usePostTeamleadFormMutation} from "../store/reviewApi/reviewApi";
 
-    console.log(commonApi)
+export default function SelfReview(){
+    const {data} = usePostTeamleadFormMutation()
+    console.log(data)
 
     return (
         <Layout className='review'>

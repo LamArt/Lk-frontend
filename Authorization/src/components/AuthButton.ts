@@ -56,8 +56,8 @@ export function AuthButton() {
                         .then(responseData => {
                             console.log('Ответ от сервера:', responseData);
 
-                            localStorage.setItem('access_token', responseData.access);
-                            localStorage.setItem('refresh_token', responseData.refresh);
+                            document.cookie = `access_token=${responseData.access}`;
+                            document.cookie = `refresh_token=${responseData.refresh}`;
                         })
                         .catch(error => {
                             console.error('Ошибка при выполнении POST-запроса:', error);
