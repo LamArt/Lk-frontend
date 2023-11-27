@@ -48,7 +48,7 @@ const baseQueryWithReauth: BaseQueryFn<string | FetchArgs, unknown, FetchBaseQue
         );
 
         if (refreshResult.data) {
-          cookies.set('access_token', (refreshResult.data as RefreshData).access, { path: '/' });
+          cookies.set('access_token', (refreshResult.data as RefreshData).access);
           api.dispatch(authActions.setAuth());
 
           result = await baseQuery(args, api, extraOptions);

@@ -60,8 +60,8 @@ export function AuthButton() {
                         .then(responseData => {
                             console.log('Ответ от сервера:', responseData);
 
-                            cookies.set('access_token', responseData.access, { path: '/' });
-                            cookies.set('refresh_token', responseData.refresh, { path: '/' });
+                            cookies.set('access_token', responseData.access);
+                            cookies.set('refresh_token', responseData.refresh);
                         })
                         .catch(error => {
                             console.error('Ошибка при выполнении POST-запроса:', error);
