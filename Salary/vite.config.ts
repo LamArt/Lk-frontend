@@ -8,6 +8,9 @@ export default defineConfig({
     react(),
     federation({
       name: 'salary',
+      remotes: {
+        authorization: 'http://localhost:5002/assets/remoteEntry.js',
+      },
       filename: 'remoteEntry.js', // название файла в которое будет собрано приложение
       exposes: {
         './Salary': './src/App.tsx' // компоненты для экспорта - "путь до компонента в удаленном приложении: путь до компонента в папке самого микро-приложения"
@@ -19,6 +22,6 @@ export default defineConfig({
     modulePreload: false,
     target: 'esnext',
     minify: false,
-    cssCodeSplit: false
+    cssCodeSplit: false,
   }
 })

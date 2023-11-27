@@ -1,7 +1,9 @@
 import './App.css'
 import {ConfigProvider, ThemeConfig} from "antd";
 import {BrowserRouter, Navigate, Route, Routes} from "react-router-dom";
+import { Provider } from 'react-redux';
 import Jira from "./pages/Jira.tsx";
+import { store } from "./redux/store.ts";
 
 const basePath = '/salary'
 
@@ -10,14 +12,16 @@ function App({isMicroApp}: {isMicroApp?: boolean}) {
 
     return (
         <>
-            <ConfigProvider theme={theme}>
-                <BrowserRouter>
-                    <Routes>
-                        <Route path={basePath} element={<Jira/>}/>
-                        {!isMicroApp && <Route path='/' element={<Navigate to={basePath}/>}/>}
-                    </Routes>
-                </BrowserRouter>
-            </ConfigProvider>
+            <Provider store={store} >
+                <ConfigProvider theme={theme}>
+                    <BrowserRouter>
+                        <Routes>
+                            <Route path={basePath} element={<Jira/>}/>
+                            {!isMicroApp && <Route path='/' element={<Navigate to={basePath}/>}/>}
+                        </Routes>
+                    </BrowserRouter>
+                </ConfigProvider>
+            </Provider>
         </>
     )
 }

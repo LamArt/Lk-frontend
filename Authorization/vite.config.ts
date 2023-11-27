@@ -10,9 +10,10 @@ export default defineConfig({
       name: 'authorization',
       filename: 'remoteEntry.js',
       exposes: {
-        './Authorization': './src/App.tsx'
+        './Authorization': './src/App.tsx',
+        './CommonApi': './src/redux/commonApi.ts',
       },
-      shared: ['react', 'react-dom', 'antd', 'react-router-dom']
+      shared: ['react', 'react-dom', 'antd', 'react-router-dom', 'async-mutex', '@reduxjs/toolkit']
     })
   ],
   build: {
