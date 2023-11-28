@@ -10,7 +10,8 @@ export default defineConfig({
       name: 'authorization',
       filename: 'remoteEntry.js',
       exposes: {
-        './Authorization': './src/App.tsx'
+        './Authorization': './src/App.tsx',
+        './commonApi': './src/store/commonApi.ts',
       },
       shared: ['react', 'react-dom', 'antd', 'react-router-dom']
     })
