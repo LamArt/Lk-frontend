@@ -67,10 +67,11 @@ const baseQueryWithReauth: BaseQueryFn<string | FetchArgs, unknown, FetchBaseQue
   return result;
 };
 
-export const commonApi = createApi({
+const commonApi = createApi({
   reducerPath: 'authReducer',
   baseQuery: baseQueryWithReauth,
   endpoints: () => ({}),
 });
 
 export type CommonApi = Api<BaseQueryFn<string | FetchArgs, unknown, FetchBaseQueryError>, {}, "authReducer", never, typeof coreModuleName | typeof reactHooksModuleName>;
+export default commonApi
