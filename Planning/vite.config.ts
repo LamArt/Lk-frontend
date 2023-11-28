@@ -13,15 +13,7 @@ export default defineConfig({
         authorization: "http://localhost:5002/assets/remoteEntry.js",
       },
       exposes: { "./Planning": "./src/App.tsx" },
-      shared: [
-        "react",
-        "react-dom",
-        "antd",
-        "react-router-dom",
-        "@reduxjs/toolkit",
-        "react-redux",
-        "react-query",
-      ],
+      shared: ["react", "react-dom", "antd", "react-router-dom"],
     }),
   ],
   build: {
