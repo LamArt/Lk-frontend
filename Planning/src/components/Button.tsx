@@ -1,13 +1,17 @@
 import { Button } from "antd";
 import "./Button.scss";
 import { useEffect, useState } from "react";
-import { commonApi } from "../../../Authorization/src/store/commonApi";
+import { useGetCountMailQuery } from "../store/planningApi/mailApi";
+import commonApi from "authorization/commonApi";
 const ButtonMail = () => {
   const [countEmails, setCountEmails] = useState(6);
   const redirectYandexPost = () => {
     const redirectUrl = "https://mail.yandex.ru";
     window.open(redirectUrl);
   };
+  console.log(commonApi);
+  // const { data } = useGetCountMailQuery(localStorage.setItem);
+  // console.log(data);
   return (
     <Button
       type="primary"
