@@ -1,9 +1,33 @@
 import { Button } from "antd";
 import "./Button.scss";
 import { useEffect, useState } from "react";
-import { commonApi } from "../../../Authorization/src/store/commonApi";
+import { useGetCountMailMutation } from "../store/mailApi/mailApi";
 const ButtonMail = () => {
   const [countEmails, setCountEmails] = useState(6);
+  const [mutate, { data }] = useGetCountMailMutation();
+  console.log(data);
+  const fetchData = async () => {
+    try {
+      try {
+        const response = await mutate({
+          /* Передайте здесь параметры, если необходимо */
+        });
+        // Assuming your response has a property 'count'
+        if ("data" in response) {
+          // Assuming your response has a property 'count'
+          setCountEmails(response.data.count);
+        } else {
+          console.error("No data property in the response.");
+        }
+      } catch (error) {
+        console.error("Error fetching data:", error);
+      }
+
+      // Assuming your response has a property 'count'
+    } catch (error) {
+      console.error("Error fetching data:", error);
+    }
+  };
   const redirectYandexPost = () => {
     const redirectUrl = "https://mail.yandex.ru";
     window.open(redirectUrl);
@@ -13,7 +37,7 @@ const ButtonMail = () => {
       type="primary"
       disabled={countEmails > 0 ? false : true}
       className="mail"
-      onClick={redirectYandexPost}
+      onClick={fetchData}
     >
       <div className="mail-container">
         <div className="mail-img__container">

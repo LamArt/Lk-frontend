@@ -1,6 +1,6 @@
 import { combineReducers } from "@reduxjs/toolkit";
-import { commonApi } from "../../../Authorization/src/store/commonApi";
+import { localApi } from "./localApi";
 
 export const rootReducer = combineReducers({
-  [commonApi.reducerPath]: commonApi.reducer,
+  [localApi.reducerPath]: localApi.reducer,
 });
