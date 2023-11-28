@@ -74,4 +74,4 @@ const commonApi = createApi({
 });
 
 export type CommonApi = Api<BaseQueryFn<string | FetchArgs, unknown, FetchBaseQueryError>, {}, "authReducer", never, typeof coreModuleName | typeof reactHooksModuleName>;
-export {commonApi}
+export default commonApi
