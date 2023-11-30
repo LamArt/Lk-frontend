@@ -2,7 +2,7 @@ import { localApi } from "../localApi";
 
 const mailApi = localApi.injectEndpoints({
   endpoints: (build) => ({
-    getCountMail: build.mutation({
+    getCountMail: build.query({
       query: () => ({
         url: "/planning/mail_count/",
         method: "GET",
@@ -11,4 +11,4 @@ const mailApi = localApi.injectEndpoints({
   }),
 });
 
-export const { useGetCountMailMutation } = mailApi;
+export const { useGetCountMailQuery } = mailApi;
