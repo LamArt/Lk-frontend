@@ -4,14 +4,21 @@ const EventCard = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   const handleOpenModal = () => {
-    setIsModalOpen(true);
+    setIsModalOpen(prevState => {
+      console.log("i'm in open");
+      console.log(prevState, 'предыдущее состояние');    
+      return true;
+    });
+    console.log(isModalOpen);
+    console.log("shouldn't be here when click on closeButton!");
   };
 
   const handleCloseModal = () => {
-    console.log(isModalOpen);
-    console.log("I'm work!");
-    setIsModalOpen(false);
-    console.log(isModalOpen);
+    setIsModalOpen(prevState => {
+      console.log("click on closeButton");
+      console.log(prevState, 'предыдущее состояние');    
+      return false;
+    });
   };
 
   return (
@@ -32,4 +39,3 @@ const EventCard = () => {
   );
 };
 export default EventCard;
-// icon = {<img className = "plus-image" src = "/icons/addImage.svg"/>}
