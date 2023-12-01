@@ -1,4 +1,3 @@
-// AuthButton.ts
 declare global {
     interface Window {
         YaAuthSuggest: {
@@ -7,7 +6,10 @@ declare global {
     }
 }
 
+import Cookies from 'universal-cookie';
+
 let scriptLoaded = false;
+const cookies = new Cookies();
 
 export function AuthButton() {
     if (!scriptLoaded) {
@@ -41,6 +43,8 @@ export function AuthButton() {
                 .then((data: any) => {
                     const postData = {
                         access_token: data.access_token,
+                        refresh_token: "string",
+                        expires_in: 0,
                         organisation: "lamart",
                         provider: "yandex",
                     };
@@ -56,8 +60,8 @@ export function AuthButton() {
                         .then(responseData => {
                             console.log('Ответ от сервера:', responseData);
 
-                            localStorage.setItem('access_token', responseData.access);
-                            localStorage.setItem('refresh_token', responseData.refresh);
+                            cookies.set('access_token', responseData.access);
+                            cookies.set('refresh_token', responseData.refresh);
                         })
                         .catch(error => {
                             console.error('Ошибка при выполнении POST-запроса:', error);
