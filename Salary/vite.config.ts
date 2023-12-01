@@ -8,14 +8,14 @@ export default defineConfig({
     react(),
     federation({
       name: 'salary',
+      filename: 'remoteEntry.js',
       remotes: {
         authorization: 'http://localhost:5002/assets/remoteEntry.js',
       },
-      filename: 'remoteEntry.js', // название файла в которое будет собрано приложение
       exposes: {
-        './Salary': './src/App.tsx' // компоненты для экспорта - "путь до компонента в удаленном приложении: путь до компонента в папке самого микро-приложения"
+        './Salary': './src/App.tsx'
       },
-      shared: ['react', 'react-dom', 'antd', 'react-router-dom'] // библиотеки нужные для корректной работы экспортируемых компонентов
+      shared: ['react', 'react-dom', 'antd', 'react-router-dom', '@reduxjs/toolkit', 'react-redux']
     })
   ],
   build: {

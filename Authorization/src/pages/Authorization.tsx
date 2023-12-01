@@ -1,10 +1,13 @@
-import {useEffect} from 'react';
-import { Flex, Form, Layout} from 'antd';
+import { useEffect } from 'react';
+import { Flex, Form, Layout } from 'antd';
 import './Authorization.scss';
-import { AuthButton } from "../components/AuthButton";
+import { AuthButton } from "../components/AuthButton.ts";
+
 export default function Authorization() {
     useEffect(() => {
-        AuthButton();
+        if (!window.YaAuthSuggest) {
+            AuthButton();
+        }
     }, []);
 
     return (
