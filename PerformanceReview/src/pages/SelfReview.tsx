@@ -3,12 +3,17 @@ import '../styles/Review.scss';
 import DoubleFormLabel from '../components/UI/DoubleFormLabel'
 import TextArea from 'antd/es/input/TextArea'
 import { selfTextAreaFields, sliderFields, textAreaFields } from '../helpers/ReviewFormHelper'
-// import {useGetAllPostsQuery} from "../store/exampleApi/exampleApi";
-import {employeeFormData, usePostTeamleadFormMutation} from "../store/reviewApi/reviewApi";
+import {EmployeeFormData, usePostEmployeeFormMutation} from "../store/reviewApi/reviewApi";
 import { useState } from 'react';
 
 export default function SelfReview(){
-    const [formData, setFormData] = useState<Partial<employeeFormData>>({})
+    const [formData, setFormData] = useState<Partial<EmployeeFormData>>({team: 1})
+
+    const [data] = usePostEmployeeFormMutation({})
+
+    const saveDataHandle = () => {
+      data(formData)
+    }
 
     return (
         <Layout className='review'>
@@ -21,7 +26,8 @@ export default function SelfReview(){
             <Layout.Content className='review-content'>
                 <Flex align='center' vertical style={{zIndex: 100}}>
                     <Form className='review-form' layout='vertical'>
-                        {sliderFields.map((field, i) => <Form.Item key={i}>
+                        {sliderFields.map((field, i) =>
+                          <Form.Item key={i}>
                             <DoubleFormLabel label={field.label} annotation={field.selfAnnotation}/>
                             <Slider
                                 tooltip={{ open: false }}
@@ -40,7 +46,7 @@ export default function SelfReview(){
                         </Form.Item>)}
                         <Flex justify='space-between' align='center'>
                             <Button type='primary' className='review-save' onClick={() => console.log(formData)}>Сохранить</Button>
-                            <Button type='primary' htmlType='submit' className='review-send'>Отправить</Button>
+                            <Button onClick={saveDataHandle} type='primary' htmlType='submit' className='review-send'>Отправить</Button>
                         </Flex>
                     </Form>
                 </Flex>

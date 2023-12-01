@@ -1,47 +1,55 @@
-import type {BaseQueryFn, FetchArgs, FetchBaseQueryError,} from '@reduxjs/toolkit/query';
-import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
-
+import type {Api, BaseQueryFn, FetchArgs, FetchBaseQueryError} from '@reduxjs/toolkit/query';
+import {createApi, fetchBaseQuery, reactHooksModuleName} from '@reduxjs/toolkit/query/react';
 import { Mutex } from 'async-mutex';
-import authActions from "./authActions.ts";
+import authActions from './authActions.ts';
+import Cookies from 'universal-cookie';
+import { coreModuleName } from '@reduxjs/toolkit/query';
 
 interface RefreshData {
   access: string;
 }
 
-const SERVER_URL = import.meta.env.VITE_BASE_URL
+const SERVER_URL = import.meta.env.VITE_BASE_URL;
 const mutex = new Mutex();
+const cookies = new Cookies();
+
 const baseQuery = fetchBaseQuery({
   baseUrl: `${SERVER_URL}`,
   credentials: 'include',
   prepareHeaders: (headers) => {
-    const token = getCookie('access_token');
+    const token = cookies.get('access_token');
     if (token) {
       headers.set('Authorization', `Bearer ${token}`);
     }
     return headers;
   },
 });
-const baseQueryWithReauth: BaseQueryFn<string | FetchArgs, unknown, FetchBaseQueryError> = async (
-  args,
-  api,
-  extraOptions
-) => {  await mutex.waitForUnlock();
+
+const baseQueryWithReauth: BaseQueryFn<string | FetchArgs, unknown, FetchBaseQueryError> = async (args, 
+  api, 
+  extraOptions) => {
+  await mutex.waitForUnlock();
   let result = await baseQuery(args, api, extraOptions);
+
   if (result.error && result.error.status === 401) {
     if (!mutex.isLocked()) {
       const release = await mutex.acquire();
       try {
         const refreshResult = await baseQuery(
-            {
-              url: `/auth/refresh/`,
-              method: 'POST',
-              body: { refresh: getCookie('refresh_token') },
-            },
-            api,
-            extraOptions
+          {
+            url: `/auth/refresh/`,
+            method: 'POST',
+            body: { refresh: cookies.get('refresh_token') },
+          },
+          api,
+          extraOptions
         );
+
         if (refreshResult.data) {
-          document.cookie = `access_token=${(refreshResult.data as RefreshData).access}; path=/`;
+          cookies.set(
+            'access_token',
+            (refreshResult.data as RefreshData).access
+          );
           api.dispatch(authActions.setAuth());
 
           result = await baseQuery(args, api, extraOptions);
@@ -56,6 +64,7 @@ const baseQueryWithReauth: BaseQueryFn<string | FetchArgs, unknown, FetchBaseQue
       result = await baseQuery(args, api, extraOptions);
     }
   }
+
   return result;
 };
 
@@ -65,16 +74,5 @@ const commonApi = createApi({
   endpoints: () => ({}),
 });
 
-function getCookie(name: string) {
-  const cookieArray = document.cookie.split(';');
-  for (let i = 0; i < cookieArray.length; i++) {
-    const cookiePair = cookieArray[i].split('=');
-    const cookieKey = cookiePair[0].trim();
-    if (cookieKey === name) {
-      return cookiePair[1];
-    }
-  }
-  return '';
-}
-
-export default commonApi
+export type CommonApi = Api<BaseQueryFn<string | FetchArgs, unknown, FetchBaseQueryError>, {}, 'authReducer', never, typeof coreModuleName | typeof reactHooksModuleName>;
+export default commonApi;
