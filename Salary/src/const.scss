@@ -1,0 +1,19 @@
+$header-title-font-size: 4rem;
+$header-text-font-size: 1.3rem;
+$header-title-lineheight: 4.1rem;
+$header-text-lineheight: 2.2rem;
+$header-title-font-family: 'Montserrat', sans-serif;
+$content-font-family: 'Inter', sans-serif;
+
+// z-indexes
+$z-background-2: -2;
+$z-background: -1;
+$z-content: 0;
+$z-foreground: 1;
+$z-foreground-2: 2;
+$z-foreground-3: 3;
+
+// colors
+$blue-title: #1C51DB;
+$background-white: #F2F6FF;
+$background-white-gradient: linear-gradient(to top right, #E9EFFC 55%, transparent 70%);

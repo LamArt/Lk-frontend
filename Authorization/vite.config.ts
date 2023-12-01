@@ -11,9 +11,9 @@ export default defineConfig({
       filename: 'remoteEntry.js',
       exposes: {
         './Authorization': './src/App.tsx',
-        './CommonApi': './src/redux/commonApi.ts',
+        './commonApi': './src/store/commonApi.ts'
       },
-      shared: ['react', 'react-dom', 'antd', 'react-router-dom', 'async-mutex', '@reduxjs/toolkit']
+      shared: ['react', 'react-dom', 'antd', 'react-router-dom', '@reduxjs/toolkit', 'react-redux', 'react-query']
     })
   ],
   build: {
