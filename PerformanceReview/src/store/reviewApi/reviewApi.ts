@@ -1,33 +1,34 @@
-import commonApi from "authorization/commonApi"
+import {localApi} from "../localApi";
 
-// type employeeFormData = {
-//   achievements?: string,
-//   ways_to_achieve?: string,
-//   strengths: string,
-//   weaknesses: string,
-//   hard_skills_rate: number,
-//   productivity_rate: number,
-//   communication_rate: number,
-//   initiative_rate: number,
-//   about?: number,
-//   team: number,
-// }
-//
-// type ReturnedData = {
-//   status: number,
-// }
+export type EmployeeFormData = {
+  achievements?: string,
+  ways_to_achieve?: string,
+  strengths: string,
+  weaknesses: string,
+  hard_skills_rate: number,
+  productivity_rate: number,
+  communication_rate: number,
+  initiative_rate: number,
+  about?: number,
+  team: number,
+}
 
-const reviewApi = commonApi.injectEndpoints({
+type ReturnedData = {
+  status: number,
+}
+
+const reviewApi = localApi.injectEndpoints({
   endpoints: (build) => ({
-    postTeamleadForm: build.mutation({
+    postEmployeeForm: build.mutation<ReturnedData, EmployeeFormData>({
       query: (data) => ({
-        url: '/review/teamlead_forms/',
+        url: '/review/employee_forms/',
         method: 'POST',
+        body: data,
       }),
     }),
   }),
 })
 
 export const {
-  usePostTeamleadFormMutation
+  usePostEmployeeFormMutation
 } = reviewApi

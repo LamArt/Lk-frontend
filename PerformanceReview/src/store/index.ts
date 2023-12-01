@@ -1,8 +1,8 @@
 import {configureStore} from "@reduxjs/toolkit";
 import {rootReducer} from "./rootReducer";
-import commonApi from "authorization/commonApi"
+import {localApi} from "./localApi";
 
 export const store = configureStore({
   reducer: rootReducer,
-  middleware: getDefaultMiddleware => getDefaultMiddleware().concat(commonApi.middleware),
+  middleware: getDefaultMiddleware => getDefaultMiddleware().concat(localApi.middleware),
 })
