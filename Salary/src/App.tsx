@@ -1,9 +1,7 @@
 import './App.css'
 import {ConfigProvider, ThemeConfig} from "antd";
 import {BrowserRouter, Navigate, Route, Routes} from "react-router-dom";
-import { Provider } from 'react-redux';
-import Jira from "./pages/Jira.tsx";
-import { store } from "./redux/store.ts";
+import Salary from "./pages/Salary.tsx";
 
 const basePath = '/salary'
 
@@ -11,18 +9,14 @@ function App({isMicroApp}: {isMicroApp?: boolean}) {
 
 
     return (
-        <>
-            <Provider store={store} >
-                <ConfigProvider theme={theme}>
-                    <BrowserRouter>
-                        <Routes>
-                            <Route path={basePath} element={<Jira/>}/>
-                            {!isMicroApp && <Route path='/' element={<Navigate to={basePath}/>}/>}
-                        </Routes>
-                    </BrowserRouter>
-                </ConfigProvider>
-            </Provider>
-        </>
+        <ConfigProvider theme={theme}>
+            <BrowserRouter>
+                <Routes>
+                    <Route path={basePath} element={<Salary/>}/>
+                    {!isMicroApp && <Route path='/' element={<Navigate to={basePath}/>}/>}
+                </Routes>
+            </BrowserRouter>
+        </ConfigProvider>
     )
 }
 
@@ -41,9 +35,6 @@ const theme: ThemeConfig = {
             handleSize: 36,
             handleSizeHover: 36,
             borderRadiusXS: 22
-        },
-        Form: {
-            labelFontSize: 32,
         },
     }
 }

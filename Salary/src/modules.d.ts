@@ -1,1 +1,1 @@
-declare module "authorization/CommonApi";
+declare module 'authorization/commonApi'

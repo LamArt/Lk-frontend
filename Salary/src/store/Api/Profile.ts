@@ -1,11 +1,9 @@
-// import { commonApi } from 'authorization/CommonApi';
+import commonApi from "authorization/commonApi"
+import {CommonApi} from "../../constans/commonApiInterface.ts";
 
-import { commonApi } from "./commonApi.ts";
-
-const test = commonApi.injectEndpoints({
-    // @ts-ignore
+const backend = (commonApi as CommonApi).injectEndpoints({
     endpoints: (build) => ({
-        getSalary: build.query({
+        getSalary: build.query<{ reward: string, story_points: string, credit: string, salary: string }, void>({
             query: () => ({
                 url: '/salary/at_moment/',
                 method: 'GET',
@@ -17,7 +15,7 @@ const test = commonApi.injectEndpoints({
                 method: 'GET',
             }),
         }),
-        getJiraToken: build.mutation({
+        getJiraToken: build.mutation<{ refresh: string, access: string }, { authorization_code: string }>({
             query: ({ authorization_code }) => ({
                 url: '/auth/get_token_jira/',
                 method: 'POST',
@@ -27,4 +25,4 @@ const test = commonApi.injectEndpoints({
     }),
 });
 
-export const { useGetSalaryQuery, useGetProfileQuery, useGetJiraTokenMutation } = test;
+export const { useGetSalaryQuery, useGetProfileQuery, useGetJiraTokenMutation } = backend;
