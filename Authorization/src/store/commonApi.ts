@@ -1,18 +1,9 @@
-import type {
-  Api,
-  BaseQueryFn,
-  FetchArgs,
-  FetchBaseQueryError,
-} from "@reduxjs/toolkit/query";
-import {
-  createApi,
-  fetchBaseQuery,
-  reactHooksModuleName,
-} from "@reduxjs/toolkit/query/react";
-import { Mutex } from "async-mutex";
-import authActions from "./authActions.ts";
-import Cookies from "universal-cookie";
-import { coreModuleName } from "@reduxjs/toolkit/query";
+import type {Api, BaseQueryFn, FetchArgs, FetchBaseQueryError} from '@reduxjs/toolkit/query';
+import {createApi, fetchBaseQuery, reactHooksModuleName} from '@reduxjs/toolkit/query/react';
+import { Mutex } from 'async-mutex';
+import authActions from './authActions.ts';
+import Cookies from 'universal-cookie';
+import { coreModuleName } from '@reduxjs/toolkit/query';
 
 interface RefreshData {
   access: string;
@@ -24,21 +15,19 @@ const cookies = new Cookies();
 
 const baseQuery = fetchBaseQuery({
   baseUrl: `${SERVER_URL}`,
-  credentials: "include",
+  credentials: 'include',
   prepareHeaders: (headers) => {
-    const token = cookies.get("access_token");
+    const token = cookies.get('access_token');
     if (token) {
-      headers.set("Authorization", `Bearer ${token}`);
+      headers.set('Authorization', `Bearer ${token}`);
     }
     return headers;
   },
 });
 
-const baseQueryWithReauth: BaseQueryFn<
-  string | FetchArgs,
-  unknown,
-  FetchBaseQueryError
-> = async (args, api, extraOptions) => {
+const baseQueryWithReauth: BaseQueryFn<string | FetchArgs, unknown, FetchBaseQueryError> = async (args, 
+  api, 
+  extraOptions) => {
   await mutex.waitForUnlock();
   let result = await baseQuery(args, api, extraOptions);
 
@@ -49,8 +38,8 @@ const baseQueryWithReauth: BaseQueryFn<
         const refreshResult = await baseQuery(
           {
             url: `/auth/refresh/`,
-            method: "POST",
-            body: { refresh: cookies.get("refresh_token") },
+            method: 'POST',
+            body: { refresh: cookies.get('refresh_token') },
           },
           api,
           extraOptions
@@ -58,7 +47,7 @@ const baseQueryWithReauth: BaseQueryFn<
 
         if (refreshResult.data) {
           cookies.set(
-            "access_token",
+            'access_token',
             (refreshResult.data as RefreshData).access
           );
           api.dispatch(authActions.setAuth());
@@ -80,16 +69,10 @@ const baseQueryWithReauth: BaseQueryFn<
 };
 
 const commonApi = createApi({
-  reducerPath: "authReducer",
+  reducerPath: 'authReducer',
   baseQuery: baseQueryWithReauth,
   endpoints: () => ({}),
 });
 
-export type CommonApi = Api<
-  BaseQueryFn<string | FetchArgs, unknown, FetchBaseQueryError>,
-  {},
-  "authReducer",
-  never,
-  typeof coreModuleName | typeof reactHooksModuleName
->;
+export type CommonApi = Api<BaseQueryFn<string | FetchArgs, unknown, FetchBaseQueryError>, {}, 'authReducer', never, typeof coreModuleName | typeof reactHooksModuleName>;
 export default commonApi;
