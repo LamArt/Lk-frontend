@@ -1,4 +1,4 @@
-import { commonApi } from "./commonApi";
+import commonApi from "./commonApi";
 
 const test = commonApi.injectEndpoints({
     endpoints: (build) => ({
