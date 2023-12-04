@@ -28,17 +28,12 @@ export default App;
 
 const theme: ThemeConfig = {
   components: {
-    Slider: {
-      railSize: 15,
-      trackBg: "#3A6EFF",
-      trackHoverBg: "#3A6EFF",
-      railBg: "#98B3FE",
-      railHoverBg: "#98B3FE",
-      handleLineWidth: 1,
-      handleLineWidthHover: 2,
-      handleSize: 36,
-      handleSizeHover: 36,
-      borderRadiusXS: 22,
+    Button: {
+      fontSize: 16,
+      colorPrimary: "#0843DD",
+      colorBgContainerDisabled: "#84A6FF",
+      colorTextDisabled: "#ffffff",
+      borderRadius: 15,
     },
   },
 };

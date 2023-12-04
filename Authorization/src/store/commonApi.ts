@@ -3,7 +3,7 @@ import {createApi, fetchBaseQuery, reactHooksModuleName} from '@reduxjs/toolkit/
 import { Mutex } from 'async-mutex';
 import authActions from './authActions.ts';
 import Cookies from 'universal-cookie';
-import {coreModuleName} from "@reduxjs/toolkit/query";
+import { coreModuleName } from '@reduxjs/toolkit/query';
 
 interface RefreshData {
   access: string;
@@ -25,11 +25,9 @@ const baseQuery = fetchBaseQuery({
   },
 });
 
-const baseQueryWithReauth: BaseQueryFn<string | FetchArgs, unknown, FetchBaseQueryError> = async (
-    args,
-    api,
-    extraOptions
-) => {
+const baseQueryWithReauth: BaseQueryFn<string | FetchArgs, unknown, FetchBaseQueryError> = async (args, 
+  api, 
+  extraOptions) => {
   await mutex.waitForUnlock();
   let result = await baseQuery(args, api, extraOptions);
 
@@ -38,17 +36,20 @@ const baseQueryWithReauth: BaseQueryFn<string | FetchArgs, unknown, FetchBaseQue
       const release = await mutex.acquire();
       try {
         const refreshResult = await baseQuery(
-            {
-              url: `/auth/refresh/`,
-              method: 'POST',
-              body: { refresh: cookies.get('refresh_token') },
-            },
-            api,
-            extraOptions
+          {
+            url: `/auth/refresh/`,
+            method: 'POST',
+            body: { refresh: cookies.get('refresh_token') },
+          },
+          api,
+          extraOptions
         );
 
         if (refreshResult.data) {
-          cookies.set('access_token', (refreshResult.data as RefreshData).access);
+          cookies.set(
+            'access_token',
+            (refreshResult.data as RefreshData).access
+          );
           api.dispatch(authActions.setAuth());
 
           result = await baseQuery(args, api, extraOptions);
@@ -73,5 +74,5 @@ const commonApi = createApi({
   endpoints: () => ({}),
 });
 
-export type CommonApi = Api<BaseQueryFn<string | FetchArgs, unknown, FetchBaseQueryError>, {}, "authReducer", never, typeof coreModuleName | typeof reactHooksModuleName>;
-export default commonApi
+export type CommonApi = Api<BaseQueryFn<string | FetchArgs, unknown, FetchBaseQueryError>, {}, 'authReducer', never, typeof coreModuleName | typeof reactHooksModuleName>;
+export default commonApi;
