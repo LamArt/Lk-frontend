@@ -1,6 +1,7 @@
-import { Button, Modal } from "antd";
-import { Input } from "antd";
-import { useState } from "react";
+import { Modal } from "antd";
+// import { Button } from "antd";
+// import { Input } from "antd";
+// import { useState } from "react";
 import {
   LinkOutlined,
   ClockCircleOutlined,
@@ -19,6 +20,7 @@ const EventInfo: React.FC<ContentProps> = ({ visible, onClose }) => {
       maskClosable={false}
       mask={false}
       footer={null}
+      className="modalEventInf"
     >
       <div className="infoWrapper">
         <h3 className="fieldTitle">{"Мероприятие X"}</h3>
