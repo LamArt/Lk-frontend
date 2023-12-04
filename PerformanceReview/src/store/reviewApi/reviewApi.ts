@@ -26,9 +26,16 @@ const reviewApi = localApi.injectEndpoints({
         body: data,
       }),
     }),
+    getTeammates: build.query({
+      query: () => ({
+        url: "/review/teammates/",
+        method: "GET",
+      }),
+    }),
   }),
 })
 
 export const {
-  usePostEmployeeFormMutation
+  usePostEmployeeFormMutation,
+  useGetTeammatesQuery,
 } = reviewApi
