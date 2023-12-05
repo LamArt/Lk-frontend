@@ -1,15 +1,15 @@
-import { Button } from "antd";
-import "./Button.scss";
-import { useEffect, useState } from "react";
-import { useGetCountMailQuery } from "../store/mailApi/mailApi";
+import { Button } from 'antd';
+import './Button.scss';
+import { useEffect, useState } from 'react';
+import { useGetCountMailQuery } from '../store/mailApi/mailApi';
 const ButtonMail = () => {
   const [countEmails, setCountEmails] = useState(0);
-  const { data, refetch } = useGetCountMailQuery({});
+  const { data, refetch } = useGetCountMailQuery();
   useEffect(() => {
     const fetchMail = async () => {
       try {
         await refetch();
-        if (data && "count" in data) {
+        if (data && 'count' in data) {
           const mails = data.count;
           if (mails > 100) {
             setCountEmails(99);
@@ -17,7 +17,7 @@ const ButtonMail = () => {
           setCountEmails(mails);
         }
       } catch (error) {
-        console.error("Error fetching data:", error);
+        console.error('Error fetching data:', error);
       }
     };
 
@@ -31,11 +31,11 @@ const ButtonMail = () => {
   }, [data, refetch]);
 
   const redirectYandexPost = () => {
-    const redirectUrl = "https://mail.yandex.ru";
+    const redirectUrl = 'https://mail.yandex.ru';
     window.open(redirectUrl);
   };
   return (
-    <div className="content-container">
+    <div className='button-container'>
       <Button
         type="primary"
         disabled={countEmails > 0 ? false : true}
@@ -49,7 +49,7 @@ const ButtonMail = () => {
               src="/icons/yaMail.svg"
               alt="yandexMail"
             />
-            <div className={countEmails > 0 ? "mail-active" : ""}></div>
+            <div className={countEmails > 0 ? 'mail-active' : ''}></div>
           </div>
           {countEmails > 0 ? (
             <>

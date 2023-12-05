@@ -1,9 +1,13 @@
 @import "./../const.scss";
+.button-container{
+  margin-top: 4%;
+  display: flex;
+  margin-left: 9%;
+}
 .mail {
   width: 426px;
   height: 64px;
   font-weight: 400;
-  margin: 0 0 0 0rem;
   font-size: $planning-text-font-size;
   &-container {
     display: flex;
@@ -35,3 +39,4 @@
     z-index: 1;
   }
 }
+

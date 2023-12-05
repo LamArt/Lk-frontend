@@ -6,10 +6,10 @@ import ButtonMail from '../components/Button';
 export default function Planning() {
   return (
     <Layout className="planning">
-      <Layout.Content className="planning-content content">
-        <Flex className="content-container" vertical>
-          <TodayDate></TodayDate>
+      <Layout.Content className="planning-content">
+        <Flex className='planning-content-container' vertical>
           <ButtonMail></ButtonMail>
+          <TodayDate></TodayDate>
         </Flex>
       </Layout.Content>
     </Layout>
