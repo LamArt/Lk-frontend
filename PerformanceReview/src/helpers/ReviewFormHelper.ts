@@ -50,30 +50,16 @@ export const leadSliderFields: Omit<SliderFields, 'selfAnnotation'>[] = [
 
 export const textAreaFields: TextAreaFields[] = [
     {
-        label: 'Сильные стороны',
+        label: 'Что понравилось:',
         placeholder: 'Напиши навыки, которые могут помочь команде:',
         fieldName: 'strengths'
     },
     {
-        label: 'Области роста',
+        label: 'Что могло быть лучше:',
         placeholder: 'Напиши навыки, в которых ощущаешь нехватку:',
         fieldName: 'weaknesses'
     }
 ]
-
-export const selfTextAreaFields: TextAreaFields[] = [
-    {
-        label: 'Достижения',
-        placeholder: 'Напиши решения, которыми гордишься:',
-        fieldName: 'achievements'
-    },
-    {
-        label: 'Как это было достигнуто?',
-        placeholder: 'Качества или обстоятельства, которые позволили достичь этого:',
-        fieldName: 'ways_to_achieve'
-    },
-]
-
 
 interface TextAreaFields{
     label: string,

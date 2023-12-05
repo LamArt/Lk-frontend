@@ -1,0 +1,21 @@
+.stage{
+    width: 14%;
+    gap: 20px;
+
+    &-number{
+        display: flex;
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        justify-content: center;
+        align-items: center;
+        color: white;
+        font-weight: 600;
+        font-size: 19px;
+    }
+
+    &-label{
+        text-align: center;
+        cursor: default;
+    }
+}

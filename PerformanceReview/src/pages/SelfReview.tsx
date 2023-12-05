@@ -2,12 +2,15 @@ import { Layout, Flex, Form, Button, Slider } from 'antd'
 import '../styles/Review.scss';
 import DoubleFormLabel from '../components/UI/DoubleFormLabel'
 import TextArea from 'antd/es/input/TextArea'
-import { selfTextAreaFields, sliderFields, textAreaFields } from '../helpers/ReviewFormHelper'
+import { sliderFields, textAreaFields } from '../helpers/ReviewFormHelper'
 import {EmployeeFormData, usePostEmployeeFormMutation} from "../store/reviewApi/reviewApi";
 import { useState } from 'react';
 
 export default function SelfReview(){
-    const [formData, setFormData] = useState<Partial<EmployeeFormData>>({team: 1})
+    const [formData, setFormData] = useState<Partial<EmployeeFormData>>({
+        team: 1,
+        ...sliderFields.reduce((acc, curr) => ({...acc, [curr.fieldName]: 50}), {})
+    })
 
     const [data] = usePostEmployeeFormMutation({})
 
@@ -35,7 +38,7 @@ export default function SelfReview(){
                                 onChange={(value) => setFormData(prevState => ({...prevState, [field.fieldName]: value}))}
                             />
                         </Form.Item>)}
-                        {[...selfTextAreaFields, ...textAreaFields].map((field, i) => <Form.Item label={field.label} key={i}>
+                        {textAreaFields.map((field, i) => <Form.Item label={field.label} key={i}>
                             <TextArea
                                 className='review-textarea'
                                 placeholder={field.placeholder}
