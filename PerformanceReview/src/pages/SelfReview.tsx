@@ -3,7 +3,7 @@ import '../styles/Review.scss';
 import DoubleFormLabel from '../components/UI/DoubleFormLabel'
 import TextArea from 'antd/es/input/TextArea'
 import { sliderFields, textAreaFields } from '../helpers/ReviewFormHelper'
-import {EmployeeFormData, usePostEmployeeFormMutation} from "../store/reviewApi/reviewApi";
+import {EmployeeFormData, useGetTeammatesQuery, usePostEmployeeFormMutation} from "../store/reviewApi/reviewApi";
 import { useState } from 'react';
 
 export default function SelfReview(){
@@ -13,9 +13,11 @@ export default function SelfReview(){
     })
 
     const [data] = usePostEmployeeFormMutation({})
+    const {teamates} = useGetTeammatesQuery({})
 
     const saveDataHandle = () => {
       data(formData)
+      console.log(teamates)
     }
 
     return (
