@@ -2,7 +2,7 @@ import {Button, Card, Flex, Layout} from "antd";
 import './Salary.scss'
 import {useCallback, useEffect} from "react";
 import { useLocation } from "react-router-dom";
-import {useGetJiraTokenMutation, useGetSalaryQuery} from "../store/Api/Profile.ts";
+import {useGetJiraTokenMutation, useGetSalaryQuery} from "../store/Api/Salary.ts";
 import Cookies from "universal-cookie";
 
 export default function Salary(){
