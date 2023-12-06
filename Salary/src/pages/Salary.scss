@@ -7,39 +7,54 @@
 
   &-header {
     background-color: $background-white;
+    margin-left: 5%;
+    margin-bottom: 75rem;
+    margin-top: 50rem;
   }
 
-  &-title{
-    margin-left: 24px;
-    font-family: $header-title-font-family;
-    color: $blue-title !important;
-    font-size: $header-title-font-size;
-    line-height: $header-title-lineheight;
+  &-title {
+    color: $blue-title;
+    font-family: $content-font-family;
+    font-size: 64rem;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 100%;
+    letter-spacing: -1.28rem;
   }
 
   &-info {
     width: 100%;
-    margin-left: 3%;
-    margin-right: 3%;
+    margin-left: 5%;
+    margin-right: 5%;
   }
 
   &-card {
-    width: 250px;
-    height: 152px;
+    width: 387rem;
+    height: 152rem;
     border-color: $blue-title;
-    border-width: 5px;
-    align-items: center;
+    border-width: 5rem;
+    align-items: start;
     display: flex;
     justify-content: center;
+
+    &-name {
+      color: black;
+      font-family: $content-font-family;
+      font-size: 40rem;
+      font-style: normal;
+      font-weight: 500;
+      line-height: 100%;
+      letter-spacing: -0.8rem;
+    }
 
     &-title {
       color: $blue-title;
       font-family: $content-font-family;
-      font-size: 64px;
+      font-size: 64rem;
       font-style: normal;
       font-weight: 600;
       line-height: 100%;
-      letter-spacing: -1.28px;
+      letter-spacing: -1.28rem;
     }
 
     &-info {
@@ -49,12 +64,59 @@
       font-style: normal;
       font-weight: 300;
       line-height: 100%;
-      letter-spacing: -0.48px;
+      letter-spacing: -0.48rem;
     }
   }
 
   &-result {
-    width: 524px;
+    width: 524rem;
+
+    &-block {
+      margin-bottom: 30rem;
+    }
+  }
+
+  &-reward {
+    &-block {
+      border-color: $blue-title;
+      border-width: 3rem;
+      opacity: 0;
+      transform: translateY(-30%);
+      transition: opacity 0.3s ease, transform 0.3s ease;
+    }
+
+    &-name {
+      color: black;
+      font-family: $content-font-family;
+      font-size: 32rem;
+      font-style: normal;
+      font-weight: 500;
+      line-height: 100%;
+      letter-spacing: -0.64rem;
+      margin-right: 10rem;
+    }
+
+    &-number {
+      &-reward {
+        color: $lime-reward;
+        font-family: $content-font-family;
+        font-size: 32rem;
+        font-style: normal;
+        font-weight: 600;
+        line-height: 100%;
+        letter-spacing: -0.64rem;
+      }
+
+      &-credit {
+        color: $red-credit;
+        font-family: $content-font-family;
+        font-size: 32rem;
+        font-style: normal;
+        font-weight: 600;
+        line-height: 100%;
+        letter-spacing: -0.64rem;
+      }
+    }
   }
 
   &-content {
@@ -74,4 +136,13 @@
       transform: rotate(-25deg);
     }
   }
+}
+
+.ant-card-body {
+  padding: 24rem !important;
+}
+
+.salary-result-block:hover + .salary-reward-block {
+  opacity: 1;
+  transform: translateY(0);
 }
