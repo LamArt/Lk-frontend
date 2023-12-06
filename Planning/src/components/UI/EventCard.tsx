@@ -10,7 +10,7 @@ const EventCard = ({event}: Event) => {
       {/* <EventInfo visible={isModalOpen} onClose={handleCloseModal} /> */}
       <ul className="list">
         <li className="list-item">
-          <p className="meeting-time">{event.start_time} - {event.end_time}</p>
+          <p className="meeting-time">{event.start_time.slice(11, 16)}-{event.end_time.slice(11, 16)}</p>
         </li>
         <li className="list-item">
           <h2 className="meeting-status">{event.title}</h2>

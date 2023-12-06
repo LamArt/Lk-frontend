@@ -32,15 +32,16 @@ const CalendarWidget = () => {
   return (
     <div className="calendar-main-window">
       <p className="date">{formattedDate}</p>
+      <div className="calendar-event-container">
+      
       <ul>
       {Object.entries(eventList).map(([key, data]) => (
         <li  key={key}>
         <EventCard event={data} />
         </li>
       ))}
-      
-      
       </ul>
+      </div>
       <FormEvent />
     </div>
   );
