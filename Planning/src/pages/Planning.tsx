@@ -1,5 +1,5 @@
 import './Planning.scss';
-import TodayDate from '../components/CalendarWidget.tsx';
+import CalendarWidget from '../components/CalendarWidget.tsx';
 import { Button, Flex, Layout } from 'antd';
 import ButtonMail from '../components/Button';
 
@@ -9,7 +9,7 @@ export default function Planning() {
       <Layout.Content className="planning-content">
         <Flex className='planning-content-container' vertical>
           <ButtonMail></ButtonMail>
-          <TodayDate></TodayDate>
+          <CalendarWidget></CalendarWidget>
         </Flex>
       </Layout.Content>
     </Layout>
