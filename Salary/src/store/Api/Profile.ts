@@ -3,7 +3,7 @@ import {CommonApi} from "../../constans/commonApiInterface.ts";
 
 const backend = (commonApi as CommonApi).injectEndpoints({
     endpoints: (build) => ({
-        getSalary: build.query<{ reward: string, story_points: string, credit: string, salary: string }, void>({
+        getSalary: build.query<{ reward: string, story_points: string, credit: string, salary: string, rate: string }, void>({
             query: () => ({
                 url: '/salary/at_moment/',
                 method: 'GET',

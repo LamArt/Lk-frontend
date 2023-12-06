@@ -1,6 +1,6 @@
-import {Button, Card, Flex, Layout, Typography} from "antd";
+import {Button, Card, Flex, Layout} from "antd";
 import './Salary.scss'
-import { useCallback, useEffect } from "react";
+import {useCallback, useEffect} from "react";
 import { useLocation } from "react-router-dom";
 import {useGetJiraTokenMutation, useGetSalaryQuery} from "../store/Api/Profile.ts";
 import Cookies from "universal-cookie";
@@ -38,15 +38,15 @@ export default function Salary(){
 
     return (
         <Layout className='salary'>
-            <Layout.Header className='salary-header'>
-                <Typography.Title className='salary-title' level={1}>Зарплата</Typography.Title>
-            </Layout.Header>
+            <div className='salary-header'>
+                <div className='salary-title'>Зарплата</div>
+            </div>
             <Layout.Content className='salary-content'>
                 <Flex justify='center' align='center'>
                     <Flex justify='space-between' align='center' className='salary-info'>
-                        <Flex gap='24px'>
-                            <Flex vertical justify='center' align='center'>
-                                <Typography.Title level={1}>Разработка</Typography.Title>
+                        <Flex gap='24rem' style={{alignSelf: 'start'}}>
+                            <Flex vertical justify='center' align='center' gap='10rem'>
+                                <div className='salary-card-name'>Разработка</div>
                                 <Card className='salary-card'>
                                     <Flex justify='center' align='center' vertical>
                                         <div className='salary-card-title'>
@@ -58,25 +58,12 @@ export default function Salary(){
                                     </Flex>
                                 </Card>
                             </Flex>
-                            <Flex vertical justify={"center"} align={"center"}>
-                                <Typography.Title level={1}>QA тесты</Typography.Title>
+                            <Flex vertical justify={"center"} align={"center"} gap='10rem'>
+                                <div className='salary-card-name'>Ставка</div>
                                 <Card className='salary-card'>
                                     <Flex justify={"center"} align={"center"} vertical>
                                         <div className='salary-card-title'>
-                                            {data?.reward}
-                                        </div>
-                                        <div className='salary-card-info'>
-                                            Story Points
-                                        </div>
-                                    </Flex>
-                                </Card>
-                            </Flex>
-                            <Flex vertical justify={"center"} align={"center"}>
-                                <Typography.Title level={1}>Ставка</Typography.Title>
-                                <Card className='salary-card'>
-                                    <Flex justify={"center"} align={"center"} vertical>
-                                        <div className='salary-card-title'>
-                                            {data?.credit}
+                                            {data?.rate}
                                         </div>
                                         <div className='salary-card-info'>
                                             Рубли / Story Points
@@ -86,16 +73,38 @@ export default function Salary(){
                             </Flex>
                         </Flex>
 
-                        <Flex vertical justify={"center"} align={"center"}>
-                            <Typography.Title level={1} className='text'>Результат</Typography.Title>
-                            <Card className='salary-card salary-result'>
-                                <Flex justify={"center"} align={"center"} vertical>
-                                    <div className='salary-card-title'>
-                                        {data?.salary}
-                                    </div>
-                                    <div className='salary-card-info'>
-                                        Рублей
-                                    </div>
+                        <Flex vertical className='salary-result'>
+                            <Flex className='salary-result-block' vertical justify={"center"} align={"center"} gap='10rem'>
+                                <div  className='salary-card-name'>Результат</div>
+                                <Card className='salary-card salary-result'>
+                                    <Flex justify={"center"} align={"center"} vertical>
+                                        <div className='salary-card-title'>
+                                            {data?.salary}
+                                        </div>
+                                        <div className='salary-card-info'>
+                                            Рублей
+                                        </div>
+                                    </Flex>
+                                </Card>
+                            </Flex>
+                            <Card className='salary-reward-block'>
+                                <Flex justify={"center"} align={"start"} vertical gap='15rem'>
+                                    <Flex>
+                                        <div className='salary-reward-name'>
+                                            Премия:
+                                        </div>
+                                        <div className='salary-reward-number-reward'>
+                                            {data?.reward} руб
+                                        </div>
+                                    </Flex>
+                                    <Flex>
+                                        <div className='salary-reward-name'>
+                                            Долг компании:
+                                        </div>
+                                        <div className='salary-reward-number-credit'>
+                                            -{data?.credit} руб
+                                        </div>
+                                    </Flex>
                                 </Flex>
                             </Card>
                         </Flex>
