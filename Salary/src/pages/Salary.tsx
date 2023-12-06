@@ -4,6 +4,7 @@ import {useCallback, useEffect} from "react";
 import { useLocation } from "react-router-dom";
 import {useGetJiraTokenMutation, useGetSalaryQuery} from "../store/Api/Salary.ts";
 import Cookies from "universal-cookie";
+import SalaryGraph from "../components/SalaryGraph.tsx";
 
 export default function Salary(){
     const OAUTH_URL = String(import.meta.env.VITE_OAuth_Jira)
@@ -111,6 +112,7 @@ export default function Salary(){
                     </Flex>
                 </Flex>
             </Layout.Content>
+            <SalaryGraph/>
             <Button onClick={() => window.location.href = OAUTH_URL}>
                 Connect with Jira
             </Button>
