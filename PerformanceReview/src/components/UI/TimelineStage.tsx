@@ -2,10 +2,10 @@ import { Flex } from "antd"
 import './TimelineStage.scss'
 
 export default function TimelineStage({orderNumber, label, active, done, available}: TimelineStageProps){
-    return <Flex vertical align="center" className="stage">
+    return <Flex vertical align="center" className="stage" style={{ width: label ? '14%' : 'min-content' }}>
         <div className="stage-number" style={{
             backgroundColor: active ? '#1C51DB' : done ? '#888888' : '#D9D9D9',
-            cursor: available ? 'pointer' : 'default'
+            cursor: available ? 'pointer' : 'default',
         }}>
             {orderNumber}
         </div>
@@ -18,5 +18,5 @@ interface TimelineStageProps{
     label?: string,
     active?: boolean,
     done?: boolean,
-    available: boolean
+    available?: boolean
 }

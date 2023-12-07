@@ -39,4 +39,35 @@
         border-radius: 0;
         font-size: 19px;
     }
+
+    &-bar{
+        align-self: center;
+        flex-grow: 1;
+        height: 2px;
+    }
+
+    &-teammate{
+        width: 200px;
+    }
+}
+
+.teammate{
+    border: none;
+    background-color: #F2F6FF;
+    cursor: pointer;
+
+    &-name{
+        font-weight: 400;
+    }
+
+    &-post{
+        font-size: 11px;
+        color: #1E1E1E;
+        text-align: center;
+    }
+}
+
+.centered{
+    margin-top: auto;
+    margin-bottom: auto;
 }
