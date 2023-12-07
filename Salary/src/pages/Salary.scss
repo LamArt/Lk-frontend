@@ -5,6 +5,47 @@
   height: 100vh;
   position: relative;
 
+  &-jira {
+    position: fixed;
+    backdrop-filter: blur(5rem);
+    width: 100vw;
+    height: 100vh;
+    z-index: 3;
+
+    &-popup {
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 850rem;
+      height: 414rem;
+      background: white;
+      border: 3rem solid $blue-title;
+      border-radius: 20rem;
+
+      &-title {
+        color: $blue-title;
+        text-align: center;
+        font-family: $content-font-family;
+        font-size: 64rem;
+        font-style: normal;
+        font-weight: 700;
+        line-height: 100%;
+        letter-spacing: -1.28rem;
+      }
+
+      &-button {
+        display: flex;
+        padding: 29rem 32rem 30rem 32rem;
+        align-items: center;
+        gap: 25rem;
+        border-radius: 20rem;
+        border: $blue-title solid;
+        background: #FFF;
+      }
+    }
+  }
+
   &-header {
     background-color: $background-white;
     margin-left: 5%;

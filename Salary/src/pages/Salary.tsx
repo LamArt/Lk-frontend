@@ -35,9 +35,21 @@ export default function Salary(){
         }
     }, [getCodeFromUrl])
 
-
     return (
         <Layout className='salary'>
+            {
+                data === undefined &&
+                <div className='salary-jira'>
+                    <Flex justify={"center"} align={"center"} vertical gap='75rem' className='salary-jira-popup'>
+                        <div className='salary-jira-popup-title'>
+                            Авторизуйтесь для продолжения
+                        </div>
+                        <Button onClick={() => window.location.href = OAUTH_URL} className='salary-jira-popup-button'>
+                            Авторизоваться
+                        </Button>
+                    </Flex>
+                </div>
+            }
             <div className='salary-header'>
                 <div className='salary-title'>Зарплата</div>
             </div>
@@ -111,9 +123,6 @@ export default function Salary(){
                     </Flex>
                 </Flex>
             </Layout.Content>
-            <Button onClick={() => window.location.href = OAUTH_URL}>
-                Connect with Jira
-            </Button>
         </Layout>
     )
 }
