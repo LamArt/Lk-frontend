@@ -26,6 +26,9 @@ const CalendarWidget = () => {
       if(data !== undefined){
         setEventList(data)
     }
+    if(data=== null){
+      console.log('uups')
+    }
     };
     fetchMail();
   }, [data])
@@ -33,7 +36,7 @@ const CalendarWidget = () => {
     <div className="calendar-main-window">
       <p className="date">{formattedDate}</p>
       <div className="calendar-event-container">
-      
+        <div className="timeline"></div> 
       <ul>
       {Object.entries(eventList).map(([key, data]) => (
         <li  key={key}>
