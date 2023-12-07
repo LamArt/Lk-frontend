@@ -26,9 +26,47 @@ const reviewApi = localApi.injectEndpoints({
         body: data,
       }),
     }),
+    getEmployeeForm: build.query({
+      query: (data) => ({
+        url: `/review/employee_forms/users/${data.username}/`,
+        method: "GET",
+      }),
+    }),
+    getTeamleadForm: build.query({
+      query: () => ({
+        url: `/review/teamlead_forms/`,
+        method: "GET",
+      }),
+    }),
+    postTeamleadForm: build.mutation({
+      query: (data) => ({
+        url: `/review/teamlead_forms/`,
+        method: "POST",
+        body: data,
+      }),
+    }),
     getTeammates: build.query({
       query: () => ({
         url: "/review/teammates/",
+        method: "GET",
+      }),
+    }),
+    getTeamleadFormsByUser: build.query({
+      query: (data) => ({
+        url: `/review/teamlead_forms/users/${data.username}/`,
+        method: "GET",
+      }),
+    }),
+    postTeamleadFormsByUser: build.mutation({
+      query: (data) => ({
+        url: `/review/teamlead_forms/users/${data.username}/`,
+        method: "POST",
+        body: data
+      }),
+    }),
+    getProfile: build.query({
+      query: () => ({
+        url: "/profile/",
         method: "GET",
       }),
     }),
@@ -38,4 +76,10 @@ const reviewApi = localApi.injectEndpoints({
 export const {
   usePostEmployeeFormMutation,
   useGetTeammatesQuery,
+  useGetEmployeeFormQuery,
+  usePostTeamleadFormMutation,
+  useGetTeamleadFormQuery,
+  useGetTeamleadFormsByUserQuery,
+  usePostTeamleadFormsByUserMutation,
+  useGetProfileQuery,
 } = reviewApi
