@@ -28,7 +28,7 @@ const ButtonMail = () => {
     }, 30000);
 
     return () => clearInterval(intervalId);
-  }, [data, refetch]);
+  }, [data, refetch]); 
 
   const redirectYandexPost = () => {
     const redirectUrl = 'https://mail.yandex.ru';
