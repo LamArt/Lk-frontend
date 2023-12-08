@@ -1,6 +1,7 @@
 import './Planning.scss';
 import CalendarWidget from '../components/CalendarWidget.tsx';
-import { Button, Flex, Layout } from 'antd';
+import { Flex, Layout } from 'antd';
+// import { Button } from 'antd'
 import ButtonMail from '../components/Button';
 
 export default function Planning() {

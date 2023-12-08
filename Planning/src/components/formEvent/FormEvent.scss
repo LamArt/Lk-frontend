@@ -1,10 +1,14 @@
 @import "../../const.scss";
 .formContainer {
-  padding: 2vw 0 0 3vw;
+  font-family: "Lato", sans-serif;
+  padding: 0vw 0 0 1vw;
+}
+.eventName {
+  font-size: 20px;
 }
 .ant-modal-content {
   width: 33vw;
-  height: 27vw;
+  height: 25.5vw;
   margin-top: 20%;
   margin-left: 20%;
 }
@@ -36,25 +40,63 @@
   font-size: 2.2vw;
   color: $accent;
 }
-.fieldTitle {
-  font-size: 2.2vw;
-  font-weight: 400;
-  border-top: none;
-  border-left: none;
-  border-right: none;
-  border-bottom: 2px solid $accent;
-  border-radius: 0;
-  width: 25vw;
-  margin: 0 0 2.5vw 0;
+.addDescription, .addVideoMeeting, .activeVideoMeeting {
+  display: flex;
+  width: 11vw;
+  height: 3.1vw;
+  background-color: #D9D9D9;
+  padding-left: 0px;
+  margin-bottom: 1vw;
 }
-.field {
-  font-size: 1.4vw;
+.addDescription h3, .addVideoMeeting h3, .activeVideoMeeting h3{
+  margin-top: auto;
+  font-weight: 500;
+  margin-bottom: auto;
+  margin-left: 15px;
+  color: #6F6F6F;
+}
+.addEventButton {
+  width: 15px;
+  margin-top: auto;
+  margin-bottom: auto;
+  margin-left: 15px;
+}
+.addVideoMeeting {
+  width: 19vw;
+}
+.activeVideoMeeting {
+  background-color: #697085;
+  width: 27vw;
+}
+.activeVideoMeeting h3 {
+  color: #0843DD;
+}
+.fieldDescription {
+  margin-bottom: 1vw;
+}
+.fieldTitle {
+  font-size: 16px;
+  font-weight: 400;
+  border: 2px solid #D9D9D9;
+  border-radius: 12px;
+  width: 30vw;
+  margin: 1.4vw 0 1vw 0;
+}
+
+.eventTime {
+  width: 30vw;
+  border-radius: 12px;
+  border: 2px solid #D9D9D9;
+  margin-bottom: 1vw;
+}
+.eventTime .ant-picker-input > input::placeholder {
+  font-size: 20px;
+  padding-left: 20px;
 }
 .saveEvent {
   width: 13vw;
   height: 3.1vw;
   font-size: 1.3vw;
-  border-radius: 50px;
   background-color: $accent;
 }
 .custom-datepicker .ant-picker-input input {
