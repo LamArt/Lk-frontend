@@ -1,12 +1,15 @@
 import {Button, Card, Flex, Layout} from "antd";
 import './Salary.scss'
-import {useCallback, useEffect} from "react";
+import {useCallback, useEffect, useState} from "react";
 import { useLocation } from "react-router-dom";
 import {useGetJiraTokenMutation, useGetSalaryQuery} from "../store/Api/Salary.ts";
 import Cookies from "universal-cookie";
+import Atlassian from "../assets/Jira.svg";
 
 export default function Salary(){
     const OAUTH_URL = String(import.meta.env.VITE_OAuth_Jira)
+
+    const [showPopup, setShowPopup] = useState(true)
 
     const location = useLocation()
     const [mutation] = useGetJiraTokenMutation()
@@ -23,6 +26,7 @@ export default function Salary(){
 
         const responce = await mutation({ authorization_code: code })
         if (responce !== undefined && 'data' in responce) {
+            setShowPopup(false)
             cookies.set('jira_refresh_token', responce.data.refresh)
             cookies.set('jira_access_token', responce.data.access)
         }
@@ -38,7 +42,7 @@ export default function Salary(){
     return (
         <Layout className='salary'>
             {
-                data === undefined &&
+                data === undefined && showPopup &&
                 <div className='salary-jira'>
                     <Flex justify={"center"} align={"center"} vertical gap='75rem' className='salary-jira-popup'>
                         <div className='salary-jira-popup-title'>
@@ -46,6 +50,7 @@ export default function Salary(){
                         </div>
                         <Button onClick={() => window.location.href = OAUTH_URL} className='salary-jira-popup-button'>
                             Авторизоваться
+                            <img src={Atlassian} alt={'Atlassian icon'} className='salary-jira-popup-image'/>
                         </Button>
                     </Flex>
                 </div>
