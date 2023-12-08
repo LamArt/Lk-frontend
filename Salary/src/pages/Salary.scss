@@ -91,6 +91,10 @@
     display: flex;
     justify-content: center;
 
+    &-without-info {
+      align-items: center;
+    }
+
     &-name {
       color: black;
       font-family: $content-font-family;

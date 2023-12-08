@@ -63,14 +63,11 @@ export default function Salary(){
                     <Flex justify='space-between' align='center' className='salary-info'>
                         <Flex gap='24rem' style={{alignSelf: 'start'}}>
                             <Flex vertical justify='center' align='center' gap='10rem'>
-                                <div className='salary-card-name'>Разработка</div>
-                                <Card className='salary-card'>
+                                <div className='salary-card-name'>Story Points</div>
+                                <Card className='salary-card salary-card-without-info'>
                                     <Flex justify='center' align='center' vertical>
                                         <div className='salary-card-title'>
                                             {data?.story_points}
-                                        </div>
-                                        <div className='salary-card-info'>
-                                            Story Points
                                         </div>
                                     </Flex>
                                 </Card>
