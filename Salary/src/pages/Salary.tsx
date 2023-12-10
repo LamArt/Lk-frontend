@@ -1,12 +1,15 @@
 import {Button, Card, Flex, Layout} from "antd";
 import './Salary.scss'
-import {useCallback, useEffect} from "react";
+import {useCallback, useEffect, useState} from "react";
 import { useLocation } from "react-router-dom";
 import {useGetJiraTokenMutation, useGetSalaryQuery} from "../store/Api/Salary.ts";
 import Cookies from "universal-cookie";
+import Atlassian from "../assets/Jira.svg";
 
 export default function Salary(){
     const OAUTH_URL = String(import.meta.env.VITE_OAuth_Jira)
+
+    const [showPopup, setShowPopup] = useState(true)
 
     const location = useLocation()
     const [mutation] = useGetJiraTokenMutation()
@@ -23,6 +26,7 @@ export default function Salary(){
 
         const responce = await mutation({ authorization_code: code })
         if (responce !== undefined && 'data' in responce) {
+            setShowPopup(false)
             cookies.set('jira_refresh_token', responce.data.refresh)
             cookies.set('jira_access_token', responce.data.access)
         }
@@ -35,9 +39,22 @@ export default function Salary(){
         }
     }, [getCodeFromUrl])
 
-
     return (
         <Layout className='salary'>
+            {
+                data === undefined && showPopup &&
+                <div className='salary-jira'>
+                    <Flex justify={"center"} align={"center"} vertical gap='75rem' className='salary-jira-popup'>
+                        <div className='salary-jira-popup-title'>
+                            Авторизуйтесь для продолжения
+                        </div>
+                        <Button onClick={() => window.location.href = OAUTH_URL} className='salary-jira-popup-button'>
+                            Авторизоваться
+                            <img src={Atlassian} alt={'Atlassian icon'} className='salary-jira-popup-image'/>
+                        </Button>
+                    </Flex>
+                </div>
+            }
             <div className='salary-header'>
                 <div className='salary-title'>Зарплата</div>
             </div>
@@ -46,14 +63,11 @@ export default function Salary(){
                     <Flex justify='space-between' align='center' className='salary-info'>
                         <Flex gap='24rem' style={{alignSelf: 'start'}}>
                             <Flex vertical justify='center' align='center' gap='10rem'>
-                                <div className='salary-card-name'>Разработка</div>
-                                <Card className='salary-card'>
+                                <div className='salary-card-name'>Story Points</div>
+                                <Card className='salary-card salary-card-without-info'>
                                     <Flex justify='center' align='center' vertical>
                                         <div className='salary-card-title'>
                                             {data?.story_points}
-                                        </div>
-                                        <div className='salary-card-info'>
-                                            Story Points
                                         </div>
                                     </Flex>
                                 </Card>
@@ -111,9 +125,6 @@ export default function Salary(){
                     </Flex>
                 </Flex>
             </Layout.Content>
-            <Button onClick={() => window.location.href = OAUTH_URL}>
-                Connect with Jira
-            </Button>
         </Layout>
     )
 }
