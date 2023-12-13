@@ -67,6 +67,7 @@
     padding-left: 24px;
     margin-bottom: 42px;
     height: 125px;
+    max-width: 600px;
 }
 
 .event-list-items {
@@ -87,7 +88,7 @@
     }
     &-reminder {
         margin: 0;
-        margin-top: 18px;
+        margin-top: 12px;
         font-size: 0.9vw;
         color: #949191;
     }

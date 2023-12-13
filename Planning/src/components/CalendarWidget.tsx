@@ -19,6 +19,7 @@ const CalendarWidget = () => {
             await refetch();
             if (data !== undefined) {
                 setEventList(data);
+                console.log(data);
             }
         };
         fetchEvents();
