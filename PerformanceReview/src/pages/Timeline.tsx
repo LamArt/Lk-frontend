@@ -5,15 +5,29 @@ import Card from "antd/es/card/Card";
 import arrowIcon from '../assets/timeline-arrow-icon.svg'
 import TimelineStage from "../components/UI/TimelineStage";
 import { useNavigate } from "react-router-dom";
-import { useState } from "react";
-import { useGetTeammatesQuery } from "../store/reviewApi/reviewApi";
+import { useEffect, useMemo, useState } from "react";
+import { useGetEmployeeFormQuery, useGetProfileQuery, useGetTeammatesQuery } from "../store/reviewApi/reviewApi";
 
 export default function Timeline(){
     const navigate = useNavigate();
     const [currentStage, setCurrentStage] = useState<Stages>(Stages.Default)
-    const {data} = useGetTeammatesQuery([])
+    const {data: profile} = useGetProfileQuery({})
+    const {data, isLoading: isLoadingTeammates} = useGetTeammatesQuery([])
+    const {data: selfReviewForm, isLoading: isLoadingEmployeeForm} = useGetEmployeeFormQuery(profile)
     
+    const isLoading = useMemo(() => isLoadingEmployeeForm || isLoadingTeammates, [isLoadingEmployeeForm, isLoadingTeammates])
 
+    useEffect(() => {
+        let stage = Stages.Default;
+        if(selfReviewForm){
+            stage = Stages.Peer;
+        }
+        setCurrentStage(stage)
+    }, [selfReviewForm])
+
+    if(isLoading){
+        return <></>
+    }
     return (
         <Layout className="review">
             <Layout.Content className="review-content timeline">
@@ -52,7 +66,7 @@ export default function Timeline(){
                                 <p className="timeline-label centered">
                                     {stageDescriptions[currentStage - 1]}
                                 </p>
-                                {currentStage === Stages.Self && <Button className="timeline-link" onClick={() => setCurrentStage(Stages.Peer)}>Перейти</Button>} 
+                                {currentStage === Stages.Self && <Button className="timeline-link" onClick={() => navigate('self')}>Перейти</Button>} 
                                 {currentStage === Stages.Peer && <Flex className="timeline-teammates" align="center" wrap="wrap" gap='middle'>
                                         <Card className="timeline-teammate teammate" onClick={() => setCurrentStage(Stages.Manager)}>
                                             <Flex vertical align="center">

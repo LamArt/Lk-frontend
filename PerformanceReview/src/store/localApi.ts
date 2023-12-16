@@ -13,7 +13,7 @@ type CommonApi = Api<
   BaseQueryFn<string | FetchArgs, unknown, FetchBaseQueryError>,
   {},
   "authReducer",
-  never,
+  "EmployeeForm",
   typeof coreModuleName | typeof reactHooksModuleName
 >;
 const localApi = commonApi as CommonApi;

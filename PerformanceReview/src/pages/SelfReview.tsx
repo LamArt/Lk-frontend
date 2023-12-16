@@ -9,6 +9,7 @@ import {
   usePostEmployeeFormMutation
 } from "../store/reviewApi/reviewApi";
 import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 export default function SelfReview(){
     const [formData, setFormData] = useState<Partial<EmployeeFormData>>({
@@ -16,14 +17,15 @@ export default function SelfReview(){
         ...sliderFields.reduce((acc, curr) => ({...acc, [curr.fieldName]: 50}), {})
     })
 
-    const {data: profile} = useGetProfileQuery({})
+    const navigate = useNavigate()
 
+    const {data: profile} = useGetProfileQuery({})
     const [employeeForm] = usePostEmployeeFormMutation({})
     const {teamleadForm} = useGetEmployeeFormQuery(profile)
-
-    const saveDataHandle = () => {
-      employeeForm(formData)
-      console.log(teamleadForm)
+    
+    const saveDataHandle = async() => {
+      await employeeForm({...formData, about: profile.id})
+      navigate('/performance')
     }
 
     return (

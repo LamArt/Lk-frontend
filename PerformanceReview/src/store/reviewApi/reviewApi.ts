@@ -25,12 +25,14 @@ const reviewApi = localApi.injectEndpoints({
         method: 'POST',
         body: data,
       }),
+      invalidatesTags: ['EmployeeForm']
     }),
     getEmployeeForm: build.query({
       query: (data) => ({
         url: `/review/employee_forms/users/${data.username}/`,
         method: "GET",
       }),
+      providesTags: ['EmployeeForm']
     }),
     getTeamleadForm: build.query({
       query: () => ({
