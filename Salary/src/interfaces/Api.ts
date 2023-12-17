@@ -7,7 +7,6 @@ export interface ResponseSalary {
 }
 
 export interface ResponseJiraToken {
-    refresh: string,
     access: string
 }
 

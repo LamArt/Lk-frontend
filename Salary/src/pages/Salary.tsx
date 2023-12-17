@@ -27,7 +27,6 @@ export default function Salary(){
         const responce = await mutation({ authorization_code: code })
         if (responce !== undefined && 'data' in responce) {
             setShowPopup(false)
-            cookies.set('jira_refresh_token', responce.data.refresh)
             cookies.set('jira_access_token', responce.data.access)
         }
     }, [location])
