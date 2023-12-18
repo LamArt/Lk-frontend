@@ -1,11 +1,10 @@
-import { FormEvent, useState } from 'react';
-import { Button, Modal } from 'antd';
-import { Input } from 'antd';
-import { DatePicker, Space } from 'antd';
+import { useState } from 'react';
+import { Input, Button, Modal, DatePicker, Space, Form } from 'antd';
 import locale from 'antd/es/date-picker/locale/ru_RU';
 import type { DatePickerProps, RangePickerProps } from 'antd/es/date-picker';
 import './FormEvent.scss';
 import { usePostNewEventMutation } from '../../store/calendarApi/eventsApi';
+import { useForm } from 'antd/es/form/Form';
 const { RangePicker } = DatePicker;
 const { TextArea } = Input;
 
@@ -17,31 +16,24 @@ const FormEvent = () => {
     const [btnMeetVisible, setBtnMeetVisible] = useState(true);
     const [isCreateMeet, setIsCreateMeet] = useState(false);
     const [eventForm] = usePostNewEventMutation({});
-
-    const showModal = () => {
-        setIsModalOpen(true);
-    };
-
-    const handleOk = () => {
-        setIsModalOpen(false);
-        // console.log('Название:', title);
-        // console.log('Описание:', description);
-        // console.log('Дата начала:', startDate);
-        // console.log('Дата конца:', endDate);
-    };
+    const [form] = useForm();
 
     const handleCancel = () => {
         setIsModalOpen(false);
+        setIsCreateMeet(false);
+        setBtnMeetVisible(true);
+        setBtnDescVisible(true);
+        // setStartDate('');
+        // setEndDate('');
     };
 
-    const handleClick = (button: string) => {
-        if (isCreateMeet === true) {
-            setIsCreateMeet(false);
-        }
+    const addDescription = () => {
+        setBtnDescVisible(false);
+    };
+
+    const addMeet = () => {
         setIsCreateMeet(true);
-        button == 'addDescription'
-            ? setBtnDescVisible(false)
-            : setBtnMeetVisible(false);
+        setBtnMeetVisible(false);
     };
 
     const onChange = (
@@ -57,30 +49,27 @@ const FormEvent = () => {
     const onOk = (
         value: DatePickerProps['value'] | RangePickerProps['value']
     ) => {
-        // console.log('onOk: ', value);
         <DatePicker showTime onChange={onChange} onOk={onOk} />;
     };
-
-    const handleSubmit = (event: FormEvent) => {
-        event.preventDefault();
-        const form = event.target as HTMLFormElement;
-        const formData = new FormData(form);
-        formData.append('start_time', startDate);
-        formData.append('end_time', endDate);
-        formData.append('create_conference', isCreateMeet);
-        const newEventData = {
-            title: '',
-            description: '',
-            start_time: '',
-            end_time: '',
-            create_conference: false,
-            ...Object.fromEntries(formData.entries()),
+    const handleSubmit = async (values: {
+        title: string;
+        description: string;
+    }) => {
+        const formData = {
+            title: values.title,
+            description: values.description,
+            start_time: startDate,
+            end_time: endDate,
+            create_conference: isCreateMeet,
         };
-        eventForm(newEventData);
-        form.reset();
+        console.log(formData);
+        eventForm(formData);
+        form.resetFields();
+        // setStartDate('');
+        // setEndDate('');
         setIsCreateMeet(false);
-        setStartDate('');
-        setEndDate('');
+        setBtnMeetVisible(true);
+        setBtnDescVisible(true);
     };
 
     return (
@@ -89,9 +78,13 @@ const FormEvent = () => {
                 shape="circle"
                 type="primary"
                 className="buttonAddEvent"
-                onClick={showModal}
+                onClick={() => setIsModalOpen(true)}
             >
-                <img className="plus-image" src="/icons/addImage.svg" />
+                <img
+                    className="plus-image"
+                    src="/icons/addImage.svg"
+                    alt="Add Event"
+                />
             </Button>
             <Modal
                 open={isModalOpen}
@@ -102,18 +95,18 @@ const FormEvent = () => {
                 footer={null}
             >
                 <div className="formContainer">
-                    <form onSubmit={handleSubmit}>
+                    <Form form={form} onFinish={handleSubmit}>
                         <h3 className="eventName">Новое мероприятие</h3>
-                        <Input
-                            className="fieldTitle"
-                            placeholder="Название"
-                            bordered={true}
-                            name="title"
-                        />
-                        {btnDescVisible && (
+                        <Form.Item name="title">
+                            <Input
+                                placeholder="Название"
+                                className="fieldTitle"
+                            />
+                        </Form.Item>
+                        {btnDescVisible ? (
                             <Button
                                 className="addDescription"
-                                onClick={() => handleClick('addDescription')}
+                                onClick={() => addDescription()}
                             >
                                 <img
                                     className="addEventButton"
@@ -121,18 +114,19 @@ const FormEvent = () => {
                                 ></img>
                                 <h3>Описание</h3>
                             </Button>
-                        )}
-                        {!btnDescVisible && (
-                            <TextArea
-                                rows={2}
-                                className="fieldDescription"
-                                name="description"
-                            ></TextArea>
+                        ) : (
+                            <Form.Item name="description">
+                                <TextArea
+                                    rows={2}
+                                    className="fieldDescription"
+                                    name="description"
+                                ></TextArea>
+                            </Form.Item>
                         )}
                         {btnMeetVisible ? (
                             <Button
                                 className={'addVideoMeeting'}
-                                onClick={() => handleClick('addViodeoMeeting')}
+                                onClick={() => addMeet()}
                             >
                                 <img
                                     className="addEventButton"
@@ -153,35 +147,30 @@ const FormEvent = () => {
                             </Button>
                         )}
                         <div className="fieldContainer">
-                            <Space direction="vertical">
-                                <div className="custom-datepicker">
-                                    <RangePicker
-                                        locale={locale}
-                                        picker="date"
-                                        showTime
-                                        onChange={onChange}
-                                        onOk={onOk}
-                                        format="YYYY-MM-DD HH:mm"
-                                        placeholder={[
-                                            'Дата начала',
-                                            'Дата конца',
-                                        ]}
-                                        className="eventTime"
-                                    />
-                                </div>
-                            </Space>
+                            <Form.Item className="custom-datepicker">
+                                <RangePicker
+                                    locale={locale}
+                                    picker="date"
+                                    showTime
+                                    onChange={onChange}
+                                    onOk={onOk}
+                                    format="YYYY-MM-DD HH:mm"
+                                    placeholder={['Дата начала', 'Дата конца']}
+                                    className="eventTime"
+                                />
+                            </Form.Item>
                         </div>
-                        <Button
-                            key="add"
-                            onClick={handleOk}
-                            type="primary"
-                            className="saveEvent"
-                            htmlType="submit"
-                        >
-                            Создать
-                        </Button>
-                        ,
-                    </form>
+                        <Form.Item>
+                            <Button
+                                key="add"
+                                type="primary"
+                                className="saveEvent"
+                                htmlType="submit"
+                            >
+                                Создать
+                            </Button>
+                        </Form.Item>
+                    </Form>
                 </div>
             </Modal>
         </>

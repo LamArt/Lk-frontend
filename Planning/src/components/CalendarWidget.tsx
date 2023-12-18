@@ -13,30 +13,31 @@ const CalendarWidget = () => {
     });
     const { data, refetch } = useGetEventsQuery();
     const [eventList, setEventList] = useState<Event>({});
+    const eventIdToNode = useRef<Record<string, HTMLElement | null>>({});
+    const attachEventNodeRef = (id: string) => (node: HTMLElement | null) => {
+        eventIdToNode.current[id] = node;
+    };
+    const mainEventContainer = useRef(null);
+
     useEffect(() => {
         //check errors add
         const fetchEvents = async () => {
-            await refetch();
-            if (data !== undefined) {
-                setEventList(data);
-                console.log(data);
+            try {
+                await refetch();
+                if (data !== undefined) {
+                    setEventList(data);
+                }
+            } catch (error) {
+                console.log('Error post data:', error);
             }
         };
         fetchEvents();
         const intervalId = setInterval(() => {
             fetchEvents();
-        }, 100000); //поменять
+        }, 300000); //поменять
 
         return () => clearInterval(intervalId);
     }, [data, refetch]);
-
-    const eventIdToNode = useRef<Record<string, HTMLElement | null>>({});
-
-    const attachEventNodeRef = (id: string) => (node: HTMLElement | null) => {
-        eventIdToNode.current[id] = node;
-    };
-
-    const mainEventContainer = useRef(null);
 
     return (
         <div className="calendar-main-window">

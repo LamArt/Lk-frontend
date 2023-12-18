@@ -83,7 +83,7 @@ const Timeline = memo(
             const nextEvent = getNextEvent(date);
 
             if (!nextEvent) {
-                return (eventsContainer.current?.scrollHeight ?? 0) - 10;
+                return (eventsContainer.current?.scrollHeight ?? 12) - 10;
             }
 
             const [eventId, {}] = nextEvent;
