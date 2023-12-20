@@ -2,6 +2,7 @@ import './Planning.scss';
 import CalendarWidget from '../components/CalendarWidget.tsx';
 import { Flex, Layout } from 'antd';
 import ButtonMail from '../components/Button';
+import JiraWidget from '../components/JiraWidget.tsx';
 
 export default function Planning() {
     return (
@@ -9,7 +10,14 @@ export default function Planning() {
             <Layout.Content className="planning-content">
                 <Flex className="planning-content-container" vertical>
                     <ButtonMail></ButtonMail>
-                    <CalendarWidget></CalendarWidget>
+                    <div
+                        style={{
+                            display: 'flex',
+                        }}
+                    >
+                        <CalendarWidget></CalendarWidget>
+                        <JiraWidget></JiraWidget>
+                    </div>
                 </Flex>
             </Layout.Content>
         </Layout>

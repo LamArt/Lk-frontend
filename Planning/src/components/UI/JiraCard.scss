@@ -1,0 +1,76 @@
+@import './../../const.scss';
+.container {
+    width: 703px;
+    height: 121px;
+    border-radius: 24px;
+    background: #fff;
+    color: black;
+    display: flex;
+    margin: 0 auto;
+    margin-bottom: 12px;
+}
+.info {
+    margin: auto 0;
+}
+.image {
+    margin: auto 25px;
+}
+.title {
+    font-weight: 500;
+    font-size: 34px;
+}
+.high {
+    color: $red;
+}
+.medium {
+    color: $yellow;
+}
+.low {
+    color: #0843dd;
+}
+.title_container {
+    display: flex;
+    margin: 0 14px 10px 0;
+}
+.description {
+    font-size: 18px;
+    color: #949191;
+    font-weight: 500;
+    padding-right: 14px;
+    margin: 0;
+    text-align: start;
+}
+
+.limit {
+    -webkit-line-clamp: 1;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+.badge {
+    background-color: #d9d9d9;
+    height: 27px;
+    width: 52px;
+    border-radius: 16px;
+    text-align: center;
+    margin-left: 12px;
+    font-size: 18px;
+    color: #545454;
+    font-weight: 500;
+    margin-top: auto;
+    margin-bottom: auto;
+}
+
+.popover-container {
+    width: 560px;
+    padding: 32px 42px 40px 42px;
+    &_status {
+        display: flex;
+        margin: 12px 0 24px 0;
+    }
+}
+.popover-badge {
+    margin-left: 0px;
+    margin-right: 18px;
+}
