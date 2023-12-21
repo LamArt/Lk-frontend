@@ -21,7 +21,7 @@ export default function SelfReview(){
 
     const {data: profile} = useGetProfileQuery({})
     const [employeeForm] = usePostEmployeeFormMutation({})
-    const {teamleadForm} = useGetEmployeeFormQuery(profile)
+    // const {teamleadForm} = useGetEmployeeFormQuery(profile)
     
     const saveDataHandle = async() => {
       await employeeForm({...formData, about: profile.id})
@@ -39,12 +39,12 @@ export default function SelfReview(){
             <Layout.Content className='review-content'>
                 <Flex align='center' vertical style={{zIndex: 100}}>
                     <Form className='review-form' layout='vertical'>
-                        {sliderFields.map((field, i) =>
+                        {!!import.meta.env.DEV && sliderFields.map((field, i) =>
                           <Form.Item key={i}>
                             <DoubleFormLabel label={field.label} annotation={field.selfAnnotation}/>
                             <Slider
                                 tooltip={{ open: false }}
-                                value={formData[field.fieldName]}
+                                value={formData[field.fieldName] as number}
                                 onChange={(value) => setFormData(prevState => ({...prevState, [field.fieldName]: value}))}
                             />
                         </Form.Item>)}

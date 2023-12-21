@@ -1,3 +1,5 @@
+import { EmployeeFormData } from "../store/reviewApi/reviewApi"
+
 export const sliderFields: SliderFields[] = [
     {
         label: 'Продуктивность',
@@ -25,28 +27,28 @@ export const sliderFields: SliderFields[] = [
     },
 ]
 
-export const leadSliderFields: Omit<SliderFields, 'selfAnnotation'>[] = [
-    {
-        label: 'Лидерские качества',
-        annotation: 'Берёт ли он/она ответственность за решения?',
-        fieldName: ''
-    },
-    {
-        label: 'Стрессоустойчивость',
-        annotation: 'Как он/она реагирует на сложные ситуации?',
-        fieldName: ''
-    },
-    {
-        label: 'Работа с информацией',
-        annotation: 'Насколько хорошо он/она умеет преподнести информацию?',
-        fieldName: ''
-    },
-    {
-        label: 'Атмосфера в команде',
-        annotation: 'Какое участие он/она принимает в создании дружественной атмосферы?',
-        fieldName: ''
-    },
-]
+// export const leadSliderFields: Omit<SliderFields, 'selfAnnotation'>[] = [
+//     {
+//         label: 'Лидерские качества',
+//         annotation: 'Берёт ли он/она ответственность за решения?',
+//         fieldName: ''
+//     },
+//     {
+//         label: 'Стрессоустойчивость',
+//         annotation: 'Как он/она реагирует на сложные ситуации?',
+//         fieldName: ''
+//     },
+//     {
+//         label: 'Работа с информацией',
+//         annotation: 'Насколько хорошо он/она умеет преподнести информацию?',
+//         fieldName: ''
+//     },
+//     {
+//         label: 'Атмосфера в команде',
+//         annotation: 'Какое участие он/она принимает в создании дружественной атмосферы?',
+//         fieldName: ''
+//     },
+// ]
 
 export const textAreaFields: TextAreaFields[] = [
     {
@@ -64,12 +66,12 @@ export const textAreaFields: TextAreaFields[] = [
 interface TextAreaFields{
     label: string,
     placeholder: string,
-    fieldName: string
+    fieldName: keyof EmployeeFormData
 }
 
 interface SliderFields {
     label: string,
     annotation: string,
     selfAnnotation: string,
-    fieldName: string
+    fieldName: keyof EmployeeFormData
 }

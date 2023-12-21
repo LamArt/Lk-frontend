@@ -1,7 +1,7 @@
 import { Layout, Flex, Form, Slider, Button } from "antd";
 import TextArea from "antd/es/input/TextArea";
 import DoubleFormLabel from "../components/UI/DoubleFormLabel";
-import { leadSliderFields, sliderFields, textAreaFields } from "../helpers/ReviewFormHelper";
+import { sliderFields, textAreaFields } from "../helpers/ReviewFormHelper";
 import '../styles/Review.scss'
 
 export default function ManagerReview(){
@@ -21,10 +21,10 @@ export default function ManagerReview(){
                             <Slider tooltip={{ open: false }}/>
                         </Form.Item>)}
                         <h2 className="review-subtitle">Оцени тимлида</h2>
-                        {leadSliderFields.map((field, i) => <Form.Item key={i}>
+                        {/* {leadSliderFields.map((field, i) => <Form.Item key={i}>
                             <DoubleFormLabel label={field.label} annotation={field.annotation}/>
                             <Slider tooltip={{ open: false }}/>
-                        </Form.Item>)}
+                        </Form.Item>)} */}
                         {textAreaFields.map((field, i) => <Form.Item label={field.label} key={i}>
                             <TextArea className='review-textarea' placeholder={field.placeholder} rows={4}/>
                         </Form.Item>)}
