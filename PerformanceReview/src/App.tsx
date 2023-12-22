@@ -18,7 +18,7 @@ function App({isMicroApp}: {isMicroApp?: boolean}) {
           <Routes>
             <Route path={basePath} element={<Timeline/>}/>
             <Route path={`${basePath}/self`} element={<SelfReview/>}/>
-            <Route path={`${basePath}/peer`} element={<PeerReview/>}/>
+            <Route path={`${basePath}/peer/:id`} element={<PeerReview/>}/>
             <Route path={`${basePath}/manager`} element={<ManagerReview/>}/>
             <Route path={`${basePath}/lead`} element={<LeadReivew/>}/>
             {!isMicroApp && <Route path='/' element={<Navigate to={basePath}/>}/>}

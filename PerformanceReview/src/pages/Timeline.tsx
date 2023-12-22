@@ -6,14 +6,21 @@ import arrowIcon from '../assets/timeline-arrow-icon.svg'
 import TimelineStage from "../components/UI/TimelineStage";
 import { useNavigate } from "react-router-dom";
 import { useEffect, useMemo, useState } from "react";
-import { useGetEmployeeFormQuery, useGetProfileQuery, useGetTeammatesQuery } from "../store/reviewApi/reviewApi";
+import {
+    Teammate,
+    useGetEmployeeFormQuery,
+    useGetProfileQuery,
+    useGetTeammatesQuery
+} from "../store/reviewApi/reviewApi";
 
 export default function Timeline(){
     const navigate = useNavigate();
     const [currentStage, setCurrentStage] = useState<Stages>(Stages.Default)
     const {data: profile} = useGetProfileQuery({})
-    const {data, isLoading: isLoadingTeammates} = useGetTeammatesQuery([])
+    const {data: teammatesData, isLoading: isLoadingTeammates} = useGetTeammatesQuery([])
     const {data: selfReviewForm, isLoading: isLoadingEmployeeForm} = useGetEmployeeFormQuery(profile)
+
+    const teammates = teammatesData?.teammates
     
     const isLoading = useMemo(() => isLoadingEmployeeForm || isLoadingTeammates, [isLoadingEmployeeForm, isLoadingTeammates])
 
@@ -28,6 +35,12 @@ export default function Timeline(){
     if(isLoading){
         return <></>
     }
+
+    const addPeerReviewHandle = (id: string) => {
+        setCurrentStage(Stages.Manager);
+        navigate(`peer/${id}`)
+    }
+
     return (
         <Layout className="review">
             <Layout.Content className="review-content timeline">
@@ -67,19 +80,16 @@ export default function Timeline(){
                                     {stageDescriptions[currentStage - 1]}
                                 </p>
                                 {currentStage === Stages.Self && <Button className="timeline-link" onClick={() => navigate('self')}>Перейти</Button>} 
-                                {currentStage === Stages.Peer && <Flex className="timeline-teammates" align="center" wrap="wrap" gap='middle'>
-                                        <Card className="timeline-teammate teammate" onClick={() => setCurrentStage(Stages.Manager)}>
-                                            <Flex vertical align="center">
-                                                <h3 className="teammate-name">Иван Дремин</h3>
-                                                <p className="teammate-post">Разработчик мобильных приложений</p>
-                                            </Flex>
-                                        </Card>
-                                        <Card className="timeline-teammate teammate" onClick={() => setCurrentStage(Stages.Manager)}>
-                                            <Flex vertical align="center">
-                                                <h3 className="teammate-name">Иван Дремин</h3>
-                                                <p className="teammate-post">Разработчик мобильных приложений</p>
-                                            </Flex>
-                                        </Card>
+                                {currentStage === Stages.Peer &&
+                                    <Flex className="timeline-teammates" align="center" wrap="wrap" gap='middle'>
+                                        {teammates && teammates.map((teammate: Teammate) => (
+                                            <Card className="timeline-teammate teammate" onClick={() => addPeerReviewHandle(teammate.username)}>
+                                                <Flex vertical align="center">
+                                                    <h3 className="teammate-name">{teammate.first_name} {teammate.last_name}</h3>
+                                                    <p className="teammate-post">Разработчик мобильных приложений</p>
+                                                </Flex>
+                                            </Card>
+                                        ))}
                                     </Flex>}
                             </>
                         }
@@ -106,7 +116,7 @@ const stageDescriptions: React.ReactNode[] = [
     <><b>Обратная связь:</b> скоро менеджер назначит вам встречу, где вы обсудите ваши успехи за ревьюируемый период.</>,
 ]
 
-enum Stages{
+export enum Stages{
     Default,
     Self,
     Peer,

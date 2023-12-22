@@ -17,6 +17,13 @@ type ReturnedData = {
   status: number,
 }
 
+export type Teammate = {
+  first_name: string;
+  gender: string;
+  last_name: string;
+  username: string;
+}
+
 const reviewApi = localApi.injectEndpoints({
   endpoints: (build) => ({
     postEmployeeForm: build.mutation<ReturnedData, EmployeeFormData>({
@@ -47,7 +54,7 @@ const reviewApi = localApi.injectEndpoints({
         body: data,
       }),
     }),
-    getTeammates: build.query({
+    getTeammates: build.query<{ teammates: Teammate[] }, void>({
       query: () => ({
         url: "/review/teammates/",
         method: "GET",

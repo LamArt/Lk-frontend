@@ -4,8 +4,7 @@ import DoubleFormLabel from '../components/UI/DoubleFormLabel'
 import TextArea from 'antd/es/input/TextArea'
 import { sliderFields, textAreaFields } from '../helpers/ReviewFormHelper'
 import {
-  EmployeeFormData,
-  useGetEmployeeFormQuery, useGetProfileQuery,
+  EmployeeFormData,useGetProfileQuery,
   usePostEmployeeFormMutation
 } from "../store/reviewApi/reviewApi";
 import { useState } from 'react';
@@ -21,7 +20,6 @@ export default function SelfReview(){
 
     const {data: profile} = useGetProfileQuery({})
     const [employeeForm] = usePostEmployeeFormMutation({})
-    const {teamleadForm} = useGetEmployeeFormQuery(profile)
     
     const saveDataHandle = async() => {
       await employeeForm({...formData, about: profile.id})
@@ -58,7 +56,7 @@ export default function SelfReview(){
                             />
                         </Form.Item>)}
                         <Flex justify='space-between' align='center'>
-                            <Button type='primary' className='review-save' onClick={() => console.log(formData)}>Сохранить</Button>
+                            <Button type='primary' className='review-save'>Сохранить</Button>
                             <Button onClick={saveDataHandle} type='primary' htmlType='submit' className='review-send'>Отправить</Button>
                         </Flex>
                     </Form>

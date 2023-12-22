@@ -4,7 +4,12 @@ import DoubleFormLabel from "../components/UI/DoubleFormLabel";
 import { sliderFields, textAreaFields } from "../helpers/ReviewFormHelper";
 import '../styles/Review.scss'
 import { useState } from "react";
-import { EmployeeFormData } from "../store/reviewApi/reviewApi";
+import {
+    EmployeeFormData,
+    useGetTeammatesQuery,
+    usePostEmployeeFormMutation
+} from "../store/reviewApi/reviewApi";
+import {useNavigate} from "react-router-dom";
 
 export default function PeerReview(){
     const [formData, setFormData] = useState<Partial<EmployeeFormData>>({
@@ -12,6 +17,15 @@ export default function PeerReview(){
         ...sliderFields.reduce((acc, curr) => ({...acc, [curr.fieldName]: 50}), {})
     })
 
+    const navigate = useNavigate()
+
+    const {data: teammates} = useGetTeammatesQuery()
+    const [employeeForm] = usePostEmployeeFormMutation({})
+
+    const saveDataHandle = async() => {
+        await employeeForm({...formData, about: teammates.teammates.username})
+        navigate('/performance')
+    }
 
     return (
         <Layout className='review'>
@@ -43,7 +57,7 @@ export default function PeerReview(){
                         </Form.Item>)}
                         <Flex justify='space-between' align='center'>
                             <Button type='primary' className='review-save'>Сохранить</Button>                        
-                            <Button type='primary' htmlType='submit' className='review-send'>Отправить</Button>
+                            <Button onClick={saveDataHandle} type='primary' htmlType='submit' className='review-send'>Отправить</Button>
                         </Flex>
                     </Form>
                 </Flex>
