@@ -40,14 +40,18 @@
         &::before{
             content: '';
             position: absolute;
-            bottom: 0;
+            bottom: -10%;
             left: -7%;
-            width: 150%;
-            height: 40%;
+            width: 110%;
+            height: 60%;
             background: linear-gradient(to right, #E9EFFC, transparent);
             background-position: bottom;
             background-repeat: no-repeat;
             transform: rotate(-25deg);
+        }
+
+        &.teamlead::before{
+            bottom: -30%;
         }
     }
 
@@ -104,6 +108,16 @@
 
     &-reply{
         margin-bottom: 16px;
+    }
+
+    &-label{
+        margin-bottom: 16px;
+        font-size: 32px;
+        font-weight: 400;
+    }
+
+    &-radio{
+        font-size: 22px;
     }
 }
 

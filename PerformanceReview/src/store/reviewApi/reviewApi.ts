@@ -1,8 +1,6 @@
 import {localApi} from "../localApi";
 
-export type EmployeeFormData = {
-  achievements?: string,
-  ways_to_achieve?: string,
+export interface EmployeeFormData{
   strengths: string,
   weaknesses: string,
   hard_skills_rate: number,
@@ -11,6 +9,10 @@ export type EmployeeFormData = {
   initiative_rate: number,
   about?: number,
   team: number,
+}
+
+export interface TeamleadFormData extends EmployeeFormData{
+  summary: number
 }
 
 type ReturnedData = {
@@ -26,7 +28,7 @@ export type Teammate = {
 
 const reviewApi = localApi.injectEndpoints({
   endpoints: (build) => ({
-    postEmployeeForm: build.mutation<ReturnedData, EmployeeFormData>({
+    postEmployeeForm: build.mutation<ReturnedData, Partial<EmployeeFormData>>({
       query: (data) => ({
         url: '/review/employee_forms/',
         method: 'POST',
