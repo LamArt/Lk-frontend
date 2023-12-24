@@ -41,7 +41,7 @@ const JiraCard = ({ task }: { task: Issue }) => {
                     src={prioritySrc[task.priority.name]}
                     width={20}
                 ></img>
-                <div className="info">
+                <div className="info-issue">
                     <div className="title_container">
                         <h3
                             className={`title limit ${task.priority.name.toLowerCase()}`}
