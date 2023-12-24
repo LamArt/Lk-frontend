@@ -21,16 +21,7 @@
 .fieldContainer {
     display: grid;
     grid-template-columns: 2.1vw auto;
-    // gap: 1vw 0.4vw;
-    // margin: 0 0 12px 0;
 }
-// .info {
-//      gap: 20px 8px;
-//      нет
-// }
-// .modalEventInf {
-//      margin: 1% 0 0 35%;
-// }
 
 // .infoWrapper {
 //     // padding: 28px 42px 28px 42px;
@@ -50,9 +41,7 @@
     padding-left: 0px;
     margin-bottom: 1.1vw;
 }
-// .addDescription {
-//     margin-bottom: 1.1vw;
-// }
+
 .addDescription h3,
 .addVideoMeeting h3,
 .activeVideoMeeting h3 {
@@ -108,4 +97,29 @@
 }
 .custom-datepicker .ant-picker-input input {
     font-size: 20px;
+}
+
+.info {
+    min-width: 498px;
+    max-width: 865;
+    min-height: 200px;
+    max-height: 590px;
+    padding: 12px 20px 40px 40px;
+    &-url {
+        display: block;
+        text-align: end;
+    }
+    &-edit-btn {
+        font-size: 32px;
+        color: #7a7a7a;
+        &:hover {
+            color: $accent;
+        }
+    }
+    &-description-wrapper {
+        position: relative;
+        overflow: auto;
+        max-height: 284px;
+        max-width: 654px;
+    }
 }
