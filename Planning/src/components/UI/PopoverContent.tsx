@@ -1,6 +1,8 @@
 import { Event } from '../../store/calendarApi/eventsApi';
 import { EditOutlined } from '@ant-design/icons';
-export const PopoverContentEvent = ({ event }: Event) => {
+import { Issue } from '../../store/jiraApi/issueApi';
+import { memo } from 'react';
+export const PopoverContentEvent = memo(({ event }: Event) => {
     return (
         <div className="info">
             <a href={event.url} className="info-url" target="_blank">
@@ -16,4 +18,26 @@ export const PopoverContentEvent = ({ event }: Event) => {
             </div>
         </div>
     );
-};
+});
+
+export const PopoverContentJira = memo(
+    ({ issue, pathImg }: { issue: Issue; pathImg: string }) => {
+        return (
+            <div className="popover-container">
+                <h1 className={`title ${issue.priority.name.toLowerCase()}`}>
+                    {issue.title}
+                </h1>
+                <div className="popover-container_status">
+                    <p className="badge popover-badge">
+                        {issue.story_points ?? '-'}
+                    </p>
+                    <img src={pathImg} />
+                </div>
+                <div className="popover-container-desc">
+                    <p className="description">Описание задачи:</p>
+                    <p className="description">{issue.description ?? '-'}</p>
+                </div>
+            </div>
+        );
+    }
+);

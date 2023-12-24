@@ -1,6 +1,7 @@
 import { Popover } from 'antd';
 import './JiraCard.scss';
-import { Issues } from '../../store/jiraApi/issueApi';
+import { Issue } from '../../store/jiraApi/issueApi';
+import { PopoverContentJira } from './PopoverContent';
 
 const prioritySrc = {
     Highest: '/jira_icons/highest.svg',
@@ -10,34 +11,18 @@ const prioritySrc = {
     Low: '/jira_icons/lowest.svg',
 };
 
-const JiraCard = ({ task }: { task: Issues }) => {
-    const content = (
-        <div className="popover-container">
-            <h1
-                className={`title ${
-                    task.priority.name == 'Highest' ||
-                    task.priority.name == 'High'
-                        ? 'High'
-                        : task.priority.name == 'Low' ||
-                          task.priority.name == 'Lowest'
-                        ? 'Low'
-                        : 'Medium'
-                }`}
-            >
-                {task.title}
-            </h1>
-            <div className="popover-container_status">
-                <p className="badge popover-badge">5</p>
-                <img src={prioritySrc[task.priority.name]} />
-            </div>
-            <div className="popover-container-desc">
-                <p className="description">Описание задачи:</p>
-                <p className="description">{task.description ?? '-'}</p>
-            </div>
-        </div>
-    );
+const JiraCard = ({ task }: { task: Issue }) => {
     return (
-        <Popover placement="bottom" content={content} trigger="click">
+        <Popover
+            placement="bottom"
+            content={
+                <PopoverContentJira
+                    issue={task}
+                    pathImg={prioritySrc[task.priority.name]}
+                />
+            }
+            trigger="click"
+        >
             <div
                 style={{
                     width: '703px',
@@ -58,12 +43,16 @@ const JiraCard = ({ task }: { task: Issues }) => {
                 ></img>
                 <div className="info">
                     <div className="title_container">
-                        <h3 className={`title limit ${task.priority.name}`}>
+                        <h3
+                            className={`title limit ${task.priority.name.toLowerCase()}`}
+                        >
                             {task.title}
                         </h3>
-                        <p className="badge">5</p>
+                        <p className="badge">{task.story_points ?? '-'}</p>
                     </div>
-                    <p className="description limit">{task.description}</p>
+                    <p className="description limit">
+                        {task.description ?? '-'}
+                    </p>
                 </div>
             </div>
         </Popover>

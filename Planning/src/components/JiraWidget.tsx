@@ -1,11 +1,12 @@
 import './JiraWidget.scss';
 import JiraCard from './UI/JiraCard';
-import { useGetIssuesQuery, Issues } from '../store/jiraApi/issueApi';
+import { useGetIssuesQuery, Issue } from '../store/jiraApi/issueApi';
 import { useEffect, useState } from 'react';
+import { Spin } from 'antd';
 
 const JiraWidget = () => {
-    const { data, refetch } = useGetIssuesQuery();
-    const [issuesList, setIssuesList] = useState<Issues[]>();
+    const { data, refetch, isLoading } = useGetIssuesQuery();
+    const [issuesList, setIssuesList] = useState<Issue[]>([]);
     useEffect(() => {
         const fetchIssues = async () => {
             try {
@@ -28,7 +29,20 @@ const JiraWidget = () => {
     return (
         <div className="jira-window-container">
             <div className="jira-tasks-container">
-                {issuesList ? (
+                {isLoading ? (
+                    <Spin size="large" style={{ margin: 'auto' }} />
+                ) : issuesList === null ? (
+                    <p
+                        className="description"
+                        style={{
+                            margin: 'auto',
+                            color: '$grey',
+                            fontSize: 'large',
+                        }}
+                    >
+                        Задач на спринт нет
+                    </p>
+                ) : (
                     <ul>
                         {Object.entries(issuesList).map((issue) => (
                             <li key={issue[0]}>
@@ -36,8 +50,6 @@ const JiraWidget = () => {
                             </li>
                         ))}
                     </ul>
-                ) : (
-                    <p>Задач на спринт нет</p>
                 )}
             </div>
         </div>

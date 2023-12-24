@@ -6,21 +6,23 @@ type Task = {
         name: 'Highest' | 'High' | 'Medium' | 'Lowest' | 'Low';
         id: string;
     };
+    story_points: number;
 };
 
-export type Issues = {
+export type Issue = {
     title: string;
     description: string;
     priority: {
         name: 'Highest' | 'High' | 'Medium' | 'Lowest' | 'Low';
         id: string;
     };
-    subtastks: Task[];
+    story_points: number;
+    subtasks: Task[];
 };
 
 const issueApi = localApi.injectEndpoints({
     endpoints: (build) => ({
-        getIssues: build.query<Issues[], void>({
+        getIssues: build.query<Issue[], void>({
             query: () => ({
                 url: '/planning/jira_issues/',
                 method: 'GET',

@@ -44,13 +44,6 @@
     text-align: start;
 }
 
-.limit {
-    -webkit-line-clamp: 1;
-    display: -webkit-box;
-    -webkit-box-orient: vertical;
-    overflow: hidden;
-}
-
 .badge {
     background-color: #d9d9d9;
     height: 27px;
