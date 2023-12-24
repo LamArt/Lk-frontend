@@ -1,4 +1,4 @@
-@import './../const.scss';
+@import '../const.scss';
 
 .calendar-main-window {
     box-sizing: border-box;
@@ -50,10 +50,12 @@
     font-size: 1.3vw;
 }
 .msg-about-event {
+    height: 400px;
     display: flex;
+    justify-content: 'center';
 }
 .msg-about-event p {
-    color: #949191;
+    color: $grey;
     font-size: large;
     margin: auto;
 }
@@ -77,11 +79,11 @@
     font-size: 1vw;
     margin: 0;
     font-weight: 400;
-    color: #949191;
+    color: $grey;
 }
 
 .event {
-    color: #0843dd;
+    color: $accent;
     &-status {
         font-size: 1.8vw;
         margin: 0;
@@ -90,13 +92,13 @@
         margin: 0;
         margin-top: 12px;
         font-size: 0.9vw;
-        color: #949191;
+        color: $grey;
     }
 }
 
 .not-active-event {
-    color: #949191;
-    border-left: 0.5vw solid #949191;
+    color: $grey;
+    border-left: 0.5vw solid $grey;
 }
 
 .buttonAddEvent {

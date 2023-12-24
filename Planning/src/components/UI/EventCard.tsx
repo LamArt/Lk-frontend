@@ -1,7 +1,7 @@
 import { Event } from '../../store/calendarApi/eventsApi';
 import { format } from 'date-fns-tz';
 import { Popover } from 'antd';
-import { EditOutlined } from '@ant-design/icons';
+import { PopoverContentEvent } from './PopoverContent';
 const EventCard = ({ event }: Event) => {
     function getCurrentDateTime() {
         const now = new Date();
@@ -12,25 +12,14 @@ const EventCard = ({ event }: Event) => {
         return formattedDateTime;
     }
     const currTime = new Date(getCurrentDateTime());
-    const content = (
-        <div className="info-wrapper">
-            <a href={event.url} className="info-wrapper-url" target="_blank">
-                <EditOutlined className="info-wrapper-edit-btn" />
-            </a>
-            <h2 className="event-status">{event.title}</h2>
-            <p className="event-time">
-                {event.start_time.slice(11, 16)} -{' '}
-                {event.end_time.slice(11, 16)}
-            </p>
-            <div className="info-wrapper-description">
-                <p className="event-reminder">{event.description}</p>
-            </div>
-        </div>
-    );
 
     return (
         <div style={{ cursor: 'pointer' }}>
-            <Popover content={content} placement="right" trigger="click">
+            <Popover
+                content={<PopoverContentEvent event={event} />}
+                placement="right"
+                trigger="click"
+            >
                 <ul
                     className={
                         currTime.getTime() > new Date(event.end_time).getTime()
@@ -45,10 +34,12 @@ const EventCard = ({ event }: Event) => {
                         </p>
                     </li>
                     <li className="list-item">
-                        <h2 className="event-status">{event.title}</h2>
+                        <h2 className="event-status limit">{event.title}</h2>
                     </li>
                     <li className="list-item">
-                        <p className="event-reminder">{event.description}</p>
+                        <p className="event-reminder limit">
+                            {event.description}
+                        </p>
                     </li>
                 </ul>
             </Popover>

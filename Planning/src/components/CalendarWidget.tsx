@@ -5,13 +5,15 @@ import FormEvent from './formEvent/FormEvent';
 import './CalendarWidget.scss';
 import { useEffect, useState, useRef } from 'react';
 import { useGetEventsQuery, Event } from '../store/calendarApi/eventsApi';
+import { Spin } from 'antd';
 import Timeline from './UI/Timeline';
+
 const CalendarWidget = () => {
     const today: Date = new Date();
     const formattedDate: string = format(today, 'd MMMM yyyy', {
         locale: ruLocale,
     });
-    const { data, refetch } = useGetEventsQuery();
+    const { data, refetch, isLoading } = useGetEventsQuery();
     const [eventList, setEventList] = useState<Event>({});
     const eventIdToNode = useRef<Record<string, HTMLElement | null>>({});
     const attachEventNodeRef = (id: string) => (node: HTMLElement | null) => {
@@ -20,7 +22,6 @@ const CalendarWidget = () => {
     const mainEventContainer = useRef(null);
 
     useEffect(() => {
-        //check errors add
         const fetchEvents = async () => {
             try {
                 await refetch();
@@ -48,7 +49,11 @@ const CalendarWidget = () => {
                     eventIdToNode={eventIdToNode}
                     eventsContainer={mainEventContainer}
                 />
-                {data === null ? (
+                {isLoading ? (
+                    <div className="msg-about-event">
+                        <Spin size="large" style={{ margin: 'auto' }} />
+                    </div>
+                ) : data === null ? (
                     <div className="msg-about-event">
                         <p>Мероприятий на сегодня нет</p>
                     </div>
