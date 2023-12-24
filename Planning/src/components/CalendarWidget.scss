@@ -1,10 +1,10 @@
-@import 'UI/CustomButton.scss';
+@import '../const.scss';
 
 .calendar-main-window {
     box-sizing: border-box;
     width: 800px;
     max-height: 770px;
-    border: solid blue 2px;
+    border: solid $color-border 2px;
     border-radius: 12px;
     text-align: left;
     background-color: #fff;
@@ -29,7 +29,7 @@
     position: absolute;
     width: 95%;
     height: 3px;
-    background-color: #ff3333;
+    background-color: $red;
     margin: 0;
 }
 
@@ -37,7 +37,7 @@
     position: relative;
     font-size: 1vw;
     text-align: center;
-    color: #f33;
+    color: $red;
     font-weight: 400;
     padding-left: 18px;
     display: flex;
@@ -50,10 +50,12 @@
     font-size: 1.3vw;
 }
 .msg-about-event {
+    height: 400px;
     display: flex;
+    justify-content: 'center';
 }
 .msg-about-event p {
-    color: #949191;
+    color: $grey;
     font-size: large;
     margin: auto;
 }
@@ -61,8 +63,8 @@
 .list {
     list-style: none;
     font-family: 'Inter', sans-serif;
-    color: #0843dd;
-    border-left: 0.5vw solid #0843dd;
+    color: $accent;
+    border-left: 0.5vw solid $accent;
     margin-left: 94px;
     padding-left: 24px;
     margin-bottom: 42px;
@@ -77,11 +79,11 @@
     font-size: 1vw;
     margin: 0;
     font-weight: 400;
-    color: #949191;
+    color: $grey;
 }
 
 .event {
-    color: #0843dd;
+    color: $accent;
     &-status {
         font-size: 1.8vw;
         margin: 0;
@@ -90,20 +92,20 @@
         margin: 0;
         margin-top: 12px;
         font-size: 0.9vw;
-        color: #949191;
+        color: $grey;
     }
 }
 
 .not-active-event {
-    color: #949191;
-    border-left: 0.5vw solid #949191;
+    color: $grey;
+    border-left: 0.5vw solid $grey;
 }
 
 .buttonAddEvent {
     width: 70px;
     height: 70px;
     border-radius: 50%;
-    background-color: $background-blue;
+    background-color: $accent;
     margin: 4px 0 36px 86%;
 }
 .buttonAddEvent:active,
