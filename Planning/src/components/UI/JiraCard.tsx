@@ -1,34 +1,39 @@
 import { Popover } from 'antd';
-import { Task } from '../JiraWidget';
 import './JiraCard.scss';
+import { Issues } from '../../store/jiraApi/issueApi';
 
 const prioritySrc = {
-    highest: '/jira_icons/highest.svg',
-    high: '/jira_icons/high.svg',
-    medium: '/jira_icons/medium.svg',
-    lowest: '/jira_icons/low.svg',
-    low: '/jira_icons/lowest.svg',
+    Highest: '/jira_icons/highest.svg',
+    High: '/jira_icons/high.svg',
+    Medium: '/jira_icons/medium.svg',
+    Lowest: '/jira_icons/low.svg',
+    Low: '/jira_icons/lowest.svg',
 };
 
-const JiraCard = ({ task }: { task: Task }) => {
+const JiraCard = ({ task }: { task: Issues }) => {
     const content = (
         <div className="popover-container">
             <h1
                 className={`title ${
-                    task.priority == 'highest' || task.priority == 'high'
-                        ? 'high'
-                        : task.priority == 'low' || task.priority == 'lowest'
-                        ? 'low'
-                        : 'medium'
+                    task.priority.name == 'Highest' ||
+                    task.priority.name == 'High'
+                        ? 'High'
+                        : task.priority.name == 'Low' ||
+                          task.priority.name == 'Lowest'
+                        ? 'Low'
+                        : 'Medium'
                 }`}
             >
                 {task.title}
             </h1>
             <div className="popover-container_status">
-                <p className="badge popover-badge">{task.status}</p>
-                <img src={prioritySrc[task.priority]} />
+                <p className="badge popover-badge">5</p>
+                <img src={prioritySrc[task.priority.name]} />
             </div>
-            <p className="description">{task.description}</p>
+            <div className="popover-container-desc">
+                <p className="description">Описание задачи:</p>
+                <p className="description">{task.description ?? '-'}</p>
+            </div>
         </div>
     );
     return (
@@ -48,23 +53,15 @@ const JiraCard = ({ task }: { task: Task }) => {
             >
                 <img
                     className="image"
-                    src={prioritySrc[task.priority]}
+                    src={prioritySrc[task.priority.name]}
                     width={20}
                 ></img>
                 <div className="info">
                     <div className="title_container">
-                        <h3
-                            className={`title limit ${
-                                task.status >= 4
-                                    ? 'high'
-                                    : task.status == 3
-                                    ? 'medium'
-                                    : 'low'
-                            }`}
-                        >
+                        <h3 className={`title limit ${task.priority.name}`}>
                             {task.title}
                         </h3>
-                        <p className="badge">{task.status}</p>
+                        <p className="badge">5</p>
                     </div>
                     <p className="description limit">{task.description}</p>
                 </div>

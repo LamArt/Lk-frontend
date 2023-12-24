@@ -13,16 +13,16 @@ const EventCard = ({ event }: Event) => {
     }
     const currTime = new Date(getCurrentDateTime());
     const content = (
-        <div className="info">
-            <a href={event.url} className="info-url" target="_blank">
-                <EditOutlined className="info-edit-btn" />
+        <div className="info-wrapper">
+            <a href={event.url} className="info-wrapper-url" target="_blank">
+                <EditOutlined className="info-wrapper-edit-btn" />
             </a>
             <h2 className="event-status">{event.title}</h2>
             <p className="event-time">
                 {event.start_time.slice(11, 16)} -{' '}
                 {event.end_time.slice(11, 16)}
             </p>
-            <div className="info-description-wrapper">
+            <div className="info-wrapper-description">
                 <p className="event-reminder">{event.description}</p>
             </div>
         </div>
