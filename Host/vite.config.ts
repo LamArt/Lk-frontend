@@ -14,9 +14,17 @@ export default defineConfig({
         planning: "http://localhost:5003/assets/remoteEntry.js",
         salary: "http://localhost:5004/assets/remoteEntry.js",
       },
+      exposes: {
+        './Menu': './src/components/Menu/Menu.tsx',
+      },
       shared: ["react", "react-dom", "react-router-dom"],
     }),
   ],
+  resolve: {
+    alias: {
+      '@assets': '/src/assets',
+    },
+  },
   build: {
     modulePreload: false,
     target: "esnext",

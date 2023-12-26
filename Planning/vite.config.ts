@@ -20,7 +20,6 @@ export default defineConfig({
         "react-router-dom",
         "@reduxjs/toolkit",
         "react-redux",
-        "react-query",
       ],
     }),
   ],
