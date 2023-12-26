@@ -71,6 +71,7 @@ const FormEvent = () => {
         setIsCreateMeet(false);
         setBtnMeetVisible(true);
         setBtnDescVisible(true);
+        setIsModalOpen(false);
     };
 
     return (
