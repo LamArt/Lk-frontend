@@ -1,6 +1,6 @@
 import { Event } from '../../store/calendarApi/eventsApi';
 import { EditOutlined } from '@ant-design/icons';
-import { Issue } from '../../store/jiraApi/issueApi';
+import { Issue, Task } from '../../store/jiraApi/issueApi';
 import { memo } from 'react';
 export const PopoverContentEvent = memo(({ event }: Event) => {
     return (
@@ -36,6 +36,18 @@ export const PopoverContentJira = memo(
                 <div className="popover-container-desc">
                     <p className="description">Описание задачи:</p>
                     <p className="description">{issue.description ?? '-'}</p>
+                    <div>
+                        {issue.subtasks.map((task, index) => (
+                            <div key={index} className="task-item">
+                                <p className="description">[{task.title}]</p>
+                                <p className="description">
+                                    {task.description ? -task.description : ''}
+                                </p>
+                                {/* <p>Priority: {task.priority.name}</p>
+                                <p>Story Points: {task.story_points}</p> */}
+                            </div>
+                        ))}
+                    </div>
                 </div>
             </div>
         );

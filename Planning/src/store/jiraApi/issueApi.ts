@@ -1,5 +1,5 @@
 import { localApi } from '../localApi';
-type Task = {
+export type Task = {
     title: string;
     description: string;
     priority: {

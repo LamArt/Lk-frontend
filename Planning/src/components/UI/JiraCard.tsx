@@ -25,9 +25,9 @@ const JiraCard = ({ task }: { task: Issue }) => {
         >
             <div
                 style={{
-                    width: '38vw',
+                    width: '36vw',
                     height: '12vh',
-                    borderRadius: '24px',
+                    borderRadius: '1.2vw',
                     background: '#fff',
                     color: 'black',
                     display: 'flex',
