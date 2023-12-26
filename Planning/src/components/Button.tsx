@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import { useGetCountMailQuery } from "../store/mailApi/mailApi";
 const ButtonMail = () => {
   const [countEmails, setCountEmails] = useState(0);
-  const { data, refetch } = useGetCountMailQuery();
+  const { data, refetch } = useGetCountMailQuery({});
   useEffect(() => {
     const fetchMail = async () => {
       try {
