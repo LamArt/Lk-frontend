@@ -5,6 +5,7 @@ import type { DatePickerProps, RangePickerProps } from 'antd/es/date-picker';
 import './FormEvent.scss';
 import { usePostNewEventMutation } from '../../store/calendarApi/eventsApi';
 import { useForm } from 'antd/es/form/Form';
+
 const { RangePicker } = DatePicker;
 const { TextArea } = Input;
 
@@ -19,6 +20,7 @@ const FormEvent = () => {
     const [form] = useForm();
 
     const handleCancel = () => {
+        form.resetFields();
         setIsModalOpen(false);
         setIsCreateMeet(false);
         setBtnMeetVisible(true);
@@ -40,6 +42,7 @@ const FormEvent = () => {
         value: DatePickerProps['value'] | RangePickerProps['value'],
         dateString: [string, string] | string
     ) => {
+        console.log('Изменено')
         if (Array.isArray(dateString) && dateString.length === 2) {
             setStartDate(dateString[0]);
             setEndDate(dateString[1]);
@@ -51,6 +54,7 @@ const FormEvent = () => {
     ) => {
         <DatePicker showTime onChange={onChange} onOk={onOk} />;
     };
+
     const handleSubmit = async (values: {
         title: string;
         description: string;
@@ -62,11 +66,8 @@ const FormEvent = () => {
             end_time: endDate,
             create_conference: isCreateMeet,
         };
-        console.log(formData);
         eventForm(formData);
         form.resetFields();
-        // setStartDate('');
-        // setEndDate('');
         setIsCreateMeet(false);
         setBtnMeetVisible(true);
         setBtnDescVisible(true);
@@ -97,12 +98,23 @@ const FormEvent = () => {
                 <div className="formContainer">
                     <Form form={form} onFinish={handleSubmit}>
                         <h3 className="eventName">Новое мероприятие</h3>
-                        <Form.Item name="title">
+                        <Form.Item 
+                        name = 'title'
+                        rules={[
+                            {
+                            required: true,
+                            message: 'Введите название встречи',
+                            },
+                        ]}
+                        >
                             <Input
+                                name='title'
                                 placeholder="Название"
                                 className="fieldTitle"
+                                autoComplete='off'
                             />
                         </Form.Item>
+                        
                         {btnDescVisible ? (
                             <Button
                                 className="addDescription"
@@ -147,8 +159,19 @@ const FormEvent = () => {
                             </Button>
                         )}
                         <div className="fieldContainer">
-                            <Form.Item className="custom-datepicker">
+                            <Form.Item 
+                            name = 'dateRange'
+                            className="custom-datepicker"
+                            rules={[
+                                {
+                                    type: 'array',
+                                    required: true,
+                                    message: 'Введите диапазон дат',
+                                },
+                            ]}
+                            >
                                 <RangePicker
+                                    name = 'dateRange'
                                     locale={locale}
                                     picker="date"
                                     showTime
