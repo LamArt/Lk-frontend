@@ -4,17 +4,17 @@
     padding: 0vw 0 0 1vw;
 }
 .eventName {
-    font-size: 20px;
+    font-size: 1.3vw;
 }
 .ant-modal-content {
     width: 33vw;
-    height: 25.5vw;
-    margin-top: 20%;
+    max-height: 30vw;
+    margin-top: 2rem;
     margin-left: 20%;
 }
 .modal .ant-modal-content {
     border-radius: 15px;
-    margin-top: 21%;
+    margin-top: 15%;
     margin-left: 34%;
     padding: 1.5vw 1vw;
 }
@@ -35,11 +35,12 @@
 .addVideoMeeting,
 .activeVideoMeeting {
     display: flex;
-    width: 11vw;
+    width: 13vw;
     height: 2.5vw;
     background-color: $default-field;
     padding-left: 0px;
     margin-bottom: 1.1vw;
+    border-radius: 0.8vw;
 }
 
 .addDescription h3,
@@ -50,6 +51,7 @@
     margin-bottom: auto;
     margin-left: 15px;
     color: #6f6f6f;
+    font-size: 1.1vw;
 }
 .addEventButton {
     width: 20px;
@@ -69,11 +71,11 @@
 }
 .fieldDescription {
     // margin-bottom: 1vw;
-    font-size: 20px;
+    font-size: 1.3vw;
     border: 2px solid $default-field;
 }
 .fieldTitle {
-    font-size: 20px;
+    font-size: 1.3vw;
     font-weight: 400;
     border: 2px solid $default-field;
     border-radius: 12px;
@@ -94,9 +96,10 @@
     font-size: 1.3vw;
     background-color: $accent;
     margin-left: 57%;
+    border-radius: 0.8vw;
 }
 .custom-datepicker .ant-picker-input input {
-    font-size: 20px;
+    font-size: 1.3vw;
 }
 
 .info-wrapper {
@@ -110,7 +113,7 @@
         text-align: end;
     }
     &-edit-btn {
-        font-size: 32px;
+        font-size: 1.3vw;
         color: #7a7a7a;
         &:hover {
             color: $accent;

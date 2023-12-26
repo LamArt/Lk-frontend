@@ -22,7 +22,7 @@ const JiraWidget = () => {
         fetchIssues();
         const intervalId = setInterval(() => {
             fetchIssues();
-        }, 300000); //поменять
+        }, 30000); //поменять
 
         return () => clearInterval(intervalId);
     }, [data, refetch]);

@@ -13,6 +13,7 @@ export default function Planning() {
                     <div
                         style={{
                             display: 'flex',
+                            gap: '0 4rem',
                         }}
                     >
                         <CalendarWidget></CalendarWidget>
