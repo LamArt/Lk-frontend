@@ -10,7 +10,12 @@ export default function Planning() {
             <Layout.Content className="planning-content">
                 <Flex className="planning-content-container" vertical>
                     <ButtonMail></ButtonMail>
-                    <RedirectLink serviceUrl = 'https://calendar.yandex.ru' pathImg="/icons/calendarIcon.svg" title="Я-календарь"></RedirectLink>
+                    <div style={{
+                        marginLeft: '730px',
+                        position: 'absolute',
+                        marginTop: '123px',
+                        zIndex: 2,
+                    }}><RedirectLink serviceUrl = 'https://calendar.yandex.ru' pathImg="/icons/calendarIcon.svg" title="Я-календарь"></RedirectLink></div>
                     <CalendarWidget></CalendarWidget>
                 </Flex>
             </Layout.Content>

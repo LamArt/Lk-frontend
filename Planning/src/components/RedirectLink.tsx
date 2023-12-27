@@ -4,14 +4,12 @@ const RedirectLink = ({serviceUrl, pathImg, title} : {serviceUrl: string, pathIm
         window.open(serviceUrl);
     };
     return (
-        <div className='calendarLink'>
             <a 
             onClick = {redirectPost} 
-            target="_blank"> 
+            target="_blank">
                 <img src = {pathImg}></img> 
                 <p className='calendarLabel'>{title}</p>
             </a>
-        </div>
     );
 };
 
