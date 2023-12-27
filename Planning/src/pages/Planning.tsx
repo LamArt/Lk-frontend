@@ -3,6 +3,7 @@ import CalendarWidget from '../components/CalendarWidget.tsx';
 import { Flex, Layout } from 'antd';
 import ButtonMail from '../components/Button';
 import JiraWidget from '../components/JiraWidget.tsx';
+import { RedirectLink } from '../components/RedirectLink.tsx';
 
 export default function Planning() {
     return (

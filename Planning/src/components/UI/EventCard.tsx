@@ -9,9 +9,9 @@ const EventCard = ({ event }: Event) => {
         const formattedDateTime = format(now, 'yyyy-MM-dd HH:mm:ssXXX', {
             timeZone,
         });
-        return formattedDateTime;
+        return new Date(formattedDateTime);
     }
-    const currTime = new Date(getCurrentDateTime());
+    const currTime = getCurrentDateTime();
 
     return (
         <div style={{ cursor: 'pointer' }}>

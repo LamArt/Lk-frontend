@@ -10,8 +10,7 @@ export const PopoverContentEvent = memo(({ event }: Event) => {
             </a>
             <h2 className="event-status">{event.title}</h2>
             <p className="event-time">
-                {event.start_time.slice(11, 16)} -{' '}
-                {event.end_time.slice(11, 16)}
+                {event.start_time.slice(11, 16)}-{event.end_time.slice(11, 16)}
             </p>
             <div className="info-wrapper-description-wrapper">
                 <p className="event-reminder">{event.description}</p>

@@ -22,31 +22,32 @@ const JiraWidget = () => {
         fetchIssues();
         const intervalId = setInterval(() => {
             fetchIssues();
-        }, 30000); //поменять
+        }, 300000); //5 минут
 
         return () => clearInterval(intervalId);
     }, [data, refetch]);
     return (
         <div className="jira-window-container">
             <div className="jira-tasks-container">
-                {isLoading ? (
-                    <Spin size="large" style={{ margin: 'auto' }} />
-                ) : issuesList === null ? (
+                {isLoading && <Spin size="large" style={{ margin: 'auto' }} />}
+
+                {!isLoading && !issuesList && (
                     <p
                         className="description"
                         style={{
                             margin: 'auto',
-                            color: '$grey',
-                            fontSize: 'large',
+                            fontSize: '1.3rem',
                         }}
                     >
                         Задач на спринт нет
                     </p>
-                ) : (
+                )}
+
+                {!isLoading && !!issuesList && (
                     <ul>
-                        {Object.entries(issuesList).map((issue) => (
-                            <li key={issue[0]}>
-                                <JiraCard task={issue[1]}></JiraCard>
+                        {Object.entries(issuesList).map(([id, task]) => (
+                            <li key={id}>
+                                <JiraCard task={task}></JiraCard>
                             </li>
                         ))}
                     </ul>
