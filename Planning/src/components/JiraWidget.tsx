@@ -27,33 +27,42 @@ const JiraWidget = () => {
         return () => clearInterval(intervalId);
     }, [data, refetch]);
     return (
-        <div className="jira-window-container">
-            <div className="jira-tasks-container">
-                {isLoading && <Spin size="large" style={{ margin: 'auto' }} />}
+        <>
+            <a className = 'jiraLink'
+            href = 'https://lamart.atlassian.net/jira/your-work' 
+            target="_blank">
+                <img src = {"/icons/jiraIcon.svg"}></img> 
+                <p className='jiraLabel'>Jira</p>
+            </a>
+            <div className="jira-window-container">
+                <div className="jira-tasks-container">
+                    {isLoading && <Spin size="large" style={{ margin: 'auto' }} />}
 
-                {!isLoading && !issuesList && (
-                    <p
-                        className="description"
-                        style={{
-                            margin: 'auto',
-                            fontSize: '1.3rem',
-                        }}
-                    >
-                        Задач на спринт нет
-                    </p>
-                )}
+                    {!isLoading && !issuesList && (
+                        <p
+                            className="description"
+                            style={{
+                                margin: 'auto',
+                                fontSize: '1.3rem',
+                            }}
+                        >
+                            Задач на спринт нет
+                        </p>
+                    )}
 
-                {!isLoading && !!issuesList && (
-                    <ul>
-                        {Object.entries(issuesList).map(([id, task]) => (
-                            <li key={id}>
-                                <JiraCard task={task}></JiraCard>
-                            </li>
-                        ))}
-                    </ul>
-                )}
+                    {!isLoading && !!issuesList && (
+                        <ul>
+                            {Object.entries(issuesList).map(([id, task]) => (
+                                <li key={id}>
+                                    <JiraCard task={task}></JiraCard>
+                                </li>
+                            ))}
+                        </ul>
+                    )}
+                </div>
             </div>
-        </div>
+        </>
+        
     );
 };
 
