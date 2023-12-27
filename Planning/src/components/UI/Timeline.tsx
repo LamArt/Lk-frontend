@@ -1,5 +1,6 @@
 import { useState, useEffect, memo, RefObject } from 'react';
 import { Event } from '../../store/calendarApi/eventsApi';
+
 const Timeline = memo(
     ({
         eventList,
@@ -32,14 +33,9 @@ const Timeline = memo(
         const getNextEvent = (currentTime: Date) => {
             if (!eventList) return null;
             const currentEvent = Object.entries(eventList).find(
-                ([_, { start_time, end_time }]) => {
+                ([_, { start_time }]) => {
                     const startTime = new Date(start_time);
-                    const endTime = new Date(end_time);
-
-                    return (
-                        currentTime.getTime() < startTime.getTime() &&
-                        currentTime.getTime() < endTime.getTime()
-                    );
+                    return currentTime.getTime() < startTime.getTime();
                 }
             );
             return currentEvent;
@@ -68,14 +64,6 @@ const Timeline = memo(
             const blockStartOffset =
                 blockHeight * (currentTimeSpan / eventTimeSpan);
 
-            // console.log({
-            //     currentEvent,
-            //     offset: eventBlock.offsetTop,
-            //     blockStartOffset,
-            //     eventBlock,
-            //     fraction: currentTimeSpan / eventTimeSpan,
-            // });
-
             return eventBlock.offsetTop + blockStartOffset;
         };
 
@@ -91,7 +79,7 @@ const Timeline = memo(
 
             if (!eventBlock) return 0;
             const blockHeight = eventBlock.clientHeight;
-            return eventBlock.offsetTop - (blockHeight / 3 - blockHeight / 6); //только для отступа в 42px.
+            return eventBlock.offsetTop - (blockHeight / 3 - blockHeight / 6); //высчет расстояния для положения таймлайна между задачами
         };
 
         useEffect(() => {
@@ -100,7 +88,6 @@ const Timeline = memo(
                 const position = getTimelinePosition(date);
                 setTopPosition(position);
                 setCurrTime(date);
-                // console.log({ position });
             }, 30000);
 
             return () => {

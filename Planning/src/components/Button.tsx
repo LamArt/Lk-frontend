@@ -2,6 +2,7 @@ import { Button } from 'antd';
 import './Button.scss';
 import { useEffect, useState } from 'react';
 import { useGetCountMailQuery } from '../store/mailApi/mailApi';
+
 const ButtonMail = () => {
     const [countEmails, setCountEmails] = useState(0);
     const { data, refetch } = useGetCountMailQuery();
@@ -25,7 +26,7 @@ const ButtonMail = () => {
 
         const intervalId = setInterval(() => {
             fetchMail();
-        }, 30000); //поменять
+        }, 30000);
 
         return () => clearInterval(intervalId);
     }, [data, refetch]);
