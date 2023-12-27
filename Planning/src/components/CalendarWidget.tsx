@@ -41,34 +41,43 @@ const CalendarWidget = () => {
     }, [data, refetch]);
 
     return (
-        <div className="calendar-main-window">
-            <p className="date">{formattedDate}</p>
-            <div ref={mainEventContainer} className="calendar-event-container">
-                <Timeline
-                    eventList={eventList}
-                    eventIdToNode={eventIdToNode}
-                    eventsContainer={mainEventContainer}
-                />
-                {isLoading ? (
-                    <div className="msg-about-event">
-                        <Spin size="large" style={{ margin: 'auto' }} />
-                    </div>
-                ) : data === null ? (
-                    <div className="msg-about-event">
-                        <p>Мероприятий на сегодня нет</p>
-                    </div>
-                ) : (
-                    <ul className="event-list-items">
-                        {Object.entries(eventList).map(([id, data]) => (
-                            <li ref={attachEventNodeRef(id)} key={id}>
-                                <EventCard event={data} />
-                            </li>
-                        ))}
-                    </ul>
-                )}
+        <>
+            <a className='calendarLink'
+            href = 'https://calendar.yandex.ru' 
+            target="_blank">
+                <img src = {"/icons/calendarIcon.svg"}></img> 
+                <p className='calendarLabel'>Я-календарь</p>
+            </a>
+            
+            <div className="calendar-main-window">
+                <p className="date">{formattedDate}</p>
+                <div ref={mainEventContainer} className="calendar-event-container">
+                    <Timeline
+                        eventList={eventList}
+                        eventIdToNode={eventIdToNode}
+                        eventsContainer={mainEventContainer}
+                    />
+                    {isLoading ? (
+                        <div className="msg-about-event">
+                            <Spin size="large" style={{ margin: 'auto' }} />
+                        </div>
+                    ) : data === null ? (
+                        <div className="msg-about-event">
+                            <p>Мероприятий на сегодня нет</p>
+                        </div>
+                    ) : (
+                        <ul className="event-list-items">
+                            {Object.entries(eventList).map(([id, data]) => (
+                                <li ref={attachEventNodeRef(id)} key={id}>
+                                    <EventCard event={data} />
+                                </li>
+                            ))}
+                        </ul>
+                    )}
+                </div>
+                <FormEvent />
             </div>
-            <FormEvent />
-        </div>
+        </>
     );
 };
 export default CalendarWidget;
