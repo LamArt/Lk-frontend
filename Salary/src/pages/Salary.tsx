@@ -1,4 +1,4 @@
-import {Button, Card, Flex, Layout} from "antd";
+import {Button, Card, Flex, Layout, Select} from "antd";
 import './Salary.scss'
 import {useCallback, useEffect, useState} from "react";
 import { useLocation } from "react-router-dom";
@@ -14,6 +14,10 @@ export default function Salary(){
     const location = useLocation()
     const [mutation] = useGetJiraTokenMutation()
     const { data } = useGetSalaryQuery()
+
+    const handleChange = (value: string) => {
+        console.log(`selected ${value}`);
+    };
 
     const getCodeFromUrl = useCallback(() => {
         const url = new URL(location.pathname + location.search, window.location.origin)
@@ -56,6 +60,16 @@ export default function Salary(){
             }
             <div className='salary-header'>
                 <div className='salary-title'>Зарплата</div>
+                <Select
+                    defaultValue="Проект 1"
+                    className='salary-select'
+                    onChange={handleChange}
+                    options={[
+                        { value: 'Проект 1', label: 'Проект 1' },
+                        { value: 'Проект 2', label: 'Проект 2' },
+                        { value: 'Проект 3', label: 'Проект 3' },
+                    ]}
+                />
             </div>
             <Layout.Content className='salary-content'>
                 <Flex justify='center' align='center'>
