@@ -35,7 +35,7 @@ const CalendarWidget = () => {
         fetchEvents();
         const intervalId = setInterval(() => {
             fetchEvents();
-        }, 300000); //поменять
+        }, 300000); //5 минут
 
         return () => clearInterval(intervalId);
     }, [data, refetch]);

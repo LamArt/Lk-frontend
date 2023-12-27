@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Input, Button, Modal, DatePicker, Space, Form } from 'antd';
+import { Input, Button, Modal, DatePicker, Form } from 'antd';
 import locale from 'antd/es/date-picker/locale/ru_RU';
 import type { DatePickerProps, RangePickerProps } from 'antd/es/date-picker';
 import './FormEvent.scss';
@@ -25,8 +25,6 @@ const FormEvent = () => {
         setIsCreateMeet(false);
         setBtnMeetVisible(true);
         setBtnDescVisible(true);
-        // setStartDate('');
-        // setEndDate('');
     };
 
     const addDescription = () => {
@@ -42,7 +40,7 @@ const FormEvent = () => {
         value: DatePickerProps['value'] | RangePickerProps['value'],
         dateString: [string, string] | string
     ) => {
-        console.log('Изменено')
+        console.log('Изменено');
         if (Array.isArray(dateString) && dateString.length === 2) {
             setStartDate(dateString[0]);
             setEndDate(dateString[1]);
@@ -99,23 +97,23 @@ const FormEvent = () => {
                 <div className="formContainer">
                     <Form form={form} onFinish={handleSubmit}>
                         <h3 className="eventName">Новое мероприятие</h3>
-                        <Form.Item 
-                        name = 'title'
-                        rules={[
-                            {
-                            required: true,
-                            message: 'Введите название встречи',
-                            },
-                        ]}
+                        <Form.Item
+                            name="title"
+                            rules={[
+                                {
+                                    required: true,
+                                    message: 'Введите название встречи',
+                                },
+                            ]}
                         >
                             <Input
-                                name='title'
+                                name="title"
                                 placeholder="Название"
                                 className="fieldTitle"
-                                autoComplete='off'
+                                autoComplete="off"
                             />
                         </Form.Item>
-                        
+
                         {btnDescVisible ? (
                             <Button
                                 className="addDescription"
@@ -160,19 +158,19 @@ const FormEvent = () => {
                             </Button>
                         )}
                         <div className="fieldContainer">
-                            <Form.Item 
-                            name = 'dateRange'
-                            className="custom-datepicker"
-                            rules={[
-                                {
-                                    type: 'array',
-                                    required: true,
-                                    message: 'Введите диапазон дат',
-                                },
-                            ]}
+                            <Form.Item
+                                name="dateRange"
+                                className="custom-datepicker"
+                                rules={[
+                                    {
+                                        type: 'array',
+                                        required: true,
+                                        message: 'Введите диапазон дат',
+                                    },
+                                ]}
                             >
                                 <RangePicker
-                                    name = 'dateRange'
+                                    name="dateRange"
                                     locale={locale}
                                     picker="date"
                                     showTime
