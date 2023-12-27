@@ -1,4 +1,25 @@
 @import '../const.scss';
+.calendarLink {
+    position: absolute;
+    margin-left: 38vw;
+    z-index: 2;
+    display: flex;
+    gap: 0.5vw;
+}
+.calendarLink img {
+    width: 2vw;
+}
+.calendarLabel {
+    font-size: 1.4vw;
+    color: $accent;
+    border-bottom: 0.15vw solid $accent;
+    height: 1.8vw;
+}
+
+.calendarLabel:hover {
+    color: $red;
+    border-bottom: 0.15vw solid $red;
+}
 
 .calendar-main-window {
     position: relative;

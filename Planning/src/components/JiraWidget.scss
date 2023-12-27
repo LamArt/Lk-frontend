@@ -22,20 +22,23 @@
 }
 
 .jiraLabel {
-    font-size: 28px;
+    font-size: 1.4vw;
     color: $accent;
-    border-bottom: 2px solid $accent;
-    height: 38px;
+    border-bottom: 0.15vw solid $accent;
+    height: 1.8vw;
 }
 .jiraLabel:hover {
     color: $red;
-    border-bottom: 2px solid $red;
+    border-bottom: 0.15vw solid $red;
 }
 
 .jiraLink {
     display: flex;
-    gap: 10px;
+    gap: 0.5vw;
     position: absolute;
-    margin-left: 1345px;
+    margin-left: 88vw;
     z-index: 2;
+}
+.jiraLink img {
+    width: 2vw;
 }
