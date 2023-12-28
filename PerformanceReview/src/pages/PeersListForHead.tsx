@@ -2,42 +2,10 @@ import React from 'react';
 import {Select, Card, Flex, Layout, Form, Button} from "antd";
 import '../styles/Review.scss';
 import '../styles/PeerList.scss';
-import manPhoto from '../assets/man.png';
-import womanPhoto from '../assets/woman.png';
+import {peersListMock} from "../mocks/mocks";
+import {Peer} from "../types/peer";
 
-type Peer = {
-  name: string;
-  image: string;
-}
-
-const peersListMock: Peer[] = [
-  {
-    name: 'Иван Дремин',
-    image: manPhoto
-  },
-  {
-    name: 'Антонова Агата',
-    image: womanPhoto
-  },
-  {
-    name: 'Шилова Софья',
-    image: womanPhoto
-  },
-  {
-    name: 'Любимов Алексей',
-    image: manPhoto
-  },
-  {
-    name: 'Лазарев Всеволод',
-    image: manPhoto
-  },
-  {
-    name: 'Краснова Мирослава',
-    image: womanPhoto
-  },
-]
-
-function PeersList() {
+function PeersListForHead() {
   return (
     <Layout className="review">
       <Layout.Content className="review-content">
@@ -73,7 +41,7 @@ function PeersList() {
               ))}
             </Flex>
             <Flex vertical={false} justify={"end"}>
-              <Button type='primary' htmlType='submit' className='peerlist-button-save'>Сохранить</Button>
+              <Button type='primary' htmlType='submit' className='peerlist-button peerlist-button-save'>Сохранить</Button>
             </Flex>
           </Form>
         </Flex>
@@ -82,4 +50,4 @@ function PeersList() {
   );
 }
 
-export default PeersList;
+export default PeersListForHead;

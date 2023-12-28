@@ -29,11 +29,14 @@
     border-radius: 35px;
   }
 
-  &-button-save {
+  &-button {
     width: 16vw;
-    margin-top: 50px;
     min-height: 38px;
     height: 3.5vh;
+
+    &-save {
+      margin-top: 50px;
+    }
   }
 
   &-header {
