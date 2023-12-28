@@ -6,6 +6,8 @@ import PeerReview from './pages/PeerReview'
 import ManagerReview from './pages/ManagerReview'
 import LeadReivew from './pages/LeadReview'
 import Timeline from './pages/Timeline'
+import React from "react";
+import PeersList from "./pages/PeersList";
 
 const basePath = '/performance'
 
@@ -20,7 +22,8 @@ function App({isMicroApp}: {isMicroApp?: boolean}) {
             <Route path={`${basePath}/self`} element={<SelfReview/>}/>
             <Route path={`${basePath}/peer/:id`} element={<PeerReview/>}/>
             <Route path={`${basePath}/manager`} element={<ManagerReview/>}/>
-            <Route path={`${basePath}/lead`} element={<LeadReivew/>}/>
+            <Route path={`${basePath}/lead`} element={<PeersList/>}/>
+            <Route path={`${basePath}/lead/:id`} element={<LeadReivew/>}/>
             {!isMicroApp && <Route path='/' element={<Navigate to={basePath}/>}/>}
           </Routes>
         </BrowserRouter>
