@@ -40,10 +40,10 @@ export default function Salary(){
     }, [getCodeFromUrl])
 
     useEffect(() => {
-        if ((error as Error)?.status === 400) {
+        if ((error as Error)?.status === 400 || (error as Error)?.status === 401) {
             setShowPopup(true)
         }
-    }, [isLoading]);
+    }, [isLoading, error]);
 
     return (
         <Layout className='salary'>
