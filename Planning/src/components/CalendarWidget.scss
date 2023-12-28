@@ -1,24 +1,28 @@
 @import '../const.scss';
 .calendarLink {
     position: absolute;
-    margin-left: 38vw;
+    width: 39.3vw;
+    margin-left: 11rem;
+}
+.calendarLink a {
     z-index: 2;
     display: flex;
     gap: 0.5vw;
+    float: right;
 }
 .calendarLink img {
-    width: 2vw;
+    width: 2rem;
 }
 .calendarLabel {
-    font-size: 1.4vw;
+    font-size: 1.3rem;
     color: $accent;
-    border-bottom: 0.15vw solid $accent;
-    height: 1.8vw;
+    border-bottom: 0.1rem solid $accent;
+    height: 1.7rem;
 }
 
 .calendarLabel:hover {
     color: $red;
-    border-bottom: 0.15vw solid $red;
+    border-bottom: 0.1rem solid $red;
 }
 
 .calendar-main-window {
@@ -32,7 +36,7 @@
     text-align: left;
     background-color: #fff;
     z-index: 1;
-    margin-top: 2.4rem;
+    margin-top: 2.6rem;
     margin-left: 11rem;
     margin-bottom: 2rem;
 }

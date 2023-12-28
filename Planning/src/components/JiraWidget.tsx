@@ -28,12 +28,15 @@ const JiraWidget = () => {
     }, [data, refetch]);
     return (
         <>
-            <a className = 'jiraLink'
-            href = 'https://lamart.atlassian.net/jira/your-work' 
-            target="_blank">
-                <img src = {"/icons/jiraIcon.svg"}></img> 
-                <p className='jiraLabel'>Jira</p>
-            </a>
+            <div className='jiraLink'>
+                <a
+                href = 'https://lamart.atlassian.net/jira/your-work' 
+                target="_blank">
+                    <img src = {"/icons/jiraIcon.svg"}></img> 
+                    <p className='jiraLabel'>Jira</p>
+                </a>
+            </div>
+            
             <div className="jira-window-container">
                 <div className="jira-tasks-container">
                     {isLoading && <Spin size="large" style={{ margin: 'auto' }} />}

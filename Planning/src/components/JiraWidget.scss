@@ -1,4 +1,34 @@
 @import './../const.scss';
+.jiraLink {
+    position: absolute;
+    margin-left: 77vw;
+    width: 16rem;
+}
+
+.jiraLink a{
+    display: flex;
+    gap: 0.5vw;
+    float: right;
+    z-index: 2;
+    margin-top: 0.2rem;
+}
+
+.jiraLink img {
+    width: 2rem;
+}
+
+.jiraLabel {
+    font-size: 1.3rem;
+    color: $accent;
+    border-bottom: 0.1rem solid $accent;
+    height: 1.7rem;
+}
+
+.jiraLabel:hover {
+    color: $red;
+    border-bottom: 0.1rem solid $red;
+}
+
 .jira-window-container {
     box-sizing: border-box;
     border-radius: 12px;
@@ -8,7 +38,7 @@
     max-height: 73vh;
     z-index: 1;
     margin-bottom: 2rem;
-    margin-top: 2.4rem;
+    margin-top: 2.6rem;
 }
 
 .jira-tasks-container {
@@ -19,26 +49,4 @@
     overflow: auto;
     margin: 3rem 0 3.75rem 0;
     justify-content: center;
-}
-
-.jiraLabel {
-    font-size: 1.4vw;
-    color: $accent;
-    border-bottom: 0.15vw solid $accent;
-    height: 1.8vw;
-}
-.jiraLabel:hover {
-    color: $red;
-    border-bottom: 0.15vw solid $red;
-}
-
-.jiraLink {
-    display: flex;
-    gap: 0.5vw;
-    position: absolute;
-    margin-left: 88vw;
-    z-index: 2;
-}
-.jiraLink img {
-    width: 2vw;
 }
