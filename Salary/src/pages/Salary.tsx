@@ -40,7 +40,7 @@ export default function Salary(){
     }, [getCodeFromUrl])
 
     useEffect(() => {
-        if ((error as Error)?.status === 400 || (error as Error)?.status === 401) {
+        if ((error as Error)?.status === 400) {
             setShowPopup(true)
         }
     }, [isLoading]);
