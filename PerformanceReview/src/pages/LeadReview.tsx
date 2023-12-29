@@ -6,12 +6,15 @@ import RadarChart from "../components/UI/RadarChart";
 import TextArea from "antd/es/input/TextArea";
 import { useState } from "react";
 import { TeamleadFormData } from "../store/reviewApi/reviewApi";
+import { useNavigate } from "react-router-dom";
 
 export default function LeadReivew(){
     const [formData, setFormData] = useState<Partial<TeamleadFormData>>({
         team: 1,
         ...sliderFields.reduce((acc, curr) => ({...acc, [curr.fieldName]: 50}), {})
     })
+
+    const navigate = useNavigate()
 
     return (
         <Layout className="review">
@@ -73,7 +76,7 @@ export default function LeadReivew(){
                         </Form.Item>
                         <Flex justify='space-between' align='center'>
                             <Button type='primary' className='review-save'>Сохранить</Button>
-                            <Button type='primary' htmlType='submit' className='review-send'>Отправить</Button>
+                            <Button type='primary' htmlType='submit' className='review-send' onClick={() => navigate('/performance/lead')}>Отправить</Button>
                         </Flex>
                     </Form>
                 </Flex>

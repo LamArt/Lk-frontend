@@ -24,6 +24,7 @@ export type Teammate = {
   gender: string;
   last_name: string;
   username: string;
+  id: number;
 }
 
 const reviewApi = localApi.injectEndpoints({

@@ -1,4 +1,4 @@
-import { Button, Flex, Layout } from "antd";
+import { Button, Flex, Layout, Radio } from "antd";
 import '../styles/Review.scss'
 import '../styles/Timeline.scss'
 import Card from "antd/es/card/Card";
@@ -17,12 +17,16 @@ export default function Timeline(){
     const navigate = useNavigate();
     const [currentStage, setCurrentStage] = useState<Stages>(Stages.Default)
     const {data: profile} = useGetProfileQuery({})
-    const {data: teammatesData, isLoading: isLoadingTeammates} = useGetTeammatesQuery([])
+    const {data: teammatesData, isLoading: isLoadingTeammates} = useGetTeammatesQuery()
     const {data: selfReviewForm, isLoading: isLoadingEmployeeForm} = useGetEmployeeFormQuery(profile)
 
     const teammates = teammatesData?.teammates
-    
+
+    const isTeamlead = useMemo(() => profile?.is_team_lead, [profile])
+    const timelineStages = useMemo(() => stages.filter((_, i) => !isTeamlead || i !== 2 && isTeamlead), [isTeamlead])
+    const currentTimelineStage = useMemo(() => timelineStages.find((stage) => stage.num === currentStage) || timelineStages[0], [timelineStages, currentStage])
     const isLoading = useMemo(() => isLoadingEmployeeForm || isLoadingTeammates, [isLoadingEmployeeForm, isLoadingTeammates])
+
 
     useEffect(() => {
         let stage = Stages.Default;
@@ -51,14 +55,14 @@ export default function Timeline(){
                                 <b>Performance review</b> — процедура, позволяющая объективно оценить текущие навыки работника: его сильные и слабые стороны, и дать обратную связь, чтобы помочь улучшить свои навыки.
                             </p>
                             <Flex align="top" justify="space-between">
-                            {stageNames.map((label, i) => <>
+                            {timelineStages.map((stage, i) => <>
                                 <TimelineStage
                                     orderNumber={i + 1} 
-                                    label={label}
+                                    label={stage.name}
                                     active
                                     key={i}
                                 />
-                                {i !== stageNames.length - 1 && <img src={arrowIcon} className="timeline-arrow"/>}
+                                {i !== timelineStages.length - 1 && <img src={arrowIcon} className="timeline-arrow"/>}
                             </>)} 
                             </Flex>
                             <Button className="timeline-link" onClick={() => setCurrentStage(Stages.Self)}>Начать</Button>
@@ -66,22 +70,26 @@ export default function Timeline(){
                         {
                             currentStage > 0 && <>
                                 <Flex align="top" justify="space-between">
-                                    {stageNames.map((label, i) => <>
+                                    {timelineStages.map((stage, i) => <>
                                         <TimelineStage
                                             orderNumber={i + 1} 
-                                            active={currentStage === i + 1}
-                                            done={currentStage > i + 1}
+                                            active={currentTimelineStage.num === stage.num}
+                                            done={currentTimelineStage.num > stage.num}
                                             key={i}
                                         />
-                                        {i !== stageNames.length - 1 && <div className="timeline-bar" style={{backgroundColor: currentStage > i + 1 ? '#888' : '#d9d9d9'}}/>}
+                                        {i !== timelineStages.length - 1 && <div className="timeline-bar" style={{backgroundColor: currentTimelineStage.num > stage.num ? '#888' : '#d9d9d9'}}/>}
                                     </>)}
                                 </Flex> 
                                 <p className="timeline-label centered">
-                                    {stageDescriptions[currentStage - 1]}
+                                    {
+                                        isTeamlead ?
+                                            currentTimelineStage.teamleadDescription || currentTimelineStage.description :
+                                            currentTimelineStage.description
+                                    }
                                 </p>
                                 {currentStage === Stages.Self && <Button className="timeline-link" onClick={() => navigate('self')}>Перейти</Button>} 
                                 {currentStage === Stages.Peer &&
-                                    <Flex className="timeline-teammates" align="center" wrap="wrap" gap='middle'>
+                                    (!isTeamlead ? <Flex className="timeline-teammates" align="center" wrap="wrap" gap='middle'>
                                         {teammates && teammates.map((teammate: Teammate) => (
                                             <Card className="timeline-teammate teammate" onClick={() => addPeerReviewHandle(teammate.username)}>
                                                 <Flex vertical align="center">
@@ -90,7 +98,17 @@ export default function Timeline(){
                                                 </Flex>
                                             </Card>
                                         ))}
-                                    </Flex>}
+                                        </Flex> :
+                                        <Button className="timeline-link" onClick={() => navigate('lead')}>Перейти</Button>
+                                    )
+                                }
+                                {currentStage === Stages.Discussion && isTeamlead === true &&
+                                 <Button className="timeline-link" onClick={() => navigate('lead')}>Посмотреть мои оценки</Button>}
+                                 {currentStage === Stages.Feedback && isTeamlead === true &&
+                                 <Flex vertical align="center" justify="space-between" style={{height: '45%'}}>
+                                    <Radio style={{fontSize: 18}}>Встреча проведена</Radio>
+                                    <Button className="timeline-link" onClick={() => navigate('lead')}>Посмотреть мои оценки</Button>
+                                 </Flex>}
                             </>
                         }
                     </Flex>
@@ -100,21 +118,6 @@ export default function Timeline(){
     )
 }
 
-const stageNames: string[] = [
-    'Оценка себя',
-    'Оценка коллег',
-    'Оценка менеджером',
-    'Обсуждение финальной оценки',
-    'Обратная связь'
-]
-
-const stageDescriptions: React.ReactNode[] = [
-    <><b>Оценка себя:</b> вы самостоятельно оцениваете свои достижения и навыки, чтобы понять, каких качеств вам не хватает.</>,
-    <><b>Оценка коллег:</b> вы непредвзято оцениваете сильные и слабые стороны своих коллег, чтобы помочь им улучшить свои навыки.</>,
-    <><b>Оценка менеджером:</b> менеджер суммирует оценку коллег и подводит итог вашей деятельности за ревьюируемый период. Выставляется первичная оценка.</>,
-    <><b>Обсуждение финальной оценки:</b> вы самостоятельно оцениваете свои достижения и навыки, чтобы понять, каких качеств вам не хватает.менеджеры и тимлиды обсуждают финальные оценки сотрудников, чтобы сформировать итоги performance review.</>,
-    <><b>Обратная связь:</b> скоро менеджер назначит вам встречу, где вы обсудите ваши успехи за ревьюируемый период.</>,
-]
 
 export enum Stages{
     Default,
@@ -124,3 +127,34 @@ export enum Stages{
     Discussion,
     Feedback
 }
+
+const stages: Array<{name: string, description: React.ReactNode, teamleadDescription? : React.ReactNode, num: Stages}> = [
+    {
+        name: 'Оценка себя',
+        description: <><b>Оценка себя:</b> вы самостоятельно оцениваете свои достижения и навыки, чтобы понять, каких качеств вам не хватает.</>,
+        num: Stages.Self
+    },
+    {
+        name: 'Оценка коллег',
+        description: <><b>Оценка коллег:</b> вы непредвзято оцениваете сильные и слабые стороны своих коллег, чтобы помочь им улучшить свои навыки.</>,
+        num: Stages.Peer
+    },
+    {
+        name: 'Оценка менеджером',
+        description: <><b>Оценка менеджером:</b> менеджер суммирует оценку коллег и подводит итог вашей деятельности за ревьюируемый период. Выставляется первичная оценка.</>,
+        num: Stages.Manager
+    },
+    {
+        name: 'Обсуждение финальной оценки',
+        description: <><b>Обсуждение финальной оценки:</b> вы самостоятельно оцениваете свои достижения и навыки, чтобы понять, каких качеств вам не хватает.менеджеры и тимлиды обсуждают финальные оценки сотрудников, чтобы сформировать итоги performance review.</>,
+        teamleadDescription: <><b>Обсуждение финальной оценки:</b> скоро вам придет письмо с датой встречи, на которой менеджеры и тимлиды обсуждают финальные оценки сотрудников, чтобы сформировать итоги performance review.</>,
+        num: Stages.Discussion
+    },
+    {
+        name: 'Обратная связь',
+        description: <><b>Обратная связь:</b> скоро менеджер назначит вам встречу, где вы обсудите ваши успехи за ревьюируемый период.</>,
+        teamleadDescription: <><b>Обратная связь:</b> время назначить индивидуальные встречи своим подопечным, чтобы обсудить их успехи за ревьюируемый период.</>,
+        num: Stages.Feedback
+    },
+    
+]

@@ -9,7 +9,7 @@ import {
     useGetTeammatesQuery,
     usePostEmployeeFormMutation
 } from "../store/reviewApi/reviewApi";
-import {useNavigate} from "react-router-dom";
+import {useNavigate, useParams} from "react-router-dom";
 
 export default function PeerReview(){
     const [formData, setFormData] = useState<Partial<EmployeeFormData>>({
@@ -18,12 +18,13 @@ export default function PeerReview(){
     })
 
     const navigate = useNavigate()
+    const { id } = useParams()
 
     const {data: teammates} = useGetTeammatesQuery()
     const [employeeForm] = usePostEmployeeFormMutation({})
 
     const saveDataHandle = async() => {
-        await employeeForm({...formData, about: teammates.teammates.username})
+        await employeeForm({...formData, about: teammates.teammates.find(teammate => teammate.id === +id)?.id})
         navigate('/performance')
     }
 
