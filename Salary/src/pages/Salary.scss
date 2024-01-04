@@ -82,6 +82,12 @@
     margin-right: 150rem;
   }
 
+  &-animation {
+    width: 524rem;
+    position: relative;
+    left: -30rem;
+  }
+
   &-card {
     width: 387rem;
     height: 152rem;
@@ -126,6 +132,32 @@
     }
   }
 
+  &-final {
+    &-card {
+      background-color: $blue-title;
+
+      &-title {
+        color: white;
+        font-family: $content-font-family;
+        font-size: 56rem;
+        font-style: normal;
+        font-weight: 600;
+        line-height: 100%;
+        letter-spacing: -1.12rem;
+      }
+
+      &-info {
+        color: white;
+        font-family: $content-font-family;
+        font-size: 22rem;
+        font-style: normal;
+        font-weight: 300;
+        line-height: 100%;
+        letter-spacing: -0.44rem;
+      }
+    }
+  }
+
   &-result {
     width: 524rem;
 
@@ -136,11 +168,25 @@
 
   &-reward {
     &-block {
+      align-self: flex-end;
+      height: 200rem;
+      width: 524rem;
       border-color: $blue-title;
       border-width: 3rem;
       opacity: 0;
-      transform: translateY(-30%);
+      transform: translateX(-10%);
       transition: opacity 0.3s ease, transform 0.3s ease;
+    }
+
+    &-info {
+      color: #000;
+      font-family: $content-font-family;
+      font-size: 18rem;
+      font-style: normal;
+      font-weight: 400;
+      line-height: 100%;
+      letter-spacing: -0.36rem;
+      margin-top: 22rem;
     }
 
     &-name {
@@ -148,7 +194,7 @@
       font-family: $content-font-family;
       font-size: 32rem;
       font-style: normal;
-      font-weight: 500;
+      font-weight: 600;
       line-height: 100%;
       letter-spacing: -0.64rem;
       margin-right: 10rem;
@@ -200,7 +246,7 @@
   padding: 24rem !important;
 }
 
-.salary-result-block:hover + .salary-reward-block {
+.salary-animation:hover + .salary-reward-block {
   opacity: 1;
   transform: translateY(0);
 }

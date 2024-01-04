@@ -65,35 +65,34 @@ export default function Salary(){
                 <div className='salary-title'>Зарплата</div>
             </div>
             <Layout.Content className='salary-content'>
-                <Flex justify='center' align='center'>
-                    <Flex justify='space-between' align='center' className='salary-info'>
-                        <Flex gap='24rem' style={{alignSelf: 'start'}}>
-                            <Flex vertical justify='center' align='center' gap='10rem'>
-                                <div className='salary-card-name'>Story Points</div>
-                                <Card className='salary-card salary-card-without-info'>
-                                    <Flex justify='center' align='center' vertical>
-                                        <div className='salary-card-title'>
-                                            {isLoading ? <Spin/> : <>{data?.story_points || 0}</>}
-                                        </div>
-                                    </Flex>
-                                </Card>
+                <Flex vertical>
+                    <Flex justify='center' align='center'>
+                        <Flex justify='space-between' align='center' className='salary-info'>
+                            <Flex gap='24rem' style={{alignSelf: 'start'}}>
+                                <Flex vertical justify='center' align='center' gap='10rem'>
+                                    <div className='salary-card-name'>Story Points</div>
+                                    <Card className='salary-card salary-card-without-info'>
+                                        <Flex justify='center' align='center' vertical>
+                                            <div className='salary-card-title'>
+                                                {isLoading ? <Spin/> : <>{data?.story_points || 0}</>}
+                                            </div>
+                                        </Flex>
+                                    </Card>
+                                </Flex>
+                                <Flex vertical justify={"center"} align={"center"} gap='10rem'>
+                                    <div className='salary-card-name'>Ставка</div>
+                                    <Card className='salary-card'>
+                                        <Flex justify={"center"} align={"center"} vertical>
+                                            <div className='salary-card-title'>
+                                                {isLoading ? <Spin/> : <>{data?.rate || 0}</>}
+                                            </div>
+                                            <div className='salary-card-info'>
+                                                Рубли / Story Points
+                                            </div>
+                                        </Flex>
+                                    </Card>
+                                </Flex>
                             </Flex>
-                            <Flex vertical justify={"center"} align={"center"} gap='10rem'>
-                                <div className='salary-card-name'>Ставка</div>
-                                <Card className='salary-card'>
-                                    <Flex justify={"center"} align={"center"} vertical>
-                                        <div className='salary-card-title'>
-                                            {isLoading ? <Spin/> : <>{data?.rate || 0}</>}
-                                        </div>
-                                        <div className='salary-card-info'>
-                                            Рубли / Story Points
-                                        </div>
-                                    </Flex>
-                                </Card>
-                            </Flex>
-                        </Flex>
-
-                        <Flex vertical className='salary-result'>
                             <Flex className='salary-result-block' vertical justify={"center"} align={"center"} gap='10rem'>
                                 <div  className='salary-card-name'>Результат</div>
                                 <Card className='salary-card salary-result'>
@@ -103,6 +102,23 @@ export default function Salary(){
                                         </div>
                                         <div className='salary-card-info'>
                                             Рублей
+                                        </div>
+                                    </Flex>
+                                </Card>
+                            </Flex>
+                        </Flex>
+                    </Flex>
+                    <Flex vertical justify='center' align='center' className='salary-info'>
+                        <Flex>
+                            <Flex vertical className='salary-animation' justify={"center"} align={"center"} gap='10rem'>
+                                <div className='salary-card-name salary-final-card-name'>Итоговая сумма</div>
+                                <Card className='salary-card salary-final-card salary-result'>
+                                    <Flex justify={"center"} align={"center"} vertical>
+                                        <div className='salary-card-title salary-final-card-title'>
+                                            {isLoading ? <Spin/> : <>{data?.salary || 0}</>}
+                                        </div>
+                                        <div className='salary-card-info salary-final-card-info'>
+                                            Рубли / Story Points
                                         </div>
                                     </Flex>
                                 </Card>
@@ -125,6 +141,9 @@ export default function Salary(){
                                             -{isLoading ? <Spin/> : <>{data?.credit || 0}</>} руб
                                         </div>
                                     </Flex>
+                                    <div className='salary-reward-info'>
+                                        *Итоговая сумма посчитана без учета QA тестов
+                                    </div>
                                 </Flex>
                             </Card>
                         </Flex>
