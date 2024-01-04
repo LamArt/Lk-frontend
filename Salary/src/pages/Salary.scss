@@ -223,17 +223,34 @@
   letter-spacing: -0.64rem;
 }
 
+.ant-select-item-option-content {
+  color: black;
+  leading-trim: both;
+  font-family: $content-font-family;
+  font-size: 32rem;
+  font-style: normal;
+  font-weight: 600 !important;
+  line-height: 200%;
+  letter-spacing: -0.64rem;
+}
+
+.ant-select-item {
+  height: 50rem !important;
+  padding: 0 12rem !important;
+  min-height: unset !important;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
 .ant-select-selector {
+  padding: 11rem !important;
   background-color: #D8E3FB !important;
 }
 
-//.ant-select-item-option {
-//  background-color: #D8E3FB !important;
-//}
-//
-//.ant-select-item-option-active {
-//  background-color: #0843DD !important;
-//}
+.ant-select-item-option-selected {
+  background-color: #A7C3FF !important;
+}
 
 .ant-select-dropdown {
   background-color: #D8E3FB !important;
