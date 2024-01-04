@@ -1,19 +1,20 @@
-import {Button, Card, Flex, Layout, Select} from "antd";
+import {Button, Card, Flex, Layout, Select, Spin} from "antd";
 import './Salary.scss'
 import {useCallback, useEffect, useState} from "react";
 import { useLocation } from "react-router-dom";
 import {useGetJiraTokenMutation, useGetSalaryQuery} from "../store/Api/Salary.ts";
 import Cookies from "universal-cookie";
 import Atlassian from "../assets/Jira.svg";
+import {Error} from "../interfaces/Error.ts";
 
 export default function Salary(){
     const OAUTH_URL = String(import.meta.env.VITE_OAuth_Jira)
 
-    const [showPopup, setShowPopup] = useState(true)
+    const [showPopup, setShowPopup] = useState(false)
 
     const location = useLocation()
     const [mutation] = useGetJiraTokenMutation()
-    const { data } = useGetSalaryQuery()
+    const { data, isLoading, error } = useGetSalaryQuery()
 
     const handleChange = (value: string) => {
         console.log(`selected ${value}`);
@@ -41,6 +42,12 @@ export default function Salary(){
             getJiraToken(code)
         }
     }, [getCodeFromUrl])
+
+    useEffect(() => {
+        if ((error as Error)?.status === 400 || (error as Error)?.status === 401) {
+            setShowPopup(true)
+        }
+    }, [isLoading, error]);
 
     return (
         <Layout className='salary'>
@@ -80,7 +87,7 @@ export default function Salary(){
                                 <Card className='salary-card salary-card-without-info'>
                                     <Flex justify='center' align='center' vertical>
                                         <div className='salary-card-title'>
-                                            {data?.story_points}
+                                            {isLoading ? <Spin/> : <>{data?.story_points || 0}</>}
                                         </div>
                                     </Flex>
                                 </Card>
@@ -90,7 +97,7 @@ export default function Salary(){
                                 <Card className='salary-card'>
                                     <Flex justify={"center"} align={"center"} vertical>
                                         <div className='salary-card-title'>
-                                            {data?.rate}
+                                            {isLoading ? <Spin/> : <>{data?.rate || 0}</>}
                                         </div>
                                         <div className='salary-card-info'>
                                             Рубли / Story Points
@@ -106,7 +113,7 @@ export default function Salary(){
                                 <Card className='salary-card salary-result'>
                                     <Flex justify={"center"} align={"center"} vertical>
                                         <div className='salary-card-title'>
-                                            {data?.salary}
+                                            {isLoading ? <Spin/> : <>{data?.salary || 0}</>}
                                         </div>
                                         <div className='salary-card-info'>
                                             Рублей
@@ -121,7 +128,7 @@ export default function Salary(){
                                             Премия:
                                         </div>
                                         <div className='salary-reward-number-reward'>
-                                            {data?.reward} руб
+                                            {isLoading ? <Spin/> : <>{data?.reward || 0}</>} руб
                                         </div>
                                     </Flex>
                                     <Flex>
@@ -129,7 +136,7 @@ export default function Salary(){
                                             Долг компании:
                                         </div>
                                         <div className='salary-reward-number-credit'>
-                                            -{data?.credit} руб
+                                            -{isLoading ? <Spin/> : <>{data?.credit || 0}</>} руб
                                         </div>
                                     </Flex>
                                 </Flex>
