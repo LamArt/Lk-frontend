@@ -29,9 +29,7 @@
 }
 
 .active {
-  background-color: $active-blue-background-button;
-
   &:hover {
-    background-color: $active-blue-background-button-hover !important;
+    background-color: $light-blue-background-button !important;
   }
 }
