@@ -1,13 +1,13 @@
 import { useState } from 'react';
 import './Menu.scss';
-import Review from '@assets/done.svg';
-import Notification from '@assets/notifications-button.svg';
-import Planning from '@assets/calendar.svg';
-import Salary from '@assets/ruble.svg';
-import ReviewActive from '@assets/done-white.svg';
-import NotificationActive from '@assets/notifications-button-white.svg';
-import PlanningActive from '@assets/calendar-white.svg';
-import SalaryActive from '@assets/ruble-white.svg';
+import Review from '@assets/performance review white.svg';
+import ReviewActive from '@assets/performance review gray.svg';
+import Salary from '@assets/salary white.svg';
+import SalaryActive from '@assets/salary gray.svg';
+import Planning from '@assets/calendar white.svg';
+import PlanningActive from '@assets/calendar gray.svg';
+import Notification from '@assets/notification white.svg';
+import NotificationActive from '@assets/notification gray.svg';
 import User from '@assets/user.svg';
 
 export default function Menu() {
