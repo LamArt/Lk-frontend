@@ -61,9 +61,16 @@
 
   &-header {
     background-color: $background-white;
-    margin-left: 287rem;
-    margin-bottom: 75rem;
-    margin-top: 50rem;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: end;
+    margin: 50rem 150rem 75rem 287rem;
+  }
+
+  &-select {
+    height: 50rem;
+    width: 524rem;
   }
 
   &-title {
@@ -203,4 +210,53 @@
 .salary-result-block:hover + .salary-reward-block {
   opacity: 1;
   transform: translateY(0);
+}
+
+.ant-select-selection-item {
+  color: black;
+  leading-trim: both;
+  font-family: $content-font-family;
+  font-size: 32rem;
+  font-style: normal;
+  font-weight: 600 !important;
+  line-height: 200%;
+  letter-spacing: -0.64rem;
+}
+
+.ant-select-item-option-content {
+  color: black;
+  leading-trim: both;
+  font-family: $content-font-family;
+  font-size: 32rem;
+  font-style: normal;
+  font-weight: 600 !important;
+  line-height: 200%;
+  letter-spacing: -0.64rem;
+}
+
+.ant-select-item {
+  height: 50rem !important;
+  padding: 0 12rem !important;
+  min-height: unset !important;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.ant-select-selector {
+  padding: 11rem !important;
+  background-color: #D8E3FB !important;
+}
+
+.ant-select-item-option-selected {
+  background-color: #A7C3FF !important;
+}
+
+.ant-select-dropdown {
+  background-color: #D8E3FB !important;
+}
+
+.ant-select-arrow {
+  font-size: 30rem !important;
+  color: black !important;
 }
