@@ -3,7 +3,6 @@ import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 import { ConfigProvider, ThemeConfig } from 'antd';
 import Planning from './pages/Planning';
 import locale from 'antd/locale/ru_RU';
-import dayjs from 'dayjs';
 
 const basePath = '/planning';
 
