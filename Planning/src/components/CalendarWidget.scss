@@ -1,0 +1,139 @@
+@import '../const.scss';
+
+.calendar-main-window {
+    box-sizing: border-box;
+    width: 800px;
+    max-height: 770px;
+    border: solid $color-border 2px;
+    border-radius: 12px;
+    text-align: left;
+    background-color: #fff;
+    z-index: 1;
+    margin-top: 42px;
+    margin-left: 174px;
+    margin-bottom: 24px;
+}
+.calendar-event-container {
+    position: relative;
+    min-height: 400px;
+    max-height: 508px;
+    overflow: auto;
+    margin-bottom: 24px;
+    margin-top: 18px;
+}
+.timeline-container {
+    position: relative;
+    z-index: 3;
+}
+.timeline {
+    position: absolute;
+    width: 95%;
+    height: 3px;
+    background-color: $red;
+    margin: 0;
+}
+
+.timeline-current-time {
+    position: relative;
+    font-size: 1vw;
+    text-align: center;
+    color: $red;
+    font-weight: 400;
+    padding-left: 18px;
+    display: flex;
+    text-align: start;
+}
+
+.date {
+    margin: 54px 0 0 58px;
+    font-family: 'Lato', sans-serif;
+    font-size: 1.3vw;
+}
+.msg-about-event {
+    height: 400px;
+    display: flex;
+    justify-content: 'center';
+}
+.msg-about-event p {
+    color: $grey;
+    font-size: large;
+    margin: auto;
+}
+
+.list {
+    list-style: none;
+    font-family: 'Inter', sans-serif;
+    color: $accent;
+    border-left: 0.5vw solid $accent;
+    margin-left: 94px;
+    padding-left: 24px;
+    margin-bottom: 42px;
+    height: 125px;
+    max-width: 600px;
+}
+
+.event-list-items {
+    margin-top: 12px;
+}
+.event-time {
+    font-size: 1vw;
+    margin: 0;
+    font-weight: 400;
+    color: $grey;
+}
+
+.event {
+    color: $accent;
+    &-status {
+        font-size: 1.8vw;
+        margin: 0;
+    }
+    &-reminder {
+        margin: 0;
+        margin-top: 12px;
+        font-size: 0.9vw;
+        color: $grey;
+    }
+}
+
+.not-active-event {
+    color: $grey;
+    border-left: 0.5vw solid $grey;
+}
+
+.buttonAddEvent {
+    width: 70px;
+    height: 70px;
+    border-radius: 50%;
+    background-color: $accent;
+    margin: 4px 0 36px 86%;
+}
+.buttonAddEvent:active,
+.buttonAddEvent:focus {
+    box-shadow: none;
+    outline: none;
+}
+.plus-image {
+    display: block;
+    width: 40px;
+    margin: 0 auto;
+}
+.calendarLink {
+    position: absolute;
+    margin-top: 123px;
+    margin-left: 730px;
+    z-index: 2;
+    display: flex;
+    gap: 10px;
+}
+
+.calendarLabel {
+    font-size: 28px;
+    color: $accent;
+    border-bottom: 2px solid $accent;
+    height: 38px;
+}
+.calendarLabel:hover {
+    color: $red;
+    border-bottom: 2px solid $red;
+}
