@@ -1,6 +1,6 @@
 @import './../const.scss';
 
-.selfReview{
+.review{
     position: relative;
 
     &-header{
@@ -17,6 +17,13 @@
         line-height: $header-title-lineheight;
     }
 
+    &-subtitle{
+        font-size: 2rem;
+        text-align: center;
+        margin-top: 30px;
+        margin-bottom: 20px;
+    }
+
     &-text{
         color: white;
         font-size: $header-text-font-size;
@@ -28,30 +35,36 @@
         padding-bottom: 120px;
         position: relative;
         overflow: hidden;
+        background-color: #F2F6FF;
 
         &::before{
             content: '';
             position: absolute;
-            bottom: 0;
+            bottom: -10%;
             left: -7%;
-            width: 150%;
-            height: 40%;
+            width: 110%;
+            height: 60%;
             background: linear-gradient(to right, #E9EFFC, transparent);
             background-position: bottom;
             background-repeat: no-repeat;
             transform: rotate(-25deg);
+        }
+
+        &.teamlead::before{
+            bottom: -30%;
         }
     }
 
     &-form{
         display: flex;
         flex-direction: column;
-        width: 33%;
+        width: 40%;
         gap: 40px;
     }
 
     &-textarea{
         font-size: 24px;
+        border-radius: 20px;
     }
 
     &-save,&-send{
@@ -67,6 +80,44 @@
 
     &-send{
         background-color: #0843DD;
+    }
+
+    &-radar{
+        width: 45%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+    }
+
+    &-chartLabel{
+        text-align: center;
+        font-size: 19px;
+        margin-bottom: 0;
+    }
+
+    &-replies{
+
+        h2{
+            font-weight: 400;
+            font-size: 32px;
+            color: black;
+            opacity: 1;
+        }
+    }
+
+    &-reply{
+        margin-bottom: 16px;
+    }
+
+    &-label{
+        margin-bottom: 16px;
+        font-size: 32px;
+        font-weight: 400;
+    }
+
+    &-radio{
+        font-size: 22px;
     }
 }
 

@@ -1,46 +1,47 @@
-import { Layout, Flex, Form, Button, Slider } from 'antd'
-import '../styles/Review.scss';
-import DoubleFormLabel from '../components/UI/DoubleFormLabel'
-import TextArea from 'antd/es/input/TextArea'
-import { sliderFields, textAreaFields } from '../helpers/ReviewFormHelper'
+import { Layout, Flex, Form, Slider, Button } from "antd";
+import TextArea from "antd/es/input/TextArea";
+import DoubleFormLabel from "../components/UI/DoubleFormLabel";
+import { sliderFields, textAreaFields } from "../helpers/ReviewFormHelper";
+import '../styles/Review.scss'
+import { useState } from "react";
 import {
-  EmployeeFormData,useGetProfileQuery,
-  usePostEmployeeFormMutation
+    EmployeeFormData,
+    useGetTeammatesQuery,
+    usePostEmployeeFormMutation
 } from "../store/reviewApi/reviewApi";
-import { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import {useNavigate, useParams} from "react-router-dom";
 
-export default function SelfReview(){
+export default function PeerReview(){
     const [formData, setFormData] = useState<Partial<EmployeeFormData>>({
         team: 1,
         ...sliderFields.reduce((acc, curr) => ({...acc, [curr.fieldName]: 50}), {})
     })
 
     const navigate = useNavigate()
+    const { id } = useParams()
 
-    const {data: profile} = useGetProfileQuery({})
+    const {data: teammates} = useGetTeammatesQuery()
     const [employeeForm] = usePostEmployeeFormMutation({})
-    
+
     const saveDataHandle = async() => {
-      await employeeForm({...formData, about: profile.id})
-      navigate('/performance')
+        await employeeForm({...formData, about: teammates.teammates.find(teammate => teammate.id === +id)?.id})
+        navigate('/performance')
     }
 
     return (
         <Layout className='review'>
             <Layout.Header className='review-header header'>
                 <Flex className='header-container' justify='center' align='center' gap='middle' vertical>
-                    <h1 className='review-title'>Оцени себя</h1>
+                    <h1 className='review-title'>Оцени коллег</h1>
                     <p className='review-text'>Постарайся быть объективым</p>
                 </Flex>
             </Layout.Header>
             <Layout.Content className='review-content'>
                 <Flex align='center' vertical style={{zIndex: 100}}>
                     <Form className='review-form' layout='vertical'>
-                        {!!import.meta.env.DEV && sliderFields.map((field, i) =>
-                          <Form.Item key={i}>
-                            <DoubleFormLabel label={field.label} annotation={field.selfAnnotation}/>
-                            <Slider
+                        {!!import.meta.env.DEV && sliderFields.map((field, i) => <Form.Item key={i}>
+                            <DoubleFormLabel label={field.label} annotation={field.annotation}/>
+                            <Slider 
                                 tooltip={{ open: false }}
                                 value={formData[field.fieldName] as number}
                                 onChange={(value) => setFormData(prevState => ({...prevState, [field.fieldName]: value}))}
@@ -56,7 +57,7 @@ export default function SelfReview(){
                             />
                         </Form.Item>)}
                         <Flex justify='space-between' align='center'>
-                            <Button type='primary' className='review-save'>Сохранить</Button>
+                            <Button type='primary' className='review-save'>Сохранить</Button>                        
                             <Button onClick={saveDataHandle} type='primary' htmlType='submit' className='review-send'>Отправить</Button>
                         </Flex>
                     </Form>
