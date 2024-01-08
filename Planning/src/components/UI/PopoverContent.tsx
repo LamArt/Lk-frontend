@@ -42,8 +42,6 @@ export const PopoverContentJira = memo(
                                 <p className="description">
                                     {task.description ? -task.description : ''}
                                 </p>
-                                {/* <p>Priority: {task.priority.name}</p>
-                                <p>Story Points: {task.story_points}</p> */}
                             </div>
                         ))}
                     </div>
