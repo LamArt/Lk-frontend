@@ -61,9 +61,16 @@
 
   &-header {
     background-color: $background-white;
-    margin-left: 5%;
-    margin-bottom: 75rem;
-    margin-top: 50rem;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: end;
+    margin: 50rem 150rem 75rem 287rem;
+  }
+
+  &-select {
+    height: 50rem;
+    width: 524rem;
   }
 
   &-title {
@@ -78,8 +85,14 @@
 
   &-info {
     width: 100%;
-    margin-left: 5%;
-    margin-right: 5%;
+    margin-left: 287rem;
+    margin-right: 150rem;
+  }
+
+  &-animation {
+    width: 524rem;
+    position: relative;
+    left: -30rem;
   }
 
   &-card {
@@ -126,6 +139,32 @@
     }
   }
 
+  &-final {
+    &-card {
+      background-color: $blue-title;
+
+      &-title {
+        color: white;
+        font-family: $content-font-family;
+        font-size: 56rem;
+        font-style: normal;
+        font-weight: 600;
+        line-height: 100%;
+        letter-spacing: -1.12rem;
+      }
+
+      &-info {
+        color: white;
+        font-family: $content-font-family;
+        font-size: 22rem;
+        font-style: normal;
+        font-weight: 300;
+        line-height: 100%;
+        letter-spacing: -0.44rem;
+      }
+    }
+  }
+
   &-result {
     width: 524rem;
 
@@ -136,11 +175,25 @@
 
   &-reward {
     &-block {
+      align-self: flex-end;
+      height: 200rem;
+      width: 524rem;
       border-color: $blue-title;
       border-width: 3rem;
       opacity: 0;
-      transform: translateY(-30%);
+      transform: translateX(-10%);
       transition: opacity 0.3s ease, transform 0.3s ease;
+    }
+
+    &-info {
+      color: #000;
+      font-family: $content-font-family;
+      font-size: 18rem;
+      font-style: normal;
+      font-weight: 400;
+      line-height: 100%;
+      letter-spacing: -0.36rem;
+      margin-top: 22rem;
     }
 
     &-name {
@@ -148,7 +201,7 @@
       font-family: $content-font-family;
       font-size: 32rem;
       font-style: normal;
-      font-weight: 500;
+      font-weight: 600;
       line-height: 100%;
       letter-spacing: -0.64rem;
       margin-right: 10rem;
@@ -200,7 +253,56 @@
   padding: 24rem !important;
 }
 
-.salary-result-block:hover + .salary-reward-block {
+.salary-animation:hover + .salary-reward-block {
   opacity: 1;
   transform: translateY(0);
+}
+
+.ant-select-selection-item {
+  color: black;
+  leading-trim: both;
+  font-family: $content-font-family;
+  font-size: 32rem;
+  font-style: normal;
+  font-weight: 600 !important;
+  line-height: 200%;
+  letter-spacing: -0.64rem;
+}
+
+.ant-select-item-option-content {
+  color: black;
+  leading-trim: both;
+  font-family: $content-font-family;
+  font-size: 32rem;
+  font-style: normal;
+  font-weight: 600 !important;
+  line-height: 200%;
+  letter-spacing: -0.64rem;
+}
+
+.ant-select-item {
+  height: 50rem !important;
+  padding: 0 12rem !important;
+  min-height: unset !important;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.ant-select-selector {
+  padding: 11rem !important;
+  background-color: #D8E3FB !important;
+}
+
+.ant-select-item-option-selected {
+  background-color: #A7C3FF !important;
+}
+
+.ant-select-dropdown {
+  background-color: #D8E3FB !important;
+}
+
+.ant-select-arrow {
+  font-size: 30rem !important;
+  color: black !important;
 }

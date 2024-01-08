@@ -1,4 +1,5 @@
 import './App.scss'
+import Menu from "host/Menu"
 import {ConfigProvider, Flex, ThemeConfig} from "antd";
 import {BrowserRouter, Navigate, Route, Routes} from "react-router-dom";
 import Salary from "./pages/Salary.tsx";
@@ -13,6 +14,7 @@ function App({isMicroApp}: {isMicroApp?: boolean}) {
 
     return (
         <ConfigProvider theme={theme}>
+            <Menu/>
             <Flex className='widget' vertical align={"center"} justify={"center"}>
                 <a target="_blank" href={lamartAtlassian} className='widget-card'>
                     <img src={Atlassian} alt={'Atlassian icon'} className='widget-card-image'/>
