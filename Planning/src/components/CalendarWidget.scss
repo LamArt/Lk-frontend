@@ -146,3 +146,22 @@
     width: 2.5vw;
     margin: auto;
 }
+.calendarLink {
+    position: absolute;
+    margin-top: 123px;
+    margin-left: 730px;
+    z-index: 2;
+    display: flex;
+    gap: 10px;
+}
+
+.calendarLabel {
+    font-size: 28px;
+    color: $accent;
+    border-bottom: 2px solid $accent;
+    height: 38px;
+}
+.calendarLabel:hover {
+    color: $red;
+    border-bottom: 2px solid $red;
+}

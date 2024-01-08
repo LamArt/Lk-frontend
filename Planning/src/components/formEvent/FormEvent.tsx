@@ -37,10 +37,9 @@ const FormEvent = () => {
     };
 
     const onChange = (
-        value: DatePickerProps['value'] | RangePickerProps['value'],
+        _value: DatePickerProps['value'] | RangePickerProps['value'],
         dateString: [string, string] | string
     ) => {
-        console.log('Изменено');
         if (Array.isArray(dateString) && dateString.length === 2) {
             setStartDate(dateString[0]);
             setEndDate(dateString[1]);
@@ -48,7 +47,7 @@ const FormEvent = () => {
     };
 
     const onOk = (
-        value: DatePickerProps['value'] | RangePickerProps['value']
+        _value: DatePickerProps['value'] | RangePickerProps['value']
     ) => {
         <DatePicker showTime onChange={onChange} onOk={onOk} />;
     };

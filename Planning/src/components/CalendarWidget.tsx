@@ -43,7 +43,7 @@ const CalendarWidget = () => {
     return (
         <>
             <div className='calendarLink'>
-                <a className=''
+                <a
                 href = 'https://calendar.yandex.ru' 
                 target="_blank">
                     <img src = {"/icons/calendarIcon.svg"}></img> 

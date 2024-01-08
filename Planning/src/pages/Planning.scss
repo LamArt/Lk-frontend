@@ -8,17 +8,5 @@
     &-content {
         position: relative;
         overflow: hidden;
-        // &::before {
-        //     content: '';
-        //     position: absolute;
-        //     bottom: 0;
-        //     left: -5%;
-        //     width: 200%;
-        //     height: 90%;
-        //     background: $color-gradient;
-        //     background-position: bottom;
-        //     background-repeat: no-repeat;
-        //     transform: rotate(-20deg);
-        // }
     }
 }

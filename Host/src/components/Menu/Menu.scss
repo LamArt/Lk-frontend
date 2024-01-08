@@ -1,0 +1,35 @@
+@import '../../const.scss';
+
+.menu {
+  display: flex;
+  justify-content: space-between;
+  flex-direction: column;
+  position: fixed;
+  left: 25rem;
+  top: 50rem;
+  height: calc(100vh - 100rem);
+  z-index: $z-foreground-3;
+
+  div {
+    display: flex;
+    flex-direction: column;
+    gap: 50rem;
+  }
+
+  div > img {
+    width: 50rem;
+    height: 50rem;
+    border-radius: 10rem;
+    transition: background-color 0.6s ease;
+
+    &:hover {
+      background-color: $light-blue-background-button;
+    }
+  }
+}
+
+.active {
+  &:hover {
+    background-color: $light-blue-background-button !important;
+  }
+}
