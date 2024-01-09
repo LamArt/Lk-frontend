@@ -3,7 +3,8 @@ export interface ResponseSalary {
     story_points: string,
     credit: string,
     salary: string,
-    rate: string
+    rate: string,
+    [key: string]: string
 }
 
 export interface ResponseJiraToken {

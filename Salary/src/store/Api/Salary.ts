@@ -10,6 +10,12 @@ const salaryApi = (commonApi as CommonApi).injectEndpoints({
                 method: 'GET',
             }),
         }),
+        getStatistic: build.query<ResponseSalary, void>({
+            query: () => ({
+                url: '/salary/statistics/',
+                method: 'GET',
+            }),
+        }),
         getJiraToken: build.mutation<ResponseJiraToken, RequestJiraToken>({
             query: ({ authorization_code }) => ({
                 url: '/auth/get_token_jira/',
@@ -20,4 +26,4 @@ const salaryApi = (commonApi as CommonApi).injectEndpoints({
     }),
 });
 
-export const { useGetSalaryQuery, useGetJiraTokenMutation } = salaryApi;
+export const { useGetSalaryQuery,useGetStatisticQuery, useGetJiraTokenMutation } = salaryApi;
