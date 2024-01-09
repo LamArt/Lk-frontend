@@ -1,0 +1,76 @@
+@import './../../const.scss';
+.container {
+    width: 34vw;
+    height: 121px;
+    border-radius: 24px;
+    background: #fff;
+    color: black;
+    display: flex;
+    margin: 0 auto;
+    margin-bottom: 12px;
+}
+.info-issue {
+    margin: auto 0;
+    align-items: flex-start;
+    text-align: start;
+}
+.image {
+    margin: auto 25px;
+}
+.title {
+    font-weight: 500;
+    font-size: 1.8vw;
+    max-width: 25vw;
+}
+.high {
+    color: $red;
+}
+.medium {
+    color: $yellow;
+}
+.low {
+    color: #0843dd;
+}
+.title_container {
+    display: flex;
+    margin: 0 0.8rem 0.6rem 0;
+}
+.description {
+    font-size: 1rem;
+    color: #949191;
+    font-weight: 500;
+    padding-right: 14px;
+    margin: 0;
+    text-align: start;
+}
+
+.badge {
+    background-color: #d9d9d9;
+    height: 1.6vw;
+    width: 3vw;
+    border-radius: 16px;
+    text-align: center;
+    margin: auto;
+    margin-left: 0.6rem;
+    margin-right: 1vw;
+    font-size: 1vw;
+    color: #545454;
+    font-weight: 500;
+}
+
+.popover-container {
+    width: 30vw;
+    padding: 2rem 2.6rem 2.5rem 2.6rem;
+    &_status {
+        display: flex;
+        margin: 12px 0 24px 0;
+    }
+    &-description {
+        max-height: 20vw;
+        overflow: auto;
+    }
+}
+.popover-badge {
+    margin-left: 0px;
+    margin-right: 18px;
+}

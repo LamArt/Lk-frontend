@@ -42,16 +42,19 @@ const CalendarWidget = () => {
 
     return (
         <>
-            <a className='calendarLink'
-            href = 'https://calendar.yandex.ru' 
-            target="_blank">
-                <img src = {"/icons/calendarIcon.svg"}></img> 
-                <p className='calendarLabel'>Я-календарь</p>
-            </a>
-            
+            <div className="calendarLink">
+                <a href="https://calendar.yandex.ru" target="_blank">
+                    <img src={'/icons/calendarIcon.svg'}></img>
+                    <p className="calendarLabel">Я-календарь</p>
+                </a>
+            </div>
+
             <div className="calendar-main-window">
                 <p className="date">{formattedDate}</p>
-                <div ref={mainEventContainer} className="calendar-event-container">
+                <div
+                    ref={mainEventContainer}
+                    className="calendar-event-container"
+                >
                     <Timeline
                         eventList={eventList}
                         eventIdToNode={eventIdToNode}

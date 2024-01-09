@@ -5,7 +5,6 @@ import Planning from './pages/Planning';
 import locale from 'antd/locale/ru_RU';
 
 const basePath = '/planning';
-
 function App({ isMicroApp }: { isMicroApp?: boolean }) {
     return (
         <>
