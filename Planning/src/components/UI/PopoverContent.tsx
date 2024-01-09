@@ -1,6 +1,6 @@
 import { Event } from '../../store/calendarApi/eventsApi';
 import { EditOutlined } from '@ant-design/icons';
-import { Issue, Task } from '../../store/jiraApi/issueApi';
+import { Issue } from '../../store/jiraApi/issueApi';
 import { memo } from 'react';
 export const PopoverContentEvent = memo(({ event }: Event) => {
     return (
