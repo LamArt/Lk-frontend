@@ -8,6 +8,9 @@ const basePath = '/performance'
 function App({isMicroApp}: {isMicroApp?: boolean}) {
   
 
+
+
+
   return (
     <>
       <ConfigProvider theme={theme}>
