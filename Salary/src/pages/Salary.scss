@@ -65,7 +65,7 @@
     flex-direction: row;
     justify-content: space-between;
     align-items: end;
-    margin: 50rem 150rem 75rem 287rem;
+    margin: 50rem 150rem 55rem 287rem;
   }
 
   &-select {
@@ -97,7 +97,7 @@
 
   &-card {
     width: 387rem;
-    height: 152rem;
+    height: 122rem;
     border-color: $blue-title;
     border-width: 5rem;
     align-items: start;
@@ -111,31 +111,31 @@
     &-name {
       color: black;
       font-family: $content-font-family;
-      font-size: 40rem;
+      font-size: 32rem;
       font-style: normal;
       font-weight: 500;
       line-height: 100%;
-      letter-spacing: -0.8rem;
+      letter-spacing: -0.64rem;
     }
 
     &-title {
-      color: $blue-title;
+      color: $blue-button-text;
       font-family: $content-font-family;
-      font-size: 64rem;
+      font-size: 56rem;
       font-style: normal;
       font-weight: 600;
       line-height: 100%;
-      letter-spacing: -1.28rem;
+      letter-spacing: -1.12rem;
     }
 
     &-info {
       color: black;
       font-family: $content-font-family;
-      font-size: $header-text-font-size;
+      font-size: 22rem;
       font-style: normal;
       font-weight: 300;
       line-height: 100%;
-      letter-spacing: -0.48rem;
+      letter-spacing: -0.44rem;
     }
   }
 
@@ -176,7 +176,7 @@
   &-reward {
     &-block {
       align-self: flex-end;
-      height: 200rem;
+      height: 164rem;
       width: 524rem;
       border-color: $blue-title;
       border-width: 3rem;
@@ -193,7 +193,7 @@
       font-weight: 400;
       line-height: 100%;
       letter-spacing: -0.36rem;
-      margin-top: 22rem;
+      margin-top: 9rem;
     }
 
     &-name {
@@ -250,7 +250,7 @@
 }
 
 .ant-card-body {
-  padding: 24rem !important;
+  padding: 16rem !important;
 }
 
 .salary-animation:hover + .salary-reward-block {
