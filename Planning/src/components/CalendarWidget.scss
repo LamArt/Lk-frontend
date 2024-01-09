@@ -1,0 +1,148 @@
+@import '../const.scss';
+.calendarLink {
+    position: absolute;
+    width: 39.3vw;
+    margin-left: 11rem;
+}
+.calendarLink a {
+    z-index: 2;
+    display: flex;
+    gap: 0.5vw;
+    float: right;
+}
+.calendarLink img {
+    width: 2rem;
+}
+.calendarLabel {
+    font-size: 1.3rem;
+    color: $accent;
+    border-bottom: 0.1rem solid $accent;
+    height: 1.7rem;
+}
+
+.calendarLabel:hover {
+    color: $red;
+    border-bottom: 0.1rem solid $red;
+}
+
+.calendar-main-window {
+    position: relative;
+    box-sizing: border-box;
+    width: 40vw;
+    min-height: 70vh;
+    max-height: 73vh;
+    border: solid $color-border 2px;
+    border-radius: 12px;
+    text-align: left;
+    background-color: #fff;
+    z-index: 1;
+    margin-top: 2.6rem;
+    margin-left: 11rem;
+    margin-bottom: 2rem;
+}
+.calendar-event-container {
+    position: relative;
+    min-height: 35vh;
+    max-height: 43vh;
+    overflow: auto;
+    margin-bottom: 1.2rem;
+    margin-top: 1rem;
+}
+.timeline-container {
+    position: relative;
+    z-index: 3;
+}
+.timeline {
+    position: absolute;
+    width: 95%;
+    height: 3px;
+    background-color: $red;
+    margin: 0;
+}
+
+.timeline-current-time {
+    position: relative;
+    font-size: 1vw;
+    text-align: center;
+    color: $red;
+    font-weight: 400;
+    padding-left: 18px;
+    display: flex;
+    text-align: start;
+}
+
+.date {
+    margin: 2.8rem 0 0 3rem;
+    font-family: 'Lato', sans-serif;
+    font-size: 1.3vw;
+}
+.msg-about-event {
+    min-height: 30vh;
+    display: flex;
+    justify-content: 'center';
+}
+.msg-about-event p {
+    color: $grey;
+    font-size: $planning-text-font-size;
+    margin: auto;
+}
+
+.list {
+    list-style: none;
+    font-family: 'Inter', sans-serif;
+    color: $accent;
+    border-left: 0.5rem solid $accent;
+    margin-left: 5.5rem;
+    padding-left: 2rem;
+    margin-bottom: 2.73rem;
+    height: 6rem;
+    max-width: 600px;
+}
+
+.event-list-items {
+    margin-top: 12px;
+}
+.event-time {
+    font-size: 1vw;
+    margin: 0;
+    font-weight: 400;
+    color: $grey;
+}
+
+.event {
+    color: $accent;
+    &-status {
+        font-size: 1.8vw;
+        margin: 0;
+    }
+    &-reminder {
+        margin: 0;
+        margin-top: 12px;
+        font-size: 0.9vw;
+        color: $grey;
+    }
+}
+
+.not-active-event {
+    color: $grey;
+    border-left: 0.5vw solid $grey;
+}
+
+.buttonAddEvent {
+    position: absolute;
+    width: 4vw;
+    height: 4vw;
+    border-radius: 50%;
+    background-color: $accent;
+    margin: 0 0 1rem 85%;
+}
+.buttonAddEvent:active,
+.buttonAddEvent:focus {
+    box-shadow: none;
+    outline: none;
+}
+.plus-image {
+    display: block;
+    width: 2.5vw;
+    margin: auto;
+}
