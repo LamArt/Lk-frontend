@@ -7,12 +7,14 @@ interface CircleCenter {
     y: number;
 }
 
-interface SalaryGraphProps {}
+interface SalaryGraphProps {
+    currentProject: string
+}
 
 const months = ["Январь", "Февраль", "Март", "Апрель", "Май", "Июнь", "Июль", "Август", "Сентябрь", "Октябрь", "Ноябрь", "Декабрь"];
 const monthsEng = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
 
-const SalaryGraph: React.FC<SalaryGraphProps> = () => {
+const SalaryGraph: React.FC<SalaryGraphProps> = ({ currentProject }) => {
     const [circleCenters, setCircleCenters] = useState<CircleCenter[]>([]);
     const [activeIndex, setActiveIndex] = useState<number | null>(null);
     const [dataLoaded, setDataLoaded] = useState(false);
@@ -20,7 +22,7 @@ const SalaryGraph: React.FC<SalaryGraphProps> = () => {
 
     const resultArray: number[] = Array.from({ length: 12 }).map((_, index) => {
         const month = monthsEng[index];
-        return data && data[month] ? parseInt(data[month], 10) : 0;
+        return data && data.projects[currentProject][month] ? parseInt(data.projects[currentProject][month], 10) : 0;
     });
 
     useEffect(() => {
