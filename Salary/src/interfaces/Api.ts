@@ -10,6 +10,9 @@ interface ProjectData {
     salary: string
     reward: string
     credit: string
+}
+
+export interface ResponseStatistic {
     [key: string]: string
 }
 

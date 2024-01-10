@@ -157,7 +157,7 @@ export default function Salary(){
                             </Card>
                         </Flex>
                     </Flex>
-                    <SalaryGraph currentProject={currentProject}/>
+                    <SalaryGraph/>
                 </Flex>
             </Layout.Content>
         </Layout>
