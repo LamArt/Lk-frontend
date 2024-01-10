@@ -1,11 +1,12 @@
-import {Button, Card, Flex, Layout, Select, Spin} from "antd";
+import {Card, Flex, Layout, Select, Spin} from "antd";
 import './Salary.scss'
 import {useCallback, useEffect, useState} from "react";
 import { useLocation } from "react-router-dom";
 import {useGetJiraTokenMutation, useGetSalaryQuery} from "../store/Api/Salary.ts";
 import Cookies from "universal-cookie";
-import Atlassian from "../assets/Jira.svg";
 import {Error} from "../interfaces/Error.ts";
+import SalaryGraph from "../components/SalaryGraph/SalaryGraph.tsx";
+import JiraPopup from "../components/JiraPopup/JiraPopup.tsx";
 
 export default function Salary(){
     const OAUTH_URL = String(import.meta.env.VITE_OAuth_Jira)
@@ -53,17 +54,7 @@ export default function Salary(){
         <Layout className='salary'>
             {
                 data === undefined && showPopup &&
-                <div className='salary-jira'>
-                    <Flex justify={"center"} align={"center"} vertical gap='75rem' className='salary-jira-popup'>
-                        <div className='salary-jira-popup-title'>
-                            Авторизуйтесь для продолжения
-                        </div>
-                        <Button onClick={() => window.location.href = OAUTH_URL} className='salary-jira-popup-button'>
-                            Авторизоваться
-                            <img src={Atlassian} alt={'Atlassian icon'} className='salary-jira-popup-image'/>
-                        </Button>
-                    </Flex>
-                </div>
+                <JiraPopup onAuthorize={() => window.location.href = OAUTH_URL} />
             }
             <div className='salary-header'>
                 <div className='salary-title'>Зарплата</div>
@@ -162,6 +153,7 @@ export default function Salary(){
                             </Card>
                         </Flex>
                     </Flex>
+                    <SalaryGraph/>
                 </Flex>
             </Layout.Content>
         </Layout>

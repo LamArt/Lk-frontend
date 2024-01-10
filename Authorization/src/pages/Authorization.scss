@@ -37,8 +37,12 @@
     font-variation-settings: 'wght' $authorization-text-font-weight;
   }
 
-  &-button{
+  &-button {
     width: 65%;
+
+    &.hidden {
+      display: none;
+    }
   }
 }
 
