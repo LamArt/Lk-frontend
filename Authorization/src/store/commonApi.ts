@@ -70,9 +70,10 @@ const baseQueryWithReauth: BaseQueryFn<string | FetchArgs, unknown, FetchBaseQue
 
 const commonApi = createApi({
   reducerPath: 'authReducer',
+  tagTypes: ['EmployeeForm'],
   baseQuery: baseQueryWithReauth,
   endpoints: () => ({}),
 });
 
-export type CommonApi = Api<BaseQueryFn<string | FetchArgs, unknown, FetchBaseQueryError>, {}, 'authReducer', never, typeof coreModuleName | typeof reactHooksModuleName>;
+export type CommonApi = Api<BaseQueryFn<string | FetchArgs, unknown, FetchBaseQueryError>, {}, 'authReducer', 'EmployeeForm', typeof coreModuleName | typeof reactHooksModuleName>;
 export default commonApi;

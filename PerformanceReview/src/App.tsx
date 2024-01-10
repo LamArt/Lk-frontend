@@ -2,18 +2,30 @@ import './App.css'
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom'
 import SelfReview from './pages/SelfReview'
 import { ConfigProvider, ThemeConfig } from 'antd'
+import PeerReview from './pages/PeerReview'
+import ManagerReview from './pages/ManagerReview'
+import LeadReivew from './pages/LeadReview'
+import Timeline from './pages/Timeline'
+import React from "react";
+import PeersListForHead from "./pages/PeersListForHead";
+import PeersListForTeamlead from "./pages/PeersListForTeamlead";
 
 const basePath = '/performance'
 
 function App({isMicroApp}: {isMicroApp?: boolean}) {
   
-
   return (
     <>
       <ConfigProvider theme={theme}>
         <BrowserRouter>
           <Routes>
-            <Route path={basePath} element={<SelfReview/>}/>
+            <Route path={basePath} element={<Timeline/>}/>
+            <Route path={`${basePath}/self`} element={<SelfReview/>}/>
+            <Route path={`${basePath}/peer/:id`} element={<PeerReview/>}/>
+            <Route path={`${basePath}/manager`} element={<ManagerReview/>}/>
+            <Route path={`${basePath}/lead`} element={<PeersListForTeamlead/>}/>
+            <Route path={`${basePath}/head`} element={<PeersListForHead/>}/>
+            <Route path={`${basePath}/lead/:id`} element={<LeadReivew/>}/>
             {!isMicroApp && <Route path='/' element={<Navigate to={basePath}/>}/>}
           </Routes>
         </BrowserRouter>
