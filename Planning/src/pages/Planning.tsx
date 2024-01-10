@@ -1,4 +1,4 @@
-import { Flex, Layout } from "antd";
+import { Button, Flex, Layout } from "antd";
 import "./Planning.scss";
 import ButtonMail from "../components/Button";
 

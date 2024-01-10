@@ -2,7 +2,7 @@ import commonApi from "./commonApi";
 
 const test = commonApi.injectEndpoints({
   endpoints: (build) => ({
-    getProfile: build.query({
+    getProfile: build.mutation({
       query: () => ({
         url: "/profile/",
         method: "GET",
@@ -11,4 +11,4 @@ const test = commonApi.injectEndpoints({
   }),
 });
 
-export const { useGetProfileQuery } = test;
+export const { useGetProfileMutation } = test;

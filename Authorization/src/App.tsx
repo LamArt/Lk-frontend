@@ -3,15 +3,10 @@ import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom'
 import Authorization from './pages/Authorization.tsx'
 import TokenPage from "./pages/TokenPage.tsx";
 import { ConfigProvider, ThemeConfig } from 'antd'
-import {useGetProfileQuery} from "./store/Auth";
 
 const basePath = '/authorization'
 
 function App({isMicroApp}: {isMicroApp?: boolean}) {
-    const {data} = useGetProfileQuery({})
-
-    console.log(data)
-
 
     return (
         <>
