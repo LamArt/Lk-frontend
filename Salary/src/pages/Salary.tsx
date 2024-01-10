@@ -10,14 +10,17 @@ import {Error} from "../interfaces/Error.ts";
 export default function Salary(){
     const OAUTH_URL = String(import.meta.env.VITE_OAuth_Jira)
 
-    const [showPopup, setShowPopup] = useState(false)
-
     const location = useLocation()
     const [mutation] = useGetJiraTokenMutation()
     const { data, isLoading, error } = useGetSalaryQuery()
 
+    const defaultProject = Object.keys(data?.projects || {"Проектов не найдено": {}})[0];
+
+    const [showPopup, setShowPopup] = useState(false)
+    const [currentProject, setCurrentProject] = useState<string>(defaultProject);
+
     const handleChange = (value: string) => {
-        console.log(`selected ${value}`);
+        setCurrentProject(value);
     };
 
     const getCodeFromUrl = useCallback(() => {
@@ -47,6 +50,7 @@ export default function Salary(){
         if ((error as Error)?.status === 400 || (error as Error)?.status === 401) {
             setShowPopup(true)
         }
+        setCurrentProject(Object.keys(data?.projects || {"Проектов не найдено": {}})[0])
     }, [isLoading, error]);
 
     return (
@@ -68,14 +72,14 @@ export default function Salary(){
             <div className='salary-header'>
                 <div className='salary-title'>Зарплата</div>
                 <Select
-                    defaultValue="Проект 1"
+                    defaultValue={defaultProject}
+                    value={currentProject}
                     className='salary-select'
                     onChange={handleChange}
-                    options={[
-                        { value: 'Проект 1', label: 'Проект 1' },
-                        { value: 'Проект 2', label: 'Проект 2' },
-                        { value: 'Проект 3', label: 'Проект 3' },
-                    ]}
+                    options={Object.keys(data?.projects || {}).map(projectName => ({
+                        label: projectName,
+                        value: projectName
+                    }))}
                 />
             </div>
             <Layout.Content className='salary-content'>
@@ -88,7 +92,7 @@ export default function Salary(){
                                     <Card className='salary-card salary-card-without-info'>
                                         <Flex justify='center' align='center' vertical>
                                             <div className='salary-card-title'>
-                                                {isLoading ? <Spin/> : <>{data?.story_points || 0}</>}
+                                                {isLoading ? <Spin/> : <>{data?.projects[currentProject] && data?.projects[currentProject].story_points || 0}</>}
                                             </div>
                                         </Flex>
                                     </Card>
@@ -98,7 +102,7 @@ export default function Salary(){
                                     <Card className='salary-card'>
                                         <Flex justify={"center"} align={"center"} vertical>
                                             <div className='salary-card-title'>
-                                                {isLoading ? <Spin/> : <>{data?.rate || 0}</>}
+                                                {isLoading ? <Spin/> : <>{data?.projects[currentProject] && data?.projects[currentProject].rate || 0}</>}
                                             </div>
                                             <div className='salary-card-info'>
                                                 Рубли / Story Points
@@ -112,7 +116,7 @@ export default function Salary(){
                                 <Card className='salary-card salary-result'>
                                     <Flex justify={"center"} align={"center"} vertical>
                                         <div className='salary-card-title'>
-                                            {isLoading ? <Spin/> : <>{data?.salary || 0}</>}
+                                            {isLoading ? <Spin/> : <>{data?.projects[currentProject] && data?.projects[currentProject].salary || 0}</>}
                                         </div>
                                         <div className='salary-card-info'>
                                             Рублей
@@ -129,7 +133,7 @@ export default function Salary(){
                                 <Card className='salary-card salary-final-card salary-result'>
                                     <Flex justify={"center"} align={"center"} vertical>
                                         <div className='salary-card-title salary-final-card-title'>
-                                            {isLoading ? <Spin/> : <>{data?.salary || 0}</>}
+                                            {isLoading ? <Spin/> : <>{data?.projects[currentProject] && data?.total_salary || 0}</>}
                                         </div>
                                         <div className='salary-card-info salary-final-card-info'>
                                             Рубли / Story Points
@@ -144,7 +148,7 @@ export default function Salary(){
                                             Премия:
                                         </div>
                                         <div className='salary-reward-number-reward'>
-                                            {isLoading ? <Spin/> : <>{data?.reward || 0}</>} руб
+                                            {isLoading ? <Spin/> : <>{data?.projects[currentProject] && data?.projects[currentProject].reward || 0}</>} руб
                                         </div>
                                     </Flex>
                                     <Flex>
@@ -152,7 +156,7 @@ export default function Salary(){
                                             Долг компании:
                                         </div>
                                         <div className='salary-reward-number-credit'>
-                                            -{isLoading ? <Spin/> : <>{data?.credit || 0}</>} руб
+                                            -{isLoading ? <Spin/> : <>{data?.projects[currentProject] && data?.projects[currentProject].credit || 0}</>} руб
                                         </div>
                                     </Flex>
                                     <div className='salary-reward-info'>
