@@ -14,7 +14,8 @@ export default defineConfig({
         host: "http://localhost:4173/assets/remoteEntry.js",
       },
       exposes: {
-        './Salary': './src/App.tsx'
+        './Salary': './src/App.tsx',
+        './JiraPopup': './src/components/JiraPopup/JiraPopup.tsx'
       },
       shared: ['react', 'react-dom', 'antd', 'react-router-dom', '@reduxjs/toolkit', 'react-redux']
     })
