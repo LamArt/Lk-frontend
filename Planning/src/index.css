@@ -5,9 +5,22 @@ body,
     font-family: 'Inter', sans-serif;
     margin: 0;
     padding: 0;
-    /* font-size: calc(1vw / 19.2); */
 }
 
+.menu {
+    left: 1.8rem !important;
+    top: 2.8rem !important;
+    height: calc(100vh - 5.6rem) !important;
+}
+
+.menu div{
+    gap: 2.8rem !important;
+}
+
+.menu div img {
+    width: 2rem !important;
+    height: 1.9rem !important;
+}
 h1 {
     font-size: 3.2em;
     line-height: 1.1;
