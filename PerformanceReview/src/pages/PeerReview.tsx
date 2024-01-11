@@ -24,7 +24,9 @@ export default function PeerReview(){
     const [employeeForm] = usePostEmployeeFormMutation({})
 
     const saveDataHandle = async() => {
-        await employeeForm({...formData, about: teammates.teammates.find(teammate => teammate.id === +id)?.id})
+        if (id && teammates) {
+            await employeeForm({...formData, about: teammates.teammates.find(teammate => teammate.id === +id)?.id})
+        }
         navigate('/performance')
     }
 
