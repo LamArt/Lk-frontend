@@ -9,7 +9,7 @@ import GitHub from "./assets/Git.svg";
 
 const basePath = '/salary'
 
-function App({isMicroApp}: {isMicroApp?: boolean}) {
+function App({isMicroApp = true}: {isMicroApp?: boolean}) {
 
 
     return (

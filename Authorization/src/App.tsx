@@ -6,7 +6,7 @@ import { ConfigProvider, ThemeConfig } from 'antd'
 
 const basePath = '/authorization'
 
-function App({isMicroApp}: {isMicroApp?: boolean}) {
+function App({isMicroApp = true}: {isMicroApp?: boolean}) {
 
     return (
         <>

@@ -5,7 +5,7 @@ import Planning from './pages/Planning';
 import locale from 'antd/locale/ru_RU';
 
 const basePath = '/planning';
-function App({ isMicroApp }: { isMicroApp?: boolean }) {
+function App({ isMicroApp = true }: { isMicroApp?: boolean }) {
     return (
         <>
             <ConfigProvider theme={theme} locale={locale}>

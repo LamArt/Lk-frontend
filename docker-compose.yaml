@@ -1,0 +1,42 @@
+services:
+  host:
+    env_file: Host/.env
+    build: .
+    ports:
+      - 3000:3000
+    expose:
+      - 3000
+#    Закомментировать чтобы работало
+  authorization:
+    env_file: Authorization/.env
+    build: .
+    ports:
+      - 3001:3001
+    expose:
+      - 3001
+#  salary:
+#    env_file: Salary/.env
+#    build: .
+#    ports:
+#      - 3004:3004
+#    depends_on:
+#      - authorization
+#      - host
+#  PerformanceReview:
+#    env_file: PerformanceReview/.env
+#    build: .
+#    ports:
+#      - 3002:3002
+#    depends_on:
+#      - Authorization
+#      - Salary
+#      - Host
+#  Planning:
+#    env_file: Planning/.env
+#    build: .
+#    ports:
+#      - 3003:3003
+#    depends_on:
+#      - Authorization
+#      - Salary
+#      - Host

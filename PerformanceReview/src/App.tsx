@@ -12,7 +12,7 @@ import PeersListForTeamlead from "./pages/PeersListForTeamlead";
 
 const basePath = '/performance'
 
-function App({isMicroApp}: {isMicroApp?: boolean}) {
+function App({isMicroApp = true}: {isMicroApp?: boolean}) {
   
   return (
     <>

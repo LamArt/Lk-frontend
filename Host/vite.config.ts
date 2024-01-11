@@ -8,12 +8,6 @@ export default defineConfig({
     react(),
     federation({
       name: "host",
-      remotes: {
-        performanceReview: "https://lk.lamart.site/assets/remoteEntry.js",
-        authorization: 'https://lk.lamart.site/assets/remoteEntry.js',
-        planning: "https://lk.lamart.site/assets/remoteEntry.js",
-        salary: "https://lk.lamart.site/assets/remoteEntry.js",
-      },
       exposes: {
         './Menu': './src/components/Menu/Menu.tsx',
       },
