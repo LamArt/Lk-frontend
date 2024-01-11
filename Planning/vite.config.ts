@@ -10,8 +10,8 @@ export default defineConfig({
             name: 'planning',
             filename: 'remoteEntry.js',
             remotes: {
-                authorization: 'http://localhost:5002/assets/remoteEntry.js',
-                salary: 'http://localhost:5004/assets/remoteEntry.js',
+                authorization: 'https://lk.lamart.site/assets/remoteEntry.js',
+                salary: 'https://lk.lamart.site/assets/remoteEntry.js',
             },
             exposes: { './Planning': './src/App.tsx' },
             shared: [

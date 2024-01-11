@@ -9,10 +9,10 @@ export default defineConfig({
     federation({
       name: "host",
       remotes: {
-        performanceReview: "http://localhost:5001/assets/remoteEntry.js",
-        authorization: 'http://localhost:5002/assets/remoteEntry.js',
-        planning: "http://localhost:5003/assets/remoteEntry.js",
-        salary: "http://localhost:5004/assets/remoteEntry.js",
+        performanceReview: "https://lk.lamart.site/assets/remoteEntry.js",
+        authorization: 'https://lk.lamart.site/assets/remoteEntry.js',
+        planning: "https://lk.lamart.site/assets/remoteEntry.js",
+        salary: "https://lk.lamart.site/assets/remoteEntry.js",
       },
       exposes: {
         './Menu': './src/components/Menu/Menu.tsx',

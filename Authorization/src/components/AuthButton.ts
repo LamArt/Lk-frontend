@@ -23,12 +23,12 @@ export function AuthButton() {
             const oauthQueryParams = {
                 client_id: 'c120ba35adaf4278a8277e542b1a0cbd',
                 response_type: 'token',
-                redirect_uri: 'http://localhost:5002/token',
+                redirect_uri: 'https://lk.lamart.site/token',
             };
 
             window.YaAuthSuggest.init(
                 oauthQueryParams,
-                'http://localhost:5002/authorization',
+                'https://lk.lamart.site/authorization',
                 {
                     view: 'button',
                     parentId: 'buttonContainerId',
@@ -60,7 +60,7 @@ export function AuthButton() {
                         .then(responseData => {
                             console.log('Ответ от сервера:', responseData);
 
-                            window.location.href = 'http://localhost:5004/salary'
+                            window.location.href = 'https://lk.lamart.site/salary'
                             cookies.set('access_token', responseData.access);
                             cookies.set('refresh_token', responseData.refresh);
                         })

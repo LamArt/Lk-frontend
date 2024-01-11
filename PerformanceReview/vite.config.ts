@@ -10,8 +10,8 @@ export default defineConfig({
       name: 'performance_review',
       filename: 'remoteEntry.js',
       remotes: {
-        authorization: 'http://localhost:5002/assets/remoteEntry.js',
-        host: "http://localhost:4173/assets/remoteEntry.js",
+        authorization: 'https://lk.lamart.site/assets/remoteEntry.js',
+        host: "https://lk.lamart.site/assets/remoteEntry.js",
       },
       exposes: {
         './PerformanceReview': './src/App.tsx'
