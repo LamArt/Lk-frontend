@@ -23,9 +23,8 @@ export default function Menu() {
 
     const handleItemClick = (itemName: string) => {
         setActiveItem(itemName !== activeItem ? itemName : '');
-        if (itemName === 'user') {
-            window.location.href = menuUrls[itemName];
-        }
+        if (itemName === 'notification') return
+        window.location.href = menuUrls[itemName];
     };
 
     return (

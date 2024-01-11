@@ -60,6 +60,7 @@ export function AuthButton() {
                         .then(responseData => {
                             console.log('Ответ от сервера:', responseData);
 
+                            window.location.href = 'http://localhost:5004/salary'
                             cookies.set('access_token', responseData.access);
                             cookies.set('refresh_token', responseData.refresh);
                         })
