@@ -58,26 +58,6 @@ const JiraWidget = () => {
             setIssuesList(data);
         }
     }, [isLoading, error, refetch]);
-
-    // useEffect(() => {
-    //     const fetchIssues = async () => {
-    //         try {
-    //             await refetch();
-    //             if (data !== undefined) {
-    //                 setIssuesList(data);
-    //                 console.log(Object.entries(data));
-    //             }
-    //         } catch (error) {
-    //             console.log('Error post data:', error);
-    //         }
-    //     };
-    //     fetchIssues();
-    //     const intervalId = setInterval(() => {
-    //         fetchIssues();
-    //     }, 300000); //5 минут
-
-    //     return () => clearInterval(intervalId);
-    // }, [data, refetch]);
     return (
         <>
             <div className="jiraLink">
