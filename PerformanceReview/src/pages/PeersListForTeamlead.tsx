@@ -5,6 +5,7 @@ import {Peer} from "../types/peer";
 import {useNavigate} from "react-router-dom";
 import '../styles/Review.scss';
 import '../styles/PeerList.scss';
+import Menu from "host/Menu";
 
 
 
@@ -13,6 +14,7 @@ function PeersListForTeamlead() {
 
   return (
     <Layout className="review">
+      <Menu/>
       <Layout.Content className="review-content">
         <h2 className="peerlist-header">Финальная оценка сотрудников</h2>
         <Flex vertical align={"center"}>

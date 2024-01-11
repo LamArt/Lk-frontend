@@ -11,6 +11,7 @@ export default defineConfig({
       filename: 'remoteEntry.js',
       remotes: {
         authorization: 'http://localhost:5002/assets/remoteEntry.js',
+        host: "http://localhost:4173/assets/remoteEntry.js",
       },
       exposes: {
         './PerformanceReview': './src/App.tsx'
