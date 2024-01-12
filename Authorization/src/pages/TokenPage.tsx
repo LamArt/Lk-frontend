@@ -13,7 +13,7 @@ function TokenPage() {
         document.body.appendChild(script);
 
         script.onload = function() {
-            window.YaSendSuggestToken("http://localhost:5002/authorization", {
+            window.YaSendSuggestToken("https://lk.lamart.site/authorization", {
                 flag: true,
             });
         };
