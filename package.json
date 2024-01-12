@@ -1,7 +1,0 @@
-{
-  "name": "lk-frontend",
-  "version": "1.0.0",
-  "scripts": {
-    "preview": "cd ./Host && npm run preview && cd ../Authorization/ && npm run preview"
-  }
-}
