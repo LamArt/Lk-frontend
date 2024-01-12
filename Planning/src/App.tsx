@@ -3,14 +3,12 @@ import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 import { ConfigProvider, ThemeConfig } from 'antd';
 import Planning from './pages/Planning';
 import locale from 'antd/locale/ru_RU';
-import Menu from 'host/Menu';
 
 const basePath = '/planning';
 function App({ isMicroApp }: { isMicroApp?: boolean }) {
     return (
         <>
             <ConfigProvider theme={theme} locale={locale}>
-                <Menu />
                 <BrowserRouter>
                     <Routes>
                         <Route path={basePath} element={<Planning />} />
