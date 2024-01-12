@@ -10,8 +10,8 @@ export default defineConfig({
       name: 'salary',
       filename: 'salary.js',
       remotes: {
-        authorization: 'http://lk.lamart.site/assets/authorization.js',
-        host: "http://lk.lamart.site/host.js",
+        authorization: 'https://lk.lamart.site/assets/authorization.js',
+        host: "https://lk.lamart.site/host.js",
       },
       exposes: {
         './Salary': './src/App.tsx',
