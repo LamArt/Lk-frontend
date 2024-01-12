@@ -23,21 +23,21 @@ services:
     depends_on:
       - authorization
       - host
-#  performance_review:
-#    env_file: PerformanceReview/.env
-#    build: PerformanceReview/
-#    ports:
-#      - 3002:3002
-#    depends_on:
-#      - Authorization
-#      - Salary
-#      - Host
-#  planning:
-#    env_file: Planning/.env
-#    build: Planning/
-#    ports:
-#      - 3003:3003
-#    depends_on:
-#      - Authorization
-#      - Salary
-#      - Host
+  performance:
+    env_file: PerformanceReview/.env
+    build: PerformanceReview/
+    ports:
+      - 3002:3002
+    depends_on:
+      - authorization
+      - salary
+      - host
+  planning:
+    env_file: Planning/.env
+    build: Planning/
+    ports:
+      - 3003:3003
+    depends_on:
+      - authorization
+      - salary
+      - host

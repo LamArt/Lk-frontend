@@ -14,11 +14,11 @@ export default function Menu() {
     const [activeItem, setActiveItem] = useState<string>('');
 
     const menuUrls: Record<string, string> = {
-        'performance-review': 'https://lk.lamart.site/performance',
-        'salary': 'https://lk.lamart.site/salary',
-        'planning': 'https://lk.lamart.site/planning',
-        'notification': 'https://lk.lamart.site/notification',
-        'user': 'https://lk.lamart.site/authorization'
+        'performance-review': 'http://lk.lamart.site/performance',
+        'salary': 'http://lk.lamart.site/salary',
+        'planning': 'http://lk.lamart.site/planning',
+        'notification': 'http://lk.lamart.site/notification',
+        'user': 'http://lk.lamart.site/authorization'
     };
 
     const handleItemClick = (itemName: string) => {
