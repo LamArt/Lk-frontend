@@ -8,10 +8,10 @@ export default defineConfig({
     react(),
     federation({
       name: 'performance_review',
-      filename: 'remoteEntry.js',
+      filename: 'performance_review.js',
       remotes: {
-        authorization: 'https://lk.lamart.site/assets/remoteEntry.js',
-        host: "https://lk.lamart.site/assets/remoteEntry.js",
+        authorization: 'https://lk.lamart.site/assets/authorization.js',
+        host: "https://lk.lamart.site/assets/host.js",
       },
       exposes: {
         './PerformanceReview': './src/App.tsx'

@@ -13,16 +13,16 @@ services:
       - 3000:3000
     expose:
       - 3000
-#    depends_on:
-#      - authorization
-#  salary:
-#    env_file: Salary/.env
-#    build: .
-#    ports:
-#      - 3004:3004
-#    depends_on:
-#      - authorization
-#      - host
+    depends_on:
+      - authorization
+  salary:
+    env_file: Salary/.env
+    build: Salary/
+    ports:
+      - 3004:3004
+    depends_on:
+      - authorization
+      - host
 #  performance_review:
 #    env_file: PerformanceReview/.env
 #    build: PerformanceReview/

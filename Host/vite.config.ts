@@ -8,6 +8,7 @@ export default defineConfig({
     react(),
     federation({
       name: "host",
+      filename: 'host.js',
       exposes: {
         './Menu': './src/components/Menu/Menu.tsx',
       },

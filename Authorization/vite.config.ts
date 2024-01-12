@@ -8,7 +8,7 @@ export default defineConfig({
     react(),
     federation({
       name: 'authorization',
-      filename: 'remoteEntry.js',
+      filename: 'authorization.js',
       exposes: {
         './Authorization': './src/App.tsx',
         './commonApi': './src/store/commonApi.ts'

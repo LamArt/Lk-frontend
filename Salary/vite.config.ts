@@ -8,10 +8,10 @@ export default defineConfig({
     react(),
     federation({
       name: 'salary',
-      filename: 'remoteEntry.js',
+      filename: 'salary.js',
       remotes: {
-        authorization: 'https://lk.lamart.site/assets/remoteEntry.js',
-        host: "https://lk.lamart.site/assets/remoteEntry.js",
+        authorization: 'https://localhost:3001/assets/authorization.js',
+        host: "https://localhost:3000/assets/host.js",
       },
       exposes: {
         './Salary': './src/App.tsx',
