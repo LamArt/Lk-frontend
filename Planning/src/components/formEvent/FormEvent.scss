@@ -120,3 +120,16 @@
 .ant-form-item-explain {
     margin-bottom: 8px;
 }
+.attendeesTitle {
+    font-size: 1.3vw;
+}
+.attendees-wrapper {
+    margin: 0;
+    padding: 0;
+}
+.attendeesField {
+    font-size: 1.3vw;
+    font-weight: 400;
+    border: 2px solid $default-field;
+    border-radius: 12px;
+}

@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Input, Button, Modal, DatePicker, Form } from 'antd';
+import { Input, Button, Modal, DatePicker, Form, Space } from 'antd';
 import locale from 'antd/es/date-picker/locale/ru_RU';
 import type { DatePickerProps, RangePickerProps } from 'antd/es/date-picker';
 import './FormEvent.scss';
@@ -17,6 +17,8 @@ const FormEvent = () => {
     const [btnMeetVisible, setBtnMeetVisible] = useState(true);
     const [isCreateMeet, setIsCreateMeet] = useState(false);
     const [eventForm] = usePostNewEventMutation({});
+    const [attendeesList, setAttendeesList] = useState<string[]>([]);
+    const [email, setEmail] = useState<string>('');
     const [form] = useForm();
 
     const handleCancel = () => {
@@ -34,6 +36,17 @@ const FormEvent = () => {
     const addMeet = () => {
         setIsCreateMeet(true);
         setBtnMeetVisible(false);
+    };
+
+    const changeEmail = (mail: React.ChangeEvent<HTMLInputElement>) => {
+        setEmail(mail.target.value);
+    };
+
+    const addEmail = () => {
+        if (email.trim() !== '') {
+            setAttendeesList([...attendeesList, email]);
+            setEmail('');
+        }
     };
 
     const onChange = (
@@ -180,6 +193,20 @@ const FormEvent = () => {
                                     className="eventTime"
                                 />
                             </Form.Item>
+                        </div>
+                        <div></div>
+                        <h3 className="attendeesTitle">Участники</h3>
+                        <div className="attendees-wrapper">
+                            <Input
+                                name="attendees"
+                                placeholder="lamart@yandex.ru"
+                                className="attendeesField"
+                                autoComplete="off"
+                                onChange={changeEmail}
+                            ></Input>
+                            <Button className="attendeesBtn" onClick={addEmail}>
+                                Добавить
+                            </Button>
                         </div>
                         <Form.Item>
                             <Button
