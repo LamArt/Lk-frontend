@@ -1,0 +1,72 @@
+.timeline{
+    margin-top: 0;
+    padding-bottom: 0;
+    height: 100vh;
+
+    &-card{
+        margin: 125px auto 0;
+        padding: 50px 120px;
+        width: 70%;
+        height: 70vh;
+        border: 1px solid #d9d9d9;
+     
+        &>div{
+            height: 100%;
+        }
+    }
+
+    &-container{
+        height: 100%;
+    }
+
+    &-label{
+        margin-bottom: 70px;
+    }
+
+    &-arrow{
+        width: 24px;
+        height: 10px;
+        margin-top: 13px;
+    }
+
+    &-link{
+        min-width: 40%;
+        height: 70px;
+        margin: auto auto 0;
+        background-color: #F2F6FF;
+        border: none;
+        border-radius: 0;
+        font-size: 19px;
+    }
+
+    &-bar{
+        align-self: center;
+        flex-grow: 1;
+        height: 2px;
+    }
+
+    &-teammate{
+        width: 200px;
+    }
+}
+
+.teammate{
+    border: none;
+    background-color: #F2F6FF;
+    cursor: pointer;
+
+    &-name{
+        font-weight: 400;
+    }
+
+    &-post{
+        font-size: 11px;
+        color: #1E1E1E;
+        text-align: center;
+    }
+}
+
+.centered{
+    margin-top: auto;
+    margin-bottom: auto;
+}

@@ -12,6 +12,7 @@ export default defineConfig({
             remotes: {
                 authorization: 'http://localhost:5002/assets/remoteEntry.js',
                 host: 'http://localhost:4173/assets/remoteEntry.js',
+                salary: 'http://localhost:5004/assets/remoteEntry.js',
             },
             exposes: { './Planning': './src/App.tsx' },
             shared: [

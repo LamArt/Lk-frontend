@@ -9,10 +9,14 @@ export default defineConfig({
     federation({
       name: 'performance_review',
       filename: 'remoteEntry.js',
+      remotes: {
+        authorization: 'http://localhost:5002/assets/remoteEntry.js',
+        host: "http://localhost:4173/assets/remoteEntry.js",
+      },
       exposes: {
         './PerformanceReview': './src/App.tsx'
       },
-      shared: ['react', 'react-dom', 'antd', 'react-router-dom']
+      shared: ['react', 'react-dom', 'antd', 'react-router-dom', '@reduxjs/toolkit', 'react-redux', 'react-query']
     })
   ],
   build: {

@@ -1,9 +1,19 @@
 export interface ResponseSalary {
-    reward: string,
-    story_points: string,
-    credit: string,
-    salary: string,
+    total_salary: string
+    projects: Record<string, ProjectData>
+}
+
+interface ProjectData {
+    role: string
+    story_points: string
     rate: string
+    salary: string
+    reward: string
+    credit: string
+}
+
+export interface ResponseStatistic {
+    [key: string]: string
 }
 
 export interface ResponseJiraToken {

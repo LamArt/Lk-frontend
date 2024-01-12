@@ -1,12 +1,18 @@
 import commonApi from "authorization/commonApi"
 import {CommonApi} from "../../constans/commonApiInterface.ts";
-import {RequestJiraToken, ResponseJiraToken, ResponseSalary} from "../../interfaces/Api.ts";
+import {RequestJiraToken, ResponseJiraToken, ResponseSalary, ResponseStatistic} from "../../interfaces/Api.ts";
 
 const salaryApi = (commonApi as CommonApi).injectEndpoints({
     endpoints: (build) => ({
         getSalary: build.query<ResponseSalary, void>({
             query: () => ({
                 url: '/salary/at_moment/',
+                method: 'GET',
+            }),
+        }),
+        getStatistic: build.query<ResponseStatistic, void>({
+            query: () => ({
+                url: '/salary/statistics/',
                 method: 'GET',
             }),
         }),
@@ -20,4 +26,4 @@ const salaryApi = (commonApi as CommonApi).injectEndpoints({
     }),
 });
 
-export const { useGetSalaryQuery, useGetJiraTokenMutation } = salaryApi;
+export const { useGetSalaryQuery,useGetStatisticQuery, useGetJiraTokenMutation } = salaryApi;

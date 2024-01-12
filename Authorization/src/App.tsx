@@ -8,7 +8,6 @@ const basePath = '/authorization'
 
 function App({isMicroApp}: {isMicroApp?: boolean}) {
 
-
     return (
         <>
             <ConfigProvider theme={theme}>
