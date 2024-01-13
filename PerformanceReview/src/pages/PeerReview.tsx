@@ -5,7 +5,7 @@ import { sliderFields, textAreaFields } from "../helpers/ReviewFormHelper";
 import '../styles/Review.scss'
 import { useState } from "react";
 import {
-    EmployeeFormData,
+    EmployeeFormData, useGetProfileQuery,
     useGetTeammatesQuery,
     usePostEmployeeFormMutation
 } from "../store/reviewApi/reviewApi";
@@ -13,19 +13,20 @@ import {useNavigate, useParams} from "react-router-dom";
 
 export default function PeerReview(){
     const [formData, setFormData] = useState<Partial<EmployeeFormData>>({
-        team: 1,
         ...sliderFields.reduce((acc, curr) => ({...acc, [curr.fieldName]: 50}), {})
     })
 
     const navigate = useNavigate()
     const { id } = useParams()
 
+    const {data: profile} = useGetProfileQuery({})
     const {data: teammates} = useGetTeammatesQuery()
     const [employeeForm] = usePostEmployeeFormMutation({})
 
     const saveDataHandle = async() => {
         if (id && teammates) {
-            await employeeForm({...formData, about: teammates.teammates.find(teammate => teammate.id === +id)?.id})
+            //TODO: Сделать чтобы выбиралась нужная команда из списка команд
+            await employeeForm({...formData, about: Number(id), team: profile.teams.PerformanceReview.team_id})
         }
         navigate('/performance')
     }

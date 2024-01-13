@@ -12,7 +12,6 @@ import { useNavigate } from 'react-router-dom';
 
 export default function SelfReview(){
     const [formData, setFormData] = useState<Partial<EmployeeFormData>>({
-        team: 1,
         ...sliderFields.reduce((acc, curr) => ({...acc, [curr.fieldName]: 50}), {})
     })
 
@@ -22,7 +21,7 @@ export default function SelfReview(){
     const [employeeForm] = usePostEmployeeFormMutation({})
     
     const saveDataHandle = async() => {
-      await employeeForm({...formData, about: profile.id})
+      await employeeForm({...formData, about: profile.id, team: profile.teams.PerformanceReview.team_id})
       navigate('/performance')
     }
 
