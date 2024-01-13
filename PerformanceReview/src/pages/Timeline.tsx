@@ -12,6 +12,8 @@ import {
     useGetProfileQuery,
     useGetTeammatesQuery
 } from "../store/reviewApi/reviewApi";
+import Menu from "host/Menu";
+
 
 export default function Timeline(){
     const navigate = useNavigate();
@@ -23,7 +25,8 @@ export default function Timeline(){
 
     const teammates = teammatesData?.teammates
 
-    const isTeamlead = useMemo(() => profile?.is_team_lead, [profile])
+    //TODO: isTeamlead как получать?
+    const isTeamlead = useMemo(() => profile?.teams.PerformanceReview.is_team_lead, [profile])
     const timelineStages = useMemo(() => stages.filter((_, i) => !isTeamlead || i !== 2 && isTeamlead), [isTeamlead])
     const currentTimelineStage = useMemo(() => timelineStages.find((stage) => stage.num === currentStage) || timelineStages[0], [timelineStages, currentStage])
     const isLoading = useMemo(() => isLoadingEmployeeForm || isLoadingTeammates, [isLoadingEmployeeForm, isLoadingTeammates])
@@ -48,6 +51,7 @@ export default function Timeline(){
 
     return (
         <Layout className="review">
+            <Menu/>
             <Layout.Content className="review-content timeline">
                 <Card className="timeline-card">
                     <Flex vertical className="timeline-container">
@@ -58,13 +62,13 @@ export default function Timeline(){
                             <Flex align="top" justify="space-between">
                             {timelineStages.map((stage, i) => <>
                                 <TimelineStage
-                                    orderNumber={i + 1} 
+                                    orderNumber={i + 1}
                                     label={stage.name}
                                     active
                                     key={i}
                                 />
                                 {i !== timelineStages.length - 1 && <img src={arrowIcon} className="timeline-arrow"/>}
-                            </>)} 
+                            </>)}
                             </Flex>
                             <Button className="timeline-link" onClick={() => setCurrentStage(Stages.Self)}>Начать</Button>
                         </>}
@@ -73,14 +77,14 @@ export default function Timeline(){
                                 <Flex align="top" justify="space-between">
                                     {timelineStages.map((stage, i) => <>
                                         <TimelineStage
-                                            orderNumber={i + 1} 
+                                            orderNumber={i + 1}
                                             active={currentTimelineStage.num === stage.num}
                                             done={currentTimelineStage.num > stage.num}
                                             key={i}
                                         />
                                         {i !== timelineStages.length - 1 && <div className="timeline-bar" style={{backgroundColor: currentTimelineStage.num > stage.num ? '#888' : '#d9d9d9'}}/>}
                                     </>)}
-                                </Flex> 
+                                </Flex>
                                 <p className="timeline-label centered">
                                     {
                                         isTeamlead ?
@@ -88,7 +92,7 @@ export default function Timeline(){
                                             currentTimelineStage.description
                                     }
                                 </p>
-                                {currentStage === Stages.Self && <Button className="timeline-link" onClick={() => navigate('self')}>Перейти</Button>} 
+                                {currentStage === Stages.Self && <Button className="timeline-link" onClick={() => navigate('self')}>Перейти</Button>}
                                 {currentStage === Stages.Peer &&
                                     (!isTeamlead ? <Flex className="timeline-teammates" align="center" wrap="wrap" gap='middle'>
                                         {teammates && teammates.map((teammate: Teammate) => (

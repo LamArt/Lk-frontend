@@ -19,6 +19,20 @@ export type Issue = {
     story_points: number;
     subtasks: Task[];
 };
+export interface ResponseJiraToken {
+    access: string;
+}
+
+export interface RequestJiraToken {
+    authorization_code: string;
+}
+
+export interface Error {
+    data: {
+        detail: string;
+    };
+    status: number;
+}
 
 const issueApi = localApi.injectEndpoints({
     endpoints: (build) => ({
@@ -28,6 +42,14 @@ const issueApi = localApi.injectEndpoints({
                 method: 'GET',
             }),
         }),
+        getJiraToken: build.mutation<ResponseJiraToken, RequestJiraToken>({
+            query: ({ authorization_code }) => ({
+                url: '/auth/get_token_jira/',
+                method: 'POST',
+                body: { authorization_code },
+            }),
+        }),
     }),
 });
-export const { useGetIssuesQuery } = issueApi;
+
+export const { useGetIssuesQuery, useGetJiraTokenMutation } = issueApi;

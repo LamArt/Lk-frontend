@@ -5,6 +5,7 @@ import '../styles/Review.scss';
 import '../styles/PeerList.scss';
 import {Teammate, useGetTeammatesQuery} from "../store/reviewApi/reviewApi";
 import manPhoto from "../assets/man.png";
+import Menu from "host/Menu";
 
 
 
@@ -16,6 +17,7 @@ function PeersListForTeamlead() {
 
   return (
     <Layout className="review">
+      <Menu/>
       <Layout.Content className="review-content">
         <h2 className="peerlist-header">Финальная оценка сотрудников</h2>
         <Flex vertical align={"center"}>
