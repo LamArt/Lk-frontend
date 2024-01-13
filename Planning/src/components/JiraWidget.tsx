@@ -11,53 +11,57 @@ import { Spin } from 'antd';
 import { useLocation } from 'react-router-dom';
 import Cookies from 'universal-cookie';
 import JiraPopup from './UI/JiraPopup';
+// const JiraWidget = () => {
+//     const { data, refetch, isLoading, error } = useGetIssuesQuery();
+//     console.log(error);
+//     const [issuesList, setIssuesList] = useState<Issue[]>([]);
+//     const OAUTH_URL = String(import.meta.env.VITE_OAuth_Jira);
+//     const [showPopup, setShowPopup] = useState(false);
+//     const [mutation] = useGetJiraTokenMutation();
+//     const location = useLocation();
+//     const getCodeFromUrl = useCallback(() => {
+//         const url = new URL(
+//             location.pathname + location.search,
+//             window.location.origin
+//         );
+//         const code = url.searchParams.get('code');
+//         return code;
+//     }, [location]);
+
+//     useEffect(() => {
+//         if (
+//             (error as Error)?.status === 400 ||
+//             (error as Error)?.status === 401
+//         ) {
+//             setShowPopup(true);
+//         }
+//         if (data !== undefined) {
+//             setIssuesList(data);
+//         }
+//     }, [isLoading, error, refetch]);
 const JiraWidget = () => {
     const { data, refetch, isLoading, error } = useGetIssuesQuery();
+    // console.log(error);
     const [issuesList, setIssuesList] = useState<Issue[]>([]);
-    const OAUTH_URL = String(import.meta.env.VITE_OAuth_Jira);
-    const [showPopup, setShowPopup] = useState(false);
-    const [mutation] = useGetJiraTokenMutation();
-    const location = useLocation();
-    const getCodeFromUrl = useCallback(() => {
-        const url = new URL(
-            location.pathname + location.search,
-            window.location.origin
-        );
-        const code = url.searchParams.get('code');
-        return code;
-    }, [location]);
-
-    const getJiraToken = useCallback(
-        async (code: string) => {
-            const cookies = new Cookies();
-
-            const responce = await mutation({ authorization_code: code });
-            if (responce !== undefined && 'data' in responce) {
-                setShowPopup(false);
-                cookies.set('jira_access_token', responce.data.access);
+    useEffect(() => {
+        const fetchIssues = async () => {
+            try {
+                await refetch();
+                if (data !== undefined) {
+                    setIssuesList(data);
+                    console.log(Object.entries(data));
+                }
+            } catch (error) {
+                console.log('Error post data:', error);
             }
-        },
-        [location]
-    );
+        };
+        fetchIssues();
+        const intervalId = setInterval(() => {
+            fetchIssues();
+        }, 300000); //5 минут
 
-    useEffect(() => {
-        const code = getCodeFromUrl();
-        if (code) {
-            getJiraToken(code);
-        }
-    }, [getCodeFromUrl]);
-
-    useEffect(() => {
-        if (
-            (error as Error)?.status === 400 ||
-            (error as Error)?.status === 401
-        ) {
-            setShowPopup(true);
-        }
-        if (data !== undefined) {
-            setIssuesList(data);
-        }
-    }, [isLoading, error, refetch]);
+        return () => clearInterval(intervalId);
+    }, [data, refetch]);
     return (
         <>
             <div className="jiraLink">
@@ -72,13 +76,13 @@ const JiraWidget = () => {
 
             <div className="jira-window-container">
                 <div className="jira-tasks-container">
-                    {data === undefined && showPopup && !isLoading && (
-                        <JiraPopup
-                            onAuthorize={() =>
-                                (window.location.href = OAUTH_URL)
-                            }
-                        />
-                    )}
+                    {/* {data === undefined && showPopup && !isLoading && (
+                        // <JiraPopup
+                        //     onAuthorize={() =>
+                        //         (window.location.href = OAUTH_URL)
+                        //     }
+                        // />
+                    )} */}
                     {isLoading && (
                         <Spin size="large" style={{ margin: 'auto' }} />
                     )}
