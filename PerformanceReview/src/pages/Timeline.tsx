@@ -1,4 +1,4 @@
-import { Button, Flex, Layout, Radio } from "antd";
+import {Button, Flex, Layout, Radio, Select} from "antd";
 import '../styles/Review.scss'
 import '../styles/Timeline.scss'
 import Card from "antd/es/card/Card";
@@ -16,6 +16,8 @@ import {
 export default function Timeline(){
     const navigate = useNavigate();
     const [currentStage, setCurrentStage] = useState<Stages>(Stages.Default)
+    const [selectedTeam, setSelectedTeam] = useState<string>('')
+
     const {data: profile} = useGetProfileQuery({})
     const {data: teammatesData, isLoading: isLoadingTeammates} = useGetTeammatesQuery()
     const {data: selfReviewForm, isLoading: isLoadingEmployeeForm} = useGetEmployeeFormQuery(profile)
@@ -30,7 +32,7 @@ export default function Timeline(){
 
     useEffect(() => {
         let stage = Stages.Default;
-        if(selfReviewForm){
+        if(selfReviewForm && selfReviewForm.length > 0){
             stage = Stages.Peer;
         }
         setCurrentStage(stage)
@@ -45,6 +47,11 @@ export default function Timeline(){
         navigate(`peer/${id}`)
     }
 
+    console.log(Object.entries(profile?.teams || {}).map(([name, team]) => ({
+        label: name,
+        value: name
+    })))
+
     return (
         <Layout className="review">
             <Layout.Content className="review-content timeline">
@@ -57,29 +64,39 @@ export default function Timeline(){
                             <Flex align="top" justify="space-between">
                             {timelineStages.map((stage, i) => <>
                                 <TimelineStage
-                                    orderNumber={i + 1} 
+                                    orderNumber={i + 1}
                                     label={stage.name}
                                     active
                                     key={i}
                                 />
                                 {i !== timelineStages.length - 1 && <img src={arrowIcon} className="timeline-arrow"/>}
-                            </>)} 
+                            </>)}
                             </Flex>
-                            <Button className="timeline-link" onClick={() => setCurrentStage(Stages.Self)}>Начать</Button>
+                            <Select
+                                options={Object.entries(profile?.teams || {}).map(([name, team]) => ({
+                                    label: name,
+                                    value: name
+                                }))}
+                                style={{width: '40%', margin: '16px auto'}}
+                                onChange={value => setSelectedTeam(value)}
+                                value={selectedTeam}
+                                placeholder={'Выберите команду'}
+                            />
+                            <Button className="timeline-link" onClick={() => setCurrentStage(Stages.Self)} disabled={!selectedTeam}>Начать</Button>
                         </>}
                         {
                             currentStage > 0 && <>
                                 <Flex align="top" justify="space-between">
                                     {timelineStages.map((stage, i) => <>
                                         <TimelineStage
-                                            orderNumber={i + 1} 
+                                            orderNumber={i + 1}
                                             active={currentTimelineStage.num === stage.num}
                                             done={currentTimelineStage.num > stage.num}
                                             key={i}
                                         />
                                         {i !== timelineStages.length - 1 && <div className="timeline-bar" style={{backgroundColor: currentTimelineStage.num > stage.num ? '#888' : '#d9d9d9'}}/>}
                                     </>)}
-                                </Flex> 
+                                </Flex>
                                 <p className="timeline-label centered">
                                     {
                                         isTeamlead ?
@@ -87,7 +104,7 @@ export default function Timeline(){
                                             currentTimelineStage.description
                                     }
                                 </p>
-                                {currentStage === Stages.Self && <Button className="timeline-link" onClick={() => navigate('self')}>Перейти</Button>} 
+                                {currentStage === Stages.Self && <Button className="timeline-link" onClick={() => navigate('self')}>Перейти</Button>}
                                 {currentStage === Stages.Peer &&
                                     (!isTeamlead ? <Flex className="timeline-teammates" align="center" wrap="wrap" gap='middle'>
                                         {teammates && teammates.map((teammate: Teammate) => (
@@ -156,5 +173,5 @@ const stages: Array<{name: string, description: React.ReactNode, teamleadDescrip
         teamleadDescription: <><b>Обратная связь:</b> время назначить индивидуальные встречи своим подопечным, чтобы обсудить их успехи за ревьюируемый период.</>,
         num: Stages.Feedback
     },
-    
+
 ]

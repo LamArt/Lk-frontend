@@ -24,7 +24,7 @@ export default function PeerReview(){
     const [employeeForm] = usePostEmployeeFormMutation({})
 
     const saveDataHandle = async() => {
-        await employeeForm({...formData, about: teammates.teammates.find(teammate => teammate.id === +id)?.id})
+        await employeeForm({...formData, about: teammates.teammates.find(teammate => teammate.username === id)?.id})
         navigate('/performance')
     }
 
@@ -41,7 +41,7 @@ export default function PeerReview(){
                     <Form className='review-form' layout='vertical'>
                         {!!import.meta.env.DEV && sliderFields.map((field, i) => <Form.Item key={i}>
                             <DoubleFormLabel label={field.label} annotation={field.annotation}/>
-                            <Slider 
+                            <Slider
                                 tooltip={{ open: false }}
                                 value={formData[field.fieldName] as number}
                                 onChange={(value) => setFormData(prevState => ({...prevState, [field.fieldName]: value}))}
@@ -57,7 +57,7 @@ export default function PeerReview(){
                             />
                         </Form.Item>)}
                         <Flex justify='space-between' align='center'>
-                            <Button type='primary' className='review-save'>Сохранить</Button>                        
+                            <Button type='primary' className='review-save'>Сохранить</Button>
                             <Button onClick={saveDataHandle} type='primary' htmlType='submit' className='review-send'>Отправить</Button>
                         </Flex>
                     </Form>
