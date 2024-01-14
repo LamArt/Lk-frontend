@@ -25,11 +25,12 @@ type ReturnedData = {
 export type Teammate = {
   first_name: string;
   gender: string;
+
+  id: number;
   last_name: string;
   status_level: string;
   teams__name: string;
   username: string;
-  id: number;
 }
 
 const reviewApi = localApi.injectEndpoints({
