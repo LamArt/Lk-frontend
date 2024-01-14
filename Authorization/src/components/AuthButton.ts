@@ -21,7 +21,7 @@ export function AuthButton() {
 
         script.onload = () => {
             const oauthQueryParams = {
-                client_id: 'c120ba35adaf4278a8277e542b1a0cbd',
+                client_id: '10d277a8f80e40e5b973e36c9d34aa01',
                 response_type: 'token',
                 redirect_uri: 'https://lk.lamart.site/token',
             };
@@ -49,7 +49,7 @@ export function AuthButton() {
                         provider: "yandex",
                     };
 
-                    fetch('http://127.0.0.1:8000/auth/exchange_token/', {
+                    fetch('https://lk.lamart.site/auth/exchange_token/', {
                         method: 'POST',
                         headers: {
                             'Content-Type': 'application/json',
