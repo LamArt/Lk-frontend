@@ -10,9 +10,9 @@ export default defineConfig({
             name: 'planning',
             filename: 'planning.js',
             remotes: {
-                authorization: 'https://lk.lamart.site/assets/authorization.js',
-                host: 'https://lk.lamart.site/assets/host.js',
-                salary: 'https://lk.lamart.site/assets/salary.js',
+                authorization: 'https://lk.lamart.site/authorization/assets/authorization.js',
+                host: 'https://lk.lamart.site/host/assets/host.js',
+                salary: 'https://lk.lamart.site/salary/assets/salary.js',
             },
             exposes: { './Planning': './src/App.tsx' },
             shared: [

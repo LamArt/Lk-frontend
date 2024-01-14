@@ -10,8 +10,8 @@ export default defineConfig({
       name: 'performance_review',
       filename: 'performance_review.js',
       remotes: {
-        authorization: 'https://lk.lamart.site/assets/authorization.js',
-        host: "https://lk.lamart.site/assets/host.js",
+        authorization: 'https://lk.lamart.site/authorization/assets/authorization.js',
+        host: "https://lk.lamart.site/host/assets/host.js",
       },
       exposes: {
         './PerformanceReview': './src/App.tsx'
