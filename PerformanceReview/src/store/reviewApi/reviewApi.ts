@@ -1,13 +1,16 @@
 import {localApi} from "../localApi";
 
 export interface EmployeeFormData{
+  achievements: string,
+  ways_to_achieve: string,
   strengths: string,
   weaknesses: string,
   hard_skills_rate: number,
   productivity_rate: number,
   communication_rate: number,
   initiative_rate: number,
-  about?: number,
+  created_by: number,
+  about: number,
   team: number,
 }
 
@@ -22,9 +25,12 @@ type ReturnedData = {
 export type Teammate = {
   first_name: string;
   gender: string;
-  last_name: string;
-  username: string;
+
   id: number;
+  last_name: string;
+  status_level: string;
+  teams__name: string;
+  username: string;
 }
 
 const reviewApi = localApi.injectEndpoints({
@@ -42,7 +48,7 @@ const reviewApi = localApi.injectEndpoints({
         url: `/review/employee_forms/users/${data.username}/`,
         method: "GET",
       }),
-      providesTags: ['EmployeeForm']
+      // providesTags: ['EmployeeForm']
     }),
     getTeamleadForm: build.query({
       query: () => ({

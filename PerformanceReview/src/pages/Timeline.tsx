@@ -21,6 +21,7 @@ export default function Timeline(){
     const {data: profile} = useGetProfileQuery({})
     const {data: teammatesData, isLoading: isLoadingTeammates} = useGetTeammatesQuery()
     const {data: selfReviewForm, isLoading: isLoadingEmployeeForm} = useGetEmployeeFormQuery(profile)
+    console.log(selfReviewForm)
 
     const teammates = teammatesData?.teammates
 
@@ -33,7 +34,7 @@ export default function Timeline(){
 
     useEffect(() => {
         let stage = Stages.Default;
-        if(selfReviewForm){
+        if(selfReviewForm && selfReviewForm.length !== 0){
             stage = Stages.Peer;
         }
         setCurrentStage(stage)
@@ -43,7 +44,7 @@ export default function Timeline(){
         return <></>
     }
 
-    const addPeerReviewHandle = (id: string) => {
+    const addPeerReviewHandle = (id: number) => {
         setCurrentStage(Stages.Manager);
         navigate(`peer/${id}`)
     }
@@ -95,7 +96,7 @@ export default function Timeline(){
                                 {currentStage === Stages.Peer &&
                                     (!isTeamlead ? <Flex className="timeline-teammates" align="center" wrap="wrap" gap='middle'>
                                         {teammates && teammates.map((teammate: Teammate) => (
-                                            <Card className="timeline-teammate teammate" onClick={() => addPeerReviewHandle(teammate.username)}>
+                                            <Card className="timeline-teammate teammate" onClick={() => addPeerReviewHandle(teammate.id)}>
                                                 <Flex vertical align="center">
                                                     <h3 className="teammate-name">{teammate.first_name} {teammate.last_name}</h3>
                                                     <p className="teammate-post">Разработчик мобильных приложений</p>
