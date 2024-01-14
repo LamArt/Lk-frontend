@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Input, Button, Modal, DatePicker, Form } from 'antd';
+import { Input, Button, Modal, DatePicker, Form, Flex } from 'antd';
 import locale from 'antd/es/date-picker/locale/ru_RU';
 import type { DatePickerProps, RangePickerProps } from 'antd/es/date-picker';
 import './FormEvent.scss';
@@ -17,9 +17,12 @@ const FormEvent = () => {
     const [btnMeetVisible, setBtnMeetVisible] = useState(true);
     const [isCreateMeet, setIsCreateMeet] = useState(false);
     const [eventForm] = usePostNewEventMutation({});
+    const [attendeesList, setAttendeesList] = useState<string[]>([]);
+    const [email, setEmail] = useState<string>('');
     const [form] = useForm();
 
     const handleCancel = () => {
+        setAttendeesList([]);
         form.resetFields();
         setIsModalOpen(false);
         setIsCreateMeet(false);
@@ -34,6 +37,17 @@ const FormEvent = () => {
     const addMeet = () => {
         setIsCreateMeet(true);
         setBtnMeetVisible(false);
+    };
+
+    const changeEmail = (mail: React.ChangeEvent<HTMLInputElement>) => {
+        setEmail(mail.target.value);
+    };
+
+    const addEmail = () => {
+        if (email.trim() !== '') {
+            setAttendeesList([...attendeesList, email]);
+            setEmail('');
+        }
     };
 
     const onChange = (
@@ -62,13 +76,31 @@ const FormEvent = () => {
             start_time: startDate,
             end_time: endDate,
             create_conference: isCreateMeet,
+            attendees: attendeesList,
         };
+        setAttendeesList([]);
         eventForm(formData);
         form.resetFields();
         setIsCreateMeet(false);
         setBtnMeetVisible(true);
         setBtnDescVisible(true);
         setIsModalOpen(false);
+    };
+
+    const [hoveredItemIndex, setHoveredItemIndex] = useState<number>(NaN);
+
+    const handleMouseEnter = (index: number) => {
+        setHoveredItemIndex(index);
+    };
+
+    const handleMouseLeave = () => {
+        setHoveredItemIndex(NaN);
+    };
+
+    const handleDeleteItem = (index: number) => {
+        const updatedItems = [...attendeesList];
+        updatedItems.splice(index, 1);
+        setAttendeesList(updatedItems);
     };
 
     return (
@@ -181,6 +213,53 @@ const FormEvent = () => {
                                 />
                             </Form.Item>
                         </div>
+                        <h3 className="attendeesTitle">Участники</h3>
+                        <div className="mails-container">
+                            {attendeesList.map((att, index) => (
+                                <div
+                                    className="mail-wrapper"
+                                    onMouseEnter={() => handleMouseEnter(index)}
+                                    onMouseLeave={handleMouseLeave}
+                                >
+                                    <p key={index}>{att}</p>
+                                    {hoveredItemIndex === index && (
+                                        <span
+                                            onClick={() =>
+                                                handleDeleteItem(index)
+                                            }
+                                            className="delete-icon"
+                                        >
+                                            <img src="/icons/delete.svg" />
+                                        </span>
+                                    )}
+                                </div>
+                            ))}
+                        </div>
+                        <Form.Item
+                            name="attendees"
+                            rules={[
+                                {
+                                    type: 'email',
+                                    message: 'Введите корректный email',
+                                },
+                            ]}
+                        >
+                            <Flex gap="small" className="attendees-wrapper">
+                                <Input
+                                    name="attendees"
+                                    placeholder="lamart@yandex.ru"
+                                    className="attendeesField"
+                                    autoComplete="off"
+                                    onChange={changeEmail}
+                                ></Input>
+                                <Button
+                                    className="attendeesBtn"
+                                    onClick={addEmail}
+                                >
+                                    Добавить
+                                </Button>
+                            </Flex>
+                        </Form.Item>
                         <Form.Item>
                             <Button
                                 key="add"
