@@ -1,6 +1,5 @@
 import { useState } from 'react';
 import { Input, Button, Modal, DatePicker, Form, Flex } from 'antd';
-import CloseOutlined from '@ant-design/icons';
 import locale from 'antd/es/date-picker/locale/ru_RU';
 import type { DatePickerProps, RangePickerProps } from 'antd/es/date-picker';
 import './FormEvent.scss';
@@ -19,7 +18,6 @@ const FormEvent = () => {
     const [isCreateMeet, setIsCreateMeet] = useState(false);
     const [eventForm] = usePostNewEventMutation({});
     const [attendeesList, setAttendeesList] = useState<string[]>([]);
-    const [inputText, setInputText] = useState('');
     const [email, setEmail] = useState<string>('');
     const [form] = useForm();
 
