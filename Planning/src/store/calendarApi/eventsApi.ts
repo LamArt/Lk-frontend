@@ -15,6 +15,7 @@ export type NewEvent = {
     start_time: string;
     end_time: string;
     create_conference: boolean;
+    attendees?: string[];
 };
 type ReturnedData = {
     status: number;
