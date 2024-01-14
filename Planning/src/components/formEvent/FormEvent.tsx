@@ -5,6 +5,10 @@ import type { DatePickerProps, RangePickerProps } from 'antd/es/date-picker';
 import './FormEvent.scss';
 import { usePostNewEventMutation } from '../../store/calendarApi/eventsApi';
 import { useForm } from 'antd/es/form/Form';
+import AddImage from "../../assets/addImage.svg"
+import Plus from "../../assets/plus.svg"
+import Telemost from "../../assets/telemost.png"
+import Delete from "../../assets/delete.svg"
 
 const { RangePicker } = DatePicker;
 const { TextArea } = Input;
@@ -113,7 +117,7 @@ const FormEvent = () => {
             >
                 <img
                     className="plus-image"
-                    src="/icons/addImage.svg"
+                    src={AddImage}
                     alt="Add Event"
                 />
             </Button>
@@ -152,7 +156,7 @@ const FormEvent = () => {
                             >
                                 <img
                                     className="addEventButton"
-                                    src="/icons/plus.svg"
+                                    src={Plus}
                                 ></img>
                                 <h3>Описание</h3>
                             </Button>
@@ -172,7 +176,7 @@ const FormEvent = () => {
                             >
                                 <img
                                     className="addEventButton"
-                                    src="/icons/telemost.png"
+                                    src={Telemost}
                                 ></img>
                                 <h3>Добавить видеовстречу</h3>
                             </Button>
@@ -183,7 +187,7 @@ const FormEvent = () => {
                             >
                                 <img
                                     className="addEventButton"
-                                    src="/icons/telemost.png"
+                                    src={Telemost}
                                 ></img>
                                 <h3>Ссылка на встречу будет в описании</h3>
                             </Button>
@@ -229,7 +233,7 @@ const FormEvent = () => {
                                             }
                                             className="delete-icon"
                                         >
-                                            <img src="/icons/delete.svg" />
+                                            <img src={Delete} />
                                         </span>
                                     )}
                                 </div>

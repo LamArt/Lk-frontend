@@ -3,12 +3,18 @@ import './JiraCard.scss';
 import { Issue } from '../../store/jiraApi/issueApi';
 import { PopoverContentJira } from './PopoverContent';
 
+import Highest from '../../assets/highest.svg';
+import High from '../../assets/high.svg';
+import Medium from '../../assets/medium.svg';
+import Low from '../../assets/low.svg';
+import Lowest from '../../assets/lowest.svg';
+
 const prioritySrc = {
-    Highest: '/jira_icons/highest.svg',
-    High: '/jira_icons/high.svg',
-    Medium: '/jira_icons/medium.svg',
-    Lowest: '/jira_icons/low.svg',
-    Low: '/jira_icons/lowest.svg',
+    Highest: Highest,
+    High: High,
+    Medium: Medium,
+    Lowest: Low,
+    Low: Lowest,
 };
 
 const JiraCard = ({ task }: { task: Issue }) => {

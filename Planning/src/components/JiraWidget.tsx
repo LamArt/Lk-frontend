@@ -4,6 +4,8 @@ import { useGetIssuesQuery, Issue, Error } from '../store/jiraApi/issueApi';
 import { useEffect, useState } from 'react';
 import { Spin } from 'antd';
 import JiraPopup from './UI/JiraPopup';
+import jiraIcon from '../assets/jiraIcon.svg';
+
 const JiraWidget = () => {
     const { data, refetch, isLoading, error } = useGetIssuesQuery();
     const [issuesList, setIssuesList] = useState<Issue[]>([]);
@@ -41,7 +43,7 @@ const JiraWidget = () => {
                     href="https://lamart.atlassian.net/jira/your-work"
                     target="_blank"
                 >
-                    <img src={'/icons/jiraIcon.svg'}></img>
+                    <img src={jiraIcon}></img>
                     <p className="jiraLabel">Jira</p>
                 </a>
             </div>

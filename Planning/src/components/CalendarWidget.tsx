@@ -7,6 +7,7 @@ import { useEffect, useState, useRef } from 'react';
 import { useGetEventsQuery, Event } from '../store/calendarApi/eventsApi';
 import { Spin } from 'antd';
 import Timeline from './UI/Timeline';
+import Calendar from '../assets/calendarIcon.svg';
 
 const CalendarWidget = () => {
     const today: Date = new Date();
@@ -44,7 +45,7 @@ const CalendarWidget = () => {
         <>
             <div className="calendarLink">
                 <a href="https://calendar.yandex.ru" target="_blank">
-                    <img src={'/icons/calendarIcon.svg'}></img>
+                    <img src={Calendar}></img>
                     <p className="calendarLabel">Я-календарь</p>
                 </a>
             </div>

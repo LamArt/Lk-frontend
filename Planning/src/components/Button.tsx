@@ -2,6 +2,7 @@ import { Button } from 'antd';
 import './Button.scss';
 import { useEffect, useState } from 'react';
 import { useGetCountMailQuery } from '../store/mailApi/mailApi';
+import YandexMail from '../assets/yaMail.svg';
 
 const ButtonMail = () => {
     const [countEmails, setCountEmails] = useState(0);
@@ -47,7 +48,7 @@ const ButtonMail = () => {
                     <div className="mail-img__container">
                         <img
                             className="mail-container__img"
-                            src="/icons/yaMail.svg"
+                            src={YandexMail}
                             alt="yandexMail"
                         />
                         <div

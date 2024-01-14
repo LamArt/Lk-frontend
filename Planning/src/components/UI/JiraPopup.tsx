@@ -1,6 +1,6 @@
 import React from 'react';
 import { Flex, Button } from 'antd';
-import Atlassian from './../../../public/jira_icons/Jira.svg';
+import Atlassian from '../../assets/Jira.svg';
 import './JiraPopup.scss';
 
 const JiraPopup: React.FC<{ onAuthorize: () => void }> = ({ onAuthorize }) => (
