@@ -7,9 +7,10 @@ import TimelineStage from "../components/UI/TimelineStage";
 import { useNavigate } from "react-router-dom";
 import { useEffect, useMemo, useState } from "react";
 import {
+    EmployeeFormData,
     Teammate,
     useGetEmployeeFormQuery,
-    useGetProfileQuery,
+    useGetProfileQuery, useGetTeammatesFormsQuery,
     useGetTeammatesQuery
 } from "../store/reviewApi/reviewApi";
 
@@ -21,6 +22,7 @@ export default function Timeline(){
     const {data: profile} = useGetProfileQuery({})
     const {data: teammatesData, isLoading: isLoadingTeammates} = useGetTeammatesQuery()
     const {data: selfReviewForm, isLoading: isLoadingEmployeeForm} = useGetEmployeeFormQuery(profile)
+    const {data: teammatesForms, isLoading: isLoadingTeammatesForms} = useGetTeammatesFormsQuery()
 
     const teammates = teammatesData?.teammates
 
@@ -35,8 +37,11 @@ export default function Timeline(){
         if(selfReviewForm && selfReviewForm.length > 0){
             stage = Stages.Peer;
         }
+        if(teammatesForms && teammates && teammates.every(teammate => (teammatesForms as EmployeeFormData[]).some(form => form.about === teammate.id))){
+            stage = Stages.Manager
+        }
         setCurrentStage(stage)
-    }, [selfReviewForm])
+    }, [selfReviewForm, teammates, teammatesForms])
 
     if(isLoading){
         return <></>
@@ -108,10 +113,17 @@ export default function Timeline(){
                                 {currentStage === Stages.Peer &&
                                     (!isTeamlead ? <Flex className="timeline-teammates" align="center" wrap="wrap" gap='middle'>
                                         {teammates && teammates.map((teammate: Teammate) => (
-                                            <Card className="timeline-teammate teammate" onClick={() => addPeerReviewHandle(teammate.username)}>
+                                            <Card
+                                                className={[
+                                                    "timeline-teammate",
+                                                    "teammate",
+                                                    (teammatesForms as EmployeeFormData[] || []).some(form => form.about === teammate.id) ?
+                                                        'done' : ''
+                                                ].join(' ')}
+                                                onClick={() => addPeerReviewHandle(teammate.username)}
+                                            >
                                                 <Flex vertical align="center">
                                                     <h3 className="teammate-name">{teammate.first_name} {teammate.last_name}</h3>
-                                                    <p className="teammate-post">Разработчик мобильных приложений</p>
                                                 </Flex>
                                             </Card>
                                         ))}

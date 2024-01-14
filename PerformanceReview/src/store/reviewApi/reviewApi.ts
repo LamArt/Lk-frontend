@@ -1,4 +1,5 @@
 import {localApi} from "../localApi";
+import {BaseQueryArg} from "@reduxjs/toolkit/dist/query/baseQueryTypes";
 
 export interface EmployeeFormData{
   strengths: string,
@@ -82,6 +83,13 @@ const reviewApi = localApi.injectEndpoints({
         method: "GET",
       }),
     }),
+    getTeammatesForms: build.query<any, void>({
+      query: () => ({
+        url: "/review/teammates/forms",
+        method: "GET"
+      }),
+      providesTags: ['EmployeeForm']
+    })
   }),
 })
 
@@ -94,4 +102,5 @@ export const {
   useGetTeamleadFormsByUserQuery,
   usePostTeamleadFormsByUserMutation,
   useGetProfileQuery,
+  useGetTeammatesFormsQuery
 } = reviewApi
