@@ -58,10 +58,9 @@ export function AuthButton() {
                     })
                         .then(response => response.json())
                         .then(responseData => {
-                            console.log('Ответ от сервера:', responseData);
-
                             cookies.set('access_token', responseData.access);
                             cookies.set('refresh_token', responseData.refresh);
+                            window.location.href = 'http://localhost:5004/salary';
                         })
                         .catch(error => {
                             console.error('Ошибка при выполнении POST-запроса:', error);

@@ -1,7 +1,6 @@
 import type {Api, BaseQueryFn, FetchArgs, FetchBaseQueryError} from '@reduxjs/toolkit/query';
 import {createApi, fetchBaseQuery, reactHooksModuleName} from '@reduxjs/toolkit/query/react';
 import { Mutex } from 'async-mutex';
-import authActions from './authActions.ts';
 import Cookies from 'universal-cookie';
 import { coreModuleName } from '@reduxjs/toolkit/query';
 
@@ -25,8 +24,8 @@ const baseQuery = fetchBaseQuery({
   },
 });
 
-const baseQueryWithReauth: BaseQueryFn<string | FetchArgs, unknown, FetchBaseQueryError> = async (args, 
-  api, 
+const baseQueryWithReauth: BaseQueryFn<string | FetchArgs, unknown, FetchBaseQueryError> = async (args,
+  api,
   extraOptions) => {
   await mutex.waitForUnlock();
   let result = await baseQuery(args, api, extraOptions);
@@ -50,11 +49,9 @@ const baseQueryWithReauth: BaseQueryFn<string | FetchArgs, unknown, FetchBaseQue
             'access_token',
             (refreshResult.data as RefreshData).access
           );
-          api.dispatch(authActions.setAuth());
-
           result = await baseQuery(args, api, extraOptions);
         } else {
-          api.dispatch(authActions.logout());
+          window.location.href = 'http://localhost:5002/authorization';
         }
       } finally {
         release();
