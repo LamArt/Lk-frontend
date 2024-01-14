@@ -51,7 +51,7 @@ const baseQueryWithReauth: BaseQueryFn<string | FetchArgs, unknown, FetchBaseQue
           );
           result = await baseQuery(args, api, extraOptions);
         } else {
-          window.location.href = 'http://localhost:5002/authorization';
+          window.location.href = 'https://lk.lamart.site/authorization';
         }
       } finally {
         release();
