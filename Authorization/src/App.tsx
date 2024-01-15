@@ -15,7 +15,7 @@ function App({isMicroApp = true}: {isMicroApp?: boolean}) {
                     <Routes>
                         <Route path={basePath} element={<Authorization/>}/>
                         {!isMicroApp && <Route path='/' element={<Navigate to={basePath}/>}/>}
-                        <Route path="/token" element={<TokenPage/>}/>
+                        <Route path={`${basePath}/token`} element={<TokenPage/>}/>
                     </Routes>
                 </BrowserRouter>
             </ConfigProvider>

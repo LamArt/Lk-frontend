@@ -23,7 +23,7 @@ export function AuthButton() {
             const oauthQueryParams = {
                 client_id: '10d277a8f80e40e5b973e36c9d34aa01',
                 response_type: 'token',
-                redirect_uri: 'https://lk.lamart.site/token',
+                redirect_uri: 'https://lk.lamart.site/authorization/token',
             };
 
             window.YaAuthSuggest.init(
