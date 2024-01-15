@@ -49,7 +49,7 @@ export function AuthButton() {
                         provider: "yandex",
                     };
 
-                    fetch('https://lk.lamart.site/auth/exchange_token/', {
+                    fetch('https://backend.lk.lamart.site/auth/exchange_token/', {
                         method: 'POST',
                         headers: {
                             'Content-Type': 'application/json',
