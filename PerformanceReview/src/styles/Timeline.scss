@@ -9,7 +9,7 @@
         width: 70%;
         height: 70vh;
         border: 1px solid #d9d9d9;
-     
+
         &>div{
             height: 100%;
         }
@@ -54,6 +54,22 @@
     border: none;
     background-color: #F2F6FF;
     cursor: pointer;
+    position: relative;
+
+    &.done::after{
+        content: "";
+        width: 28px;
+        height: 28px;
+        position: absolute;
+        top: -12px;
+        right: -12px;
+        border-radius: 50%;
+        border: 2px solid #F2F6FF;
+        background-color: white;
+        background-repeat: no-repeat;
+        background-image: url("../assets/teammate-done.svg");
+        background-position: 50% 50%;
+    }
 
     &-name{
         font-weight: 400;

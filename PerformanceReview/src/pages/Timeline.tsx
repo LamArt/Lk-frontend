@@ -1,4 +1,4 @@
-import { Button, Flex, Layout, Radio } from "antd";
+import {Button, Flex, Layout, Radio, Select} from "antd";
 import '../styles/Review.scss'
 import '../styles/Timeline.scss'
 import Card from "antd/es/card/Card";
@@ -7,9 +7,11 @@ import TimelineStage from "../components/UI/TimelineStage";
 import { useNavigate } from "react-router-dom";
 import { useEffect, useMemo, useState } from "react";
 import {
+    EmployeeFormData,
     Teammate,
-    useGetEmployeeFormQuery,
+    useGetEmployeeFormQuery, useGetPerformanceReviewQuery,
     useGetProfileQuery,
+    useGetTeammatesFormsQuery,
     useGetTeammatesQuery
 } from "../store/reviewApi/reviewApi";
 import Menu from "host/Menu";
@@ -18,10 +20,13 @@ import Menu from "host/Menu";
 export default function Timeline(){
     const navigate = useNavigate();
     const [currentStage, setCurrentStage] = useState<Stages>(Stages.Default)
+    const [selectedTeam, setSelectedTeam] = useState<string>('')
+
     const {data: profile} = useGetProfileQuery({})
     const {data: teammatesData, isLoading: isLoadingTeammates} = useGetTeammatesQuery()
     const {data: selfReviewForm, isLoading: isLoadingEmployeeForm} = useGetEmployeeFormQuery(profile)
-    console.log(selfReviewForm)
+    const {data: teammatesForms, isLoading: isLoadingTeammatesForms} = useGetTeammatesFormsQuery()
+    const {data: performanceReview} = useGetPerformanceReviewQuery({})
 
     const teammates = teammatesData?.teammates
 
@@ -37,8 +42,11 @@ export default function Timeline(){
         if(selfReviewForm && selfReviewForm.length !== 0){
             stage = Stages.Peer;
         }
+        if(teammatesForms && teammates && teammates.every(teammate => (teammatesForms as EmployeeFormData[]).some(form => form.about === teammate.id))){
+            stage = Stages.Manager
+        }
         setCurrentStage(stage)
-    }, [selfReviewForm])
+    }, [selfReviewForm, teammates, teammatesForms])
 
     if(isLoading){
         return <></>
@@ -70,7 +78,17 @@ export default function Timeline(){
                                 {i !== timelineStages.length - 1 && <img src={arrowIcon} className="timeline-arrow"/>}
                             </>)}
                             </Flex>
-                            <Button className="timeline-link" onClick={() => setCurrentStage(Stages.Self)}>Начать</Button>
+                            <Select
+                                options={Object.entries(profile?.teams || {}).map(([name, team]) => ({
+                                    label: name,
+                                    value: name
+                                }))}
+                                style={{width: '40%', margin: '16px auto'}}
+                                onChange={value => setSelectedTeam(value)}
+                                value={selectedTeam}
+                                placeholder={'Выберите команду'}
+                            />
+                            <Button className="timeline-link" onClick={() => setCurrentStage(Stages.Self)} disabled={!selectedTeam}>Начать</Button>
                         </>}
                         {
                             currentStage > 0 && <>
@@ -96,10 +114,17 @@ export default function Timeline(){
                                 {currentStage === Stages.Peer &&
                                     (!isTeamlead ? <Flex className="timeline-teammates" align="center" wrap="wrap" gap='middle'>
                                         {teammates && teammates.map((teammate: Teammate) => (
-                                            <Card className="timeline-teammate teammate" onClick={() => addPeerReviewHandle(teammate.id)}>
+                                            <Card
+                                                className={[
+                                                    "timeline-teammate",
+                                                    "teammate",
+                                                    (teammatesForms as EmployeeFormData[] || []).some(form => form.about === teammate.id) ?
+                                                        'done' : ''
+                                                ].join(' ')}
+                                                onClick={() => addPeerReviewHandle(teammate.username)}
+                                            >
                                                 <Flex vertical align="center">
                                                     <h3 className="teammate-name">{teammate.first_name} {teammate.last_name}</h3>
-                                                    <p className="teammate-post">Разработчик мобильных приложений</p>
                                                 </Flex>
                                             </Card>
                                         ))}
@@ -161,5 +186,5 @@ const stages: Array<{name: string, description: React.ReactNode, teamleadDescrip
         teamleadDescription: <><b>Обратная связь:</b> время назначить индивидуальные встречи своим подопечным, чтобы обсудить их успехи за ревьюируемый период.</>,
         num: Stages.Feedback
     },
-    
+
 ]

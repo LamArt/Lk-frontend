@@ -1,4 +1,5 @@
 import {localApi} from "../localApi";
+import {BaseQueryArg} from "@reduxjs/toolkit/dist/query/baseQueryTypes";
 
 export interface EmployeeFormData{
   achievements: string,
@@ -48,9 +49,9 @@ const reviewApi = localApi.injectEndpoints({
         url: `/review/employee_forms/users/${data.username}/`,
         method: "GET",
       }),
-      // providesTags: ['EmployeeForm']
+      providesTags: ['EmployeeForm']
     }),
-    getTeamleadForm: build.query({
+    getTeamleadForm: build.query<void, void>({
       query: () => ({
         url: `/review/teamlead_forms/`,
         method: "GET",
@@ -88,6 +89,26 @@ const reviewApi = localApi.injectEndpoints({
         method: "GET",
       }),
     }),
+    postPerformanceReview: build.mutation({
+      query: (data) => ({
+        url: '/review/perfomance_review/',
+        method: 'POST',
+        body: data,
+      }),
+    }),
+    getPerformanceReview: build.query({
+      query: () => ({
+        url: '/review/perfomance_review/',
+        method: 'GET',
+      }),
+    }),
+    getTeammatesForms: build.query<any, void>({
+      query: () => ({
+        url: "/review/teammates/forms",
+        method: "GET"
+      }),
+      providesTags: ['EmployeeForm']
+    })
   }),
 })
 
@@ -100,4 +121,8 @@ export const {
   useGetTeamleadFormsByUserQuery,
   usePostTeamleadFormsByUserMutation,
   useGetProfileQuery,
+  // useGetTeamleadFormsQuery,
+  usePostPerformanceReviewMutation,
+  useGetPerformanceReviewQuery,
+  useGetTeammatesFormsQuery
 } = reviewApi
