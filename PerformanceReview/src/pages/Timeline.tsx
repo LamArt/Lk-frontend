@@ -8,7 +8,7 @@ import { useNavigate } from "react-router-dom";
 import { useEffect, useMemo, useState } from "react";
 import {
     Teammate,
-    useGetEmployeeFormQuery,
+    useGetEmployeeFormQuery, useGetPerformanceReviewQuery,
     useGetProfileQuery,
     useGetTeammatesQuery
 } from "../store/reviewApi/reviewApi";
@@ -21,7 +21,7 @@ export default function Timeline(){
     const {data: profile} = useGetProfileQuery({})
     const {data: teammatesData, isLoading: isLoadingTeammates} = useGetTeammatesQuery()
     const {data: selfReviewForm, isLoading: isLoadingEmployeeForm} = useGetEmployeeFormQuery(profile)
-    console.log(selfReviewForm)
+    const {data: performanceReview} = useGetPerformanceReviewQuery({})
 
     const teammates = teammatesData?.teammates
 
