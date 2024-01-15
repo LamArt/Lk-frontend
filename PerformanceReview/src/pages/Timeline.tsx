@@ -9,8 +9,9 @@ import { useEffect, useMemo, useState } from "react";
 import {
     EmployeeFormData,
     Teammate,
-    useGetEmployeeFormQuery,
-    useGetProfileQuery, useGetTeammatesFormsQuery,
+    useGetEmployeeFormQuery, useGetPerformanceReviewQuery,
+    useGetProfileQuery,
+    useGetTeammatesFormsQuery,
     useGetTeammatesQuery
 } from "../store/reviewApi/reviewApi";
 import Menu from "host/Menu";
@@ -25,6 +26,7 @@ export default function Timeline(){
     const {data: teammatesData, isLoading: isLoadingTeammates} = useGetTeammatesQuery()
     const {data: selfReviewForm, isLoading: isLoadingEmployeeForm} = useGetEmployeeFormQuery(profile)
     const {data: teammatesForms, isLoading: isLoadingTeammatesForms} = useGetTeammatesFormsQuery()
+    const {data: performanceReview} = useGetPerformanceReviewQuery({})
 
     const teammates = teammatesData?.teammates
 
