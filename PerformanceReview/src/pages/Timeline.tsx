@@ -17,19 +17,26 @@ import Menu from "host/Menu";
 
 export default function Timeline(){
     const navigate = useNavigate();
-    const [currentStage, setCurrentStage] = useState<Stages>(Stages.Default)
+    const {data: performanceReview} = useGetPerformanceReviewQuery({})
     const {data: profile} = useGetProfileQuery({})
     const {data: teammatesData, isLoading: isLoadingTeammates} = useGetTeammatesQuery()
     const {data: selfReviewForm, isLoading: isLoadingEmployeeForm} = useGetEmployeeFormQuery(profile)
-    const {data: performanceReview} = useGetPerformanceReviewQuery({})
+
+    const [currentStage, setCurrentStage] = useState<Stages>(performanceReview?.stage)
+
 
     const teammates = teammatesData?.teammates
 
     //TODO: isTeamlead как получать?
     const isTeamlead = useMemo(() => profile?.teams.PerformanceReview.is_team_lead, [profile])
+
     const timelineStages = useMemo(() => stages.filter((_, i) => !isTeamlead || i !== 2 && isTeamlead), [isTeamlead])
-    const currentTimelineStage = useMemo(() => timelineStages.find((stage) => stage.num === currentStage) || timelineStages[0], [timelineStages, currentStage])
+    let currentTimelineStage = useMemo(() => timelineStages.find((stage) => stage.num === currentStage) || timelineStages[0], [timelineStages, currentStage])
     const isLoading = useMemo(() => isLoadingEmployeeForm || isLoadingTeammates, [isLoadingEmployeeForm, isLoadingTeammates])
+
+    if (performanceReview?.stage > 2 ) {
+        currentTimelineStage = timelineStages[performanceReview?.stage]
+    }
 
 
     useEffect(() => {
@@ -38,7 +45,10 @@ export default function Timeline(){
             stage = Stages.Peer;
         }
         setCurrentStage(stage)
-    }, [selfReviewForm])
+        if (performanceReview?.stage > 2) {
+            setCurrentStage(performanceReview?.stage)
+        }
+    }, [selfReviewForm, performanceReview])
 
     if(isLoading){
         return <></>
@@ -60,20 +70,20 @@ export default function Timeline(){
                                 <b>Performance review</b> — процедура, позволяющая объективно оценить текущие навыки работника: его сильные и слабые стороны, и дать обратную связь, чтобы помочь улучшить свои навыки.
                             </p>
                             <Flex align="top" justify="space-between">
-                            {timelineStages.map((stage, i) => <>
-                                <TimelineStage
-                                    orderNumber={i + 1}
-                                    label={stage.name}
-                                    active
-                                    key={i}
-                                />
-                                {i !== timelineStages.length - 1 && <img src={arrowIcon} className="timeline-arrow"/>}
-                            </>)}
+                                {timelineStages.map((stage, i) => <>
+                                    <TimelineStage
+                                        orderNumber={i + 1}
+                                        label={stage.name}
+                                        active
+                                        key={i}
+                                    />
+                                    {i !== timelineStages.length - 1 && <img src={arrowIcon} className="timeline-arrow"/>}
+                                </>)}
                             </Flex>
                             <Button className="timeline-link" onClick={() => setCurrentStage(Stages.Self)}>Начать</Button>
                         </>}
                         {
-                            currentStage > 0 && <>
+                          currentStage > 0 && <>
                                 <Flex align="top" justify="space-between">
                                     {timelineStages.map((stage, i) => <>
                                         <TimelineStage
